@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Swap</string>
+    <string name="category_label_books">Books</string>
+    <string name="category_label_clothes">Clothes</string>
+</resources>
