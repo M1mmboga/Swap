@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <!-- scroll view that holds the rv with other views-->
+    <ScrollView
+        android:id="@+id/scrollV"
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent">
+
+        <!--rv with views for the item entry activity -->
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <!--top bar textview saying the activity name -->
+            <TextView
+                android:id="@+id/enterItemTextView"
+                android:layout_width="410dp"
+                android:layout_height="54dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginEnd="0dp"
+                android:layout_marginRight="0dp"
+                android:text="@string/enter_items_top_bar"
+                android:textAlignment="center"
+                android:textSize="30sp" />
+
+            <!--category spinner -->
+            <TextView
+                android:id="@+id/itemCategorySpinnerTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/enterItemTextView"
+                android:layout_marginTop="@dimen/vertical_margin_top"
+                android:text="@string/item_category_textview" />
+
+            <!-- spinner with items inside-->
+            <Spinner
+                android:id="@+id/categoriesSpinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/itemCategorySpinnerTextView"
+                android:layout_marginTop="@dimen/vertical_margin_top">
+
+            </Spinner>
+
+            <!-- the item name-->
+            <TextView
+                android:id="@+id/itemName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/categoriesSpinner"
+                android:layout_marginTop="@dimen/vertical_margin_top"
+                android:text="@string/item_name_textview" />
+
+            <!--enter the item name below -->
+            <EditText
+                android:id="@+id/itemNameEdit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/itemName"
+                android:layout_marginTop="@dimen/vertical_margin_top"
+
+                />
+
+            <!--item description textview -->
+            <TextView
+                android:id="@+id/itemDescriptionTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/itemNameEdit"
+                android:layout_marginTop="@dimen/vertical_margin_top"
+                android:text="@string/item_description_textview" />
+
+            <!-- enter item description-->
+            <EditText
+                android:id="@+id/itemDescriptionEdit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/itemDescriptionTextView"
+                android:layout_marginTop="@dimen/vertical_margin_top"
+                android:inputType="textCapSentences|textAutoCorrect"
+
+
+                />
+
+            <!--my location textview -->
+            <TextView
+                android:id="@+id/sellerLocationTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/itemDescriptionEdit"
+                android:layout_marginTop="@dimen/vertical_margin_top"
+                android:text="@string/my_location_textview" />
+
+            <!--enter the location -->
+            <EditText
+                android:id="@+id/sellerLocationEdit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/sellerLocationTextView"
+                android:layout_marginTop="@dimen/vertical_margin_top"
+                android:inputType="textCapSentences|textAutoCorrect"
+
+                />
+
+            <!--the item's image textview -->
+            <TextView
+                android:id="@+id/itemImageTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/sellerLocationEdit"
+                android:layout_marginTop="@dimen/vertical_margin_top"
+                android:text="@string/image_textview" />
+
+
+            <!--where the saved image is put -->
+            <ImageView
+                android:id="@+id/itemImage"
+                android:layout_width="400dp"
+                android:layout_height="200dp"
+                android:layout_below="@id/itemImageTextView"
+                android:src="@drawable/ic_image_black_24dp"
+                />
+
+            <!--button to select an image from camera and gallery -->
+            <Button
+                android:id="@+id/selectImageButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/itemImage"
+                android:text="Choose Item Image"
+                />
+
+            <!--the item price textview -->
+            <TextView
+                android:id="@+id/itemPriceTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/selectImageButton"
+                android:layout_marginTop="@dimen/vertical_margin_top"
+                android:text="@string/valued_price_textview" />
+
+            <!--enter th etem price below -->
+            <EditText
+                android:id="@+id/valuedPriceEdit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/itemPriceTextView"
+                android:layout_marginTop="@dimen/vertical_margin_top"
+                android:inputType="textCapSentences|textAutoCorrect" />
+
+            <!--button to submit my items -->
+            <Button
+                android:id="@+id/submitItem"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/valuedPriceEdit"
+                android:layout_marginTop="@dimen/vertical_margin_top"
+                android:text="@string/submit_item" />
+        </RelativeLayout>
+    </ScrollView>
+
+</RelativeLayout>
