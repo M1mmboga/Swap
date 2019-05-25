@@ -1,13 +1,13 @@
 package com.johngachihi.swap.viewmodels;
 
+import android.app.Application;
+
 import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
-import androidx.paging.DataSource;
 import androidx.paging.LivePagedListBuilder;
 import androidx.paging.PagedList;
 
-import com.johngachihi.swap.datasources.factories.GoodsDataSourceFactory;
+import com.johngachihi.swap.datasources.goods.factories.GoodsByCategoryDataSourceFactory;
 import com.johngachihi.swap.models.Good;
 
 import java.util.concurrent.Executor;
@@ -15,10 +15,10 @@ import java.util.concurrent.Executors;
 
 public class GoodsByCategoryViewModel extends ViewModel {
     private LiveData<PagedList<Good>> goodsPagedList;
-    private MutableLiveData<String> categoryLiveData = new MutableLiveData<>();
 
-    public GoodsByCategoryViewModel() {
-        GoodsDataSourceFactory goodsDataSourceFactory = new GoodsDataSourceFactory();
+    public GoodsByCategoryViewModel(Application application, String category) {
+        GoodsByCategoryDataSourceFactory goodsDataSourceFactory =
+                new GoodsByCategoryDataSourceFactory(category);
 
         Executor executor = Executors.newFixedThreadPool(4);
 
@@ -34,19 +34,8 @@ public class GoodsByCategoryViewModel extends ViewModel {
                 .build();
     }
 
-    public MutableLiveData<String> getCategoryLiveData() {
-        return categoryLiveData;
-    }
-
     public LiveData<PagedList<Good>> getGoodsPagedList() {
         return goodsPagedList;
     }
 
-    public void setCategory(String category) {
-        if(categoryLiveData.getValue() != null &&
-                !categoryLiveData.getValue().equals(category))
-        {
-            categoryLiveData.setValue(category);
-        }
-    }
 }
