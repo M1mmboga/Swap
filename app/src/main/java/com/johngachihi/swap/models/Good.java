@@ -16,6 +16,7 @@ public class Good {
     @SerializedName("image_file_name") private String imageFileName;
     @SerializedName("price_range_min") private int priceRangeMin;
     @SerializedName("price_range_max") private int priceRangeMax;
+    @SerializedName("category") private String category;
     @SerializedName("created_at") private Date postDate;
 
     public Good() {
@@ -30,6 +31,14 @@ public class Good {
         this.priceRangeMin = priceRangeMin;
         this.priceRangeMax = priceRangeMax;
         this.postDate = postDate;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
     }
 
     public boolean equals(@Nullable Good good) {
@@ -47,11 +56,11 @@ public class Good {
         this.id = id;
     }
 
-    public User getUser() {
+    public User getOfferer() {
         return user;
     }
 
-    public void setUser(User user) {
+    public void setOfferer(User user) {
         this.user = user;
     }
 
