@@ -1,12 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:background="?android:attr/selectableItemBackground"
+    android:padding="@dimen/md_keylines">
 
-    <TextView
-        android:id="@+id/good_name_text"
+    <ImageView
+        android:id="@+id/good_image"
+        android:layout_width="@dimen/avator_size"
+        android:layout_height="@dimen/avator_size"
+        android:scaleType="centerCrop"
+        tools:srcCompat="@tools:sample/avatars[10]"/>
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="TextView" />
-</LinearLayout>
+        android:layout_height="match_parent"
+        android:layout_alignTop="@id/good_image"
+        android:layout_alignBottom="@id/good_image"
+        android:layout_toEndOf="@id/good_image"
+        android:layout_toRightOf="@id/good_image"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/good_name_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/md_keylines"
+            android:layout_marginLeft="@dimen/md_keylines"
+            android:ellipsize="end"
+            android:maxLines="3"
+            android:textAppearance="?attr/textAppearanceListItem"
+            android:textSize="@dimen/good_list_item_title"
+            tools:text="Product name" />
+
+        <TextView
+            android:id="@+id/good_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/md_keylines"
+            android:layout_marginLeft="@dimen/md_keylines"
+            android:ellipsize="end"
+            android:maxLines="3"
+            android:textAppearance="?attr/textAppearanceListItem"
+            android:textColor="@color/medium_grey"
+            android:textSize="@dimen/good_list_item_description"
+            tools:text="This is the product's description. Ble ble" />
+
+        <TextView
+            android:id="@+id/temp_good_category"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/md_keylines"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            tools:text="@string/goods_list_category_label" />
+
+        <TextView
+            android:id="@+id/good_price_range"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginStart="@dimen/md_keylines"
+            android:layout_marginLeft="@dimen/md_keylines"
+            android:layout_marginTop="8dp"
+            android:layout_weight="1"
+            android:gravity="bottom|end"
+            android:textAppearance="?attr/textAppearanceListItem"
+            android:textSize="14sp"
+            tools:text="Ksh 100 - Ksh 300" />
+
+    </LinearLayout>
+</RelativeLayout>
