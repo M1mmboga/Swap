@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <dimen name="vertical_margin_top">20dp</dimen>
     <dimen name="md_keylines">16dp</dimen>
     <dimen name="avator_size">150dp</dimen>
     <dimen name="good_list_item_title">16sp</dimen>

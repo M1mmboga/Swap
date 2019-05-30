@@ -1,5 +1,22 @@
 <resources>
     <string name="app_name">Swap</string>
+    <string name="enter_items_top_bar">Post Item</string>
+    <string name="item_category_textview">Select Category</string>
+    <string name="item_description_textview">Description</string>
+    <string name="item_name_textview">Item Name</string>
+    <string name="my_location_textview">My Location</string>
+    <string name="image_textview">Image</string>
+    <string name="submit_item">Submit Item</string>
+    <string name="valued_price_textview">Valued Price</string>
+
+    <string-array name="categories_array">
+        <item>Books and School</item>
+        <item>Electronics</item>
+        <item>Furniture</item>
+        <item>Men Clothing</item>
+        <item>Women Clothing</item>
+    </string-array>
+
     <string name="category_label_books">Books</string>
     <string name="category_label_clothes">Clothes</string>
     <string name="good_price_range">Kshs. %1$d - %2$d</string>
