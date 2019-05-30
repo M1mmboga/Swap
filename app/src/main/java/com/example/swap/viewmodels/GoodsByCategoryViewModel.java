@@ -1,4 +1,4 @@
-package com.johngachihi.swap.viewmodels;
+package com.example.swap.viewmodels;
 
 import android.app.Application;
 
@@ -7,8 +7,8 @@ import androidx.lifecycle.ViewModel;
 import androidx.paging.LivePagedListBuilder;
 import androidx.paging.PagedList;
 
-import com.johngachihi.swap.datasources.goods.factories.GoodsByCategoryDataSourceFactory;
-import com.johngachihi.swap.models.Good;
+import com.example.swap.datasources.goods.factories.GoodsByCategoryDataSourceFactory;
+import com.example.swap.models.Good;
 
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;

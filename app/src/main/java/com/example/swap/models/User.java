@@ -1,4 +1,4 @@
-package com.johngachihi.swap.models;
+package com.example.swap.models;
 
 import com.google.gson.annotations.SerializedName;
 

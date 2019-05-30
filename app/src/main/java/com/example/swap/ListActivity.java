@@ -1,27 +1,18 @@
-package com.johngachihi.swap;
+package com.example.swap;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.ViewModel;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.TextView;
 
-import com.johngachihi.swap.adapters.GoodsListAdapter;
-import com.johngachihi.swap.fragments.GoodsListFragment;
-import com.johngachihi.swap.viewmodels.GoodsByCategoryViewModel;
-import com.johngachihi.swap.viewmodels.factories.GoodsByCategoryViewModelFactory;
+import com.example.swap.fragments.GoodsListFragment;
+import com.example.swap.viewmodels.GoodsByCategoryViewModel;
+import com.example.swap.viewmodels.factories.GoodsByCategoryViewModelFactory;
 
 public class ListActivity extends AppCompatActivity {
 

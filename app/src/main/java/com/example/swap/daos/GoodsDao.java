@@ -1,6 +1,6 @@
-package com.johngachihi.swap.daos;
+package com.example.swap.daos;
 
-import com.johngachihi.swap.models.GoodsPage;
+import com.example.swap.models.GoodsPage;
 
 import retrofit2.Call;
 import retrofit2.http.GET;

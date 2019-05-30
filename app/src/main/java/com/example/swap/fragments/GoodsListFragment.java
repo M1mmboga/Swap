@@ -1,25 +1,22 @@
-package com.johngachihi.swap.fragments;
+package com.example.swap.fragments;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.LiveData;
-import androidx.lifecycle.Observer;
 import androidx.paging.PagedList;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.johngachihi.swap.R;
-import com.johngachihi.swap.adapters.GoodsListAdapter;
-import com.johngachihi.swap.models.Good;
+import com.example.swap.adapters.GoodsListAdapter;
+import com.example.swap.models.Good;
 
 public class GoodsListFragment extends Fragment {
 

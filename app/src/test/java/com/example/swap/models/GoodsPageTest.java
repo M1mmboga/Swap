@@ -1,4 +1,4 @@
-package com.johngachihi.swap.models;
+package com.example.swap.models;
 
 import org.junit.Before;
 import org.junit.Test;
