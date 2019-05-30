@@ -1,8 +1,8 @@
-package com.johngachihi.swap.datasources.goods;
+package com.example.swap.goods;
 
-import com.johngachihi.swap.daos.GoodsDao;
-import com.johngachihi.swap.models.GoodsPage;
-import com.johngachihi.swap.rest.RetrofitFactory;
+import com.example.swap.daos.GoodsDao;
+import com.example.swap.models.GoodsPage;
+import com.example.swap.rest.RetrofitFactory;
 
 import retrofit2.Call;
 import retrofit2.Retrofit;

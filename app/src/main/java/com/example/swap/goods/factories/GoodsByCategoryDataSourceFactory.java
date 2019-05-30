@@ -1,14 +1,13 @@
-package com.johngachihi.swap.datasources.goods.factories;
+package com.example.swap.goods.factories;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.MutableLiveData;
 import androidx.paging.DataSource;
 
-import com.johngachihi.swap.daos.GoodsDao;
-import com.johngachihi.swap.datasources.goods.GoodsDataSource;
-import com.johngachihi.swap.datasources.goods.GoodsFetcher;
-import com.johngachihi.swap.models.Good;
-import com.johngachihi.swap.models.GoodsPage;
+import com.example.swap.goods.GoodsDataSource;
+import com.example.swap.goods.GoodsFetcher;
+import com.example.swap.models.Good;
+import com.example.swap.models.GoodsPage;
 
 import retrofit2.Call;
 

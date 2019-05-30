@@ -1,4 +1,4 @@
-package com.johngachihi.swap;
+package com.example.swap;
 
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;

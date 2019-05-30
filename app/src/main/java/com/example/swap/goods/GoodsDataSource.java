@@ -1,19 +1,16 @@
-package com.johngachihi.swap.datasources.goods;
+package com.example.swap.goods;
 
 import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.paging.PageKeyedDataSource;
 
-import com.johngachihi.swap.daos.GoodsDao;
-import com.johngachihi.swap.models.Good;
-import com.johngachihi.swap.models.GoodsPage;
-import com.johngachihi.swap.rest.RetrofitFactory;
+import com.example.swap.models.Good;
+import com.example.swap.models.GoodsPage;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
 
 public class GoodsDataSource extends PageKeyedDataSource<Integer, Good> {
     private static final int INITIAL_PAGE = 1;

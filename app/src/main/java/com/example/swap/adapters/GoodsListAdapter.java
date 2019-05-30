@@ -1,4 +1,4 @@
-package com.johngachihi.swap.adapters;
+package com.example.swap.adapters;
 
 import android.content.Context;
 import android.util.Log;
@@ -13,8 +13,8 @@ import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.johngachihi.swap.R;
-import com.johngachihi.swap.models.Good;
-import com.johngachihi.swap.rest.constants.Addresses;
+import com.example.swap.models.Good;
+import com.example.swap.rest.constants.Addresses;
 import com.squareup.picasso.Picasso;
 
 public class GoodsListAdapter extends PagedListAdapter<Good, RecyclerView.ViewHolder> {

@@ -1,4 +1,4 @@
-package com.johngachihi.swap.rest;
+package com.example.swap.rest;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
