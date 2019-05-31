@@ -3,6 +3,8 @@
     package="com.example.swap">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <!--get permission to access the gallery -->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
 
     <application
         android:allowBackup="true"
