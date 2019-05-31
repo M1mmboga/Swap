@@ -12,10 +12,12 @@ import androidx.paging.PagedListAdapter;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.johngachihi.swap.R;
+import com.example.swap.R;
 import com.example.swap.models.Good;
 import com.example.swap.rest.constants.Addresses;
 import com.squareup.picasso.Picasso;
+
+//import com.johngachihi.swap.R;
 
 public class GoodsListAdapter extends PagedListAdapter<Good, RecyclerView.ViewHolder> {
     private static final int ITEM_GOOD = 0;

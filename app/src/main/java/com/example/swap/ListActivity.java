@@ -1,14 +1,14 @@
 package com.example.swap;
 
+import android.content.Intent;
+import android.os.Bundle;
+
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProviders;
-
-import android.content.Intent;
-import android.os.Bundle;
 
 import com.example.swap.fragments.GoodsListFragment;
 import com.example.swap.viewmodels.GoodsByCategoryViewModel;

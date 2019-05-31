@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.johngachihi.swap.R;
+import com.example.swap.R;
 import com.example.swap.adapters.GoodsListAdapter;
 import com.example.swap.models.Good;
 
@@ -38,7 +38,7 @@ public class GoodsListFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_goods_list, container, false);
 
-        GoodsListAdapter adapter = new GoodsListAdapter(getDiffCallback());
+        GoodsListAdapter adapter = new GoodsListAdapter(getDiffCallback(), getContext());
         goodsPagedList.observe(this, adapter::submitList);
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());

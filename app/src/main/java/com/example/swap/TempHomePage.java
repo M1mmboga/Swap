@@ -1,15 +1,13 @@
-package com.johngachihi.swap;
-
-import androidx.appcompat.app.AppCompatActivity;
+package com.example.swap;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-import com.example.swap.ListActivity;
+import androidx.appcompat.app.AppCompatActivity;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class TempHomePage extends AppCompatActivity implements View.OnClickListener {
 
     private Button booksCategoryBtn;
     private Button clothesCategoryBtn;
@@ -17,7 +15,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_list);
 
         booksCategoryBtn = (Button) findViewById(R.id.books_category_btn);
         booksCategoryBtn.setOnClickListener(this);
@@ -34,3 +32,4 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 }
+
