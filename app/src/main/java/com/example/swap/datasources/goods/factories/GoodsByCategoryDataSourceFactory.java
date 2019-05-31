@@ -1,11 +1,11 @@
-package com.example.swap.goods.factories;
+package com.example.swap.datasources.goods.factories;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.MutableLiveData;
 import androidx.paging.DataSource;
 
-import com.example.swap.goods.GoodsDataSource;
-import com.example.swap.goods.GoodsFetcher;
+import com.example.swap.datasources.goods.GoodsDataSource;
+import com.example.swap.datasources.goods.GoodsFetcher;
 import com.example.swap.models.Good;
 import com.example.swap.models.GoodsPage;
 

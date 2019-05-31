@@ -1,5 +1,6 @@
 package com.example.swap.rest;
 
+import com.example.swap.rest.addressconstants.Addresses;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -20,7 +21,7 @@ public class RetrofitFactory {
 
             retrofit = retrofit = new Retrofit.Builder()
                     .addConverterFactory(GsonConverterFactory.create(gson))
-                    .baseUrl(BASE_URL)
+                    .baseUrl(Addresses.API_HOME_URL)
                     .build();
         }
         return retrofit;

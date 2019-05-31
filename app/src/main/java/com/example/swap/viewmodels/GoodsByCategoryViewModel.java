@@ -7,7 +7,7 @@ import androidx.lifecycle.ViewModel;
 import androidx.paging.LivePagedListBuilder;
 import androidx.paging.PagedList;
 
-import com.example.swap.goods.factories.GoodsByCategoryDataSourceFactory;
+import com.example.swap.datasources.goods.factories.GoodsByCategoryDataSourceFactory;
 import com.example.swap.models.Good;
 
 import java.util.concurrent.Executor;

@@ -1,6 +1,7 @@
 package com.example.swap.adapters;
 
 import android.content.Context;
+import android.net.Uri;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
@@ -14,7 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.swap.R;
 import com.example.swap.models.Good;
-import com.example.swap.rest.constants.Addresses;
+import com.example.swap.rest.addressconstants.Addresses;
 import com.squareup.picasso.Picasso;
 
 //import com.johngachihi.swap.R;
@@ -45,7 +46,7 @@ public class GoodsListAdapter extends PagedListAdapter<Good, RecyclerView.ViewHo
         if(getItemViewType(position) == ITEM_GOOD) {
             Good good = getItem(position);
             ImageView goodImage = ((GoodItemViewHolder)holder).goodImage;
-            Picasso.get().load(Addresses.IMAGES_HOME + good.getImageFileName()).into(goodImage);
+            buildPicasso().load(Addresses.IMAGES_HOME + good.getImageFileName()).into(goodImage);
             ((GoodItemViewHolder)holder).goodNameTxt.setText(good.getName());
             ((GoodItemViewHolder) holder).goodDescriptionTxt.setText(good.getDescription());
             Log.d("Offerer", good.getOfferer().getEmail());
@@ -82,5 +83,18 @@ public class GoodsListAdapter extends PagedListAdapter<Good, RecyclerView.ViewHo
         public PlaceholderItemViewHolder(LayoutInflater inflater, ViewGroup parent) {
             super(inflater.inflate(R.layout.goods_list_placeholder, parent, false));
         }
+    }
+
+    private Picasso buildPicasso() {
+        Picasso.Builder picassoBuiler = new Picasso.Builder(context);
+        Picasso picasso = picassoBuiler.listener(new Picasso.Listener() {
+            @Override
+            public void onImageLoadFailed(Picasso picasso, Uri uri, Exception exception) {
+//                exception.printStackTrace();
+                Log.e("Picasso Load Failed", exception.getMessage());
+            }
+        }).build();
+
+        return picasso;
     }
 }

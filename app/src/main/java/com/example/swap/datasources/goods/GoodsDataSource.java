@@ -1,4 +1,4 @@
-package com.example.swap.goods;
+package com.example.swap.datasources.goods;
 
 import android.util.Log;
 

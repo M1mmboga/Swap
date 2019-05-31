@@ -1,4 +1,4 @@
-package com.example.swap.goods;
+package com.example.swap.datasources.goods;
 
 import com.example.swap.daos.GoodsDao;
 import com.example.swap.models.GoodsPage;
