@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -17,20 +18,25 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.swap.R;
 import com.example.swap.adapters.GoodsListAdapter;
 import com.example.swap.models.Good;
+import com.example.swap.rest.NetworkState;
 
 public class GoodsListFragment extends Fragment {
 
-    LiveData<PagedList<Good>> goodsPagedList;
+    private LiveData<PagedList<Good>> goodsPagedList;
+    private LiveData<NetworkState> loadInitialNetworkState;
+    private LiveData<NetworkState> loadAfterNetworkState;
 
-    public GoodsListFragment(LiveData<PagedList<Good>> goodsPagedList) {
+    public GoodsListFragment(LiveData<PagedList<Good>> goodsPagedList,
+                             LiveData<NetworkState> loadInitialNetworkState,
+                             LiveData<NetworkState> loadAfterNetworkState) {
         this.goodsPagedList = goodsPagedList;
+        this.loadInitialNetworkState = loadInitialNetworkState;
+        this.loadAfterNetworkState = loadAfterNetworkState;
     }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-
     }
 
     @Nullable
@@ -46,6 +52,9 @@ public class GoodsListFragment extends Fragment {
         RecyclerView recyclerView = v.findViewById(R.id.goods_recyclerview);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(layoutManager);
+
+        loadInitialNetworkState.observe(this, this::handleNetworkState);
+        loadAfterNetworkState.observe(this, adapter::setNetworkState);
 
         return v;
     }
@@ -63,4 +72,17 @@ public class GoodsListFragment extends Fragment {
             }
         };
     }
+
+    private void handleNetworkState(NetworkState networkState) {
+        if(networkState.getStatus() == NetworkState.Status.FAILED) {
+            View errorView = getView().findViewById(R.id.retry_error);
+            Button retry = (Button) errorView.findViewById(R.id.retry_btn);
+            retry.setOnClickListener(v -> {
+                errorView.setVisibility(View.GONE);
+                networkState.getRetryable().retry();
+            });
+            errorView.setVisibility(View.VISIBLE);
+        }
+    }
+
 }

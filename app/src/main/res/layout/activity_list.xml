@@ -29,6 +29,16 @@
                 android:minHeight="?attr/actionBarSize"
                 android:theme="?attr/actionBarTheme"
                 app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+
+            <me.zhanghai.android.materialprogressbar.MaterialProgressBar
+                android:id="@+id/activity_list_progressbar"
+                android:layout_width="match_parent"
+                android:layout_height="4dp"
+                android:indeterminate="true"
+                app:mpb_useIntrinsicPadding="false"
+                app:mpb_progressStyle="horizontal"
+                style="@style/Widget.MaterialProgressBar.ProgressBar.Horizontal"
+                android:visibility="invisible"/>
         </com.google.android.material.appbar.AppBarLayout>
 
         <LinearLayout

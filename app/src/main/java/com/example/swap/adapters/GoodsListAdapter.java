@@ -4,8 +4,11 @@ import android.content.Context;
 import android.net.Uri;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -15,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.swap.R;
 import com.example.swap.models.Good;
+import com.example.swap.rest.NetworkState;
 import com.example.swap.rest.addressconstants.Addresses;
 import com.squareup.picasso.Picasso;
 
@@ -25,6 +29,8 @@ public class GoodsListAdapter extends PagedListAdapter<Good, RecyclerView.ViewHo
     private static final int ITEM_PLACEHOLDER = 1;
 
     private Context context;
+
+    private NetworkState networkState;
 
     public GoodsListAdapter(@NonNull DiffUtil.ItemCallback<Good> diffCallback, Context context) {
         super(diffCallback);
@@ -37,7 +43,7 @@ public class GoodsListAdapter extends PagedListAdapter<Good, RecyclerView.ViewHo
         if(viewType == ITEM_GOOD) {
             return new GoodItemViewHolder(LayoutInflater.from(parent.getContext()), parent);
         } else {
-            return new PlaceholderItemViewHolder(LayoutInflater.from(parent.getContext()), parent);
+            return new PlaceholderItemViewHolder(LayoutInflater.from(parent.getContext()), parent, this.networkState);
         }
     }
 
@@ -46,20 +52,60 @@ public class GoodsListAdapter extends PagedListAdapter<Good, RecyclerView.ViewHo
         if(getItemViewType(position) == ITEM_GOOD) {
             Good good = getItem(position);
             ImageView goodImage = ((GoodItemViewHolder)holder).goodImage;
-            buildPicasso().load(Addresses.IMAGES_HOME + good.getImageFileName()).into(goodImage);
+            Picasso.get().load(Addresses.IMAGES_HOME + good.getImageFileName()).into(goodImage);
             ((GoodItemViewHolder)holder).goodNameTxt.setText(good.getName());
             ((GoodItemViewHolder) holder).goodDescriptionTxt.setText(good.getDescription());
-            Log.d("Offerer", good.getOfferer().getEmail());
             ((GoodItemViewHolder) holder).goodPriceRangeTxt.setText(
                     this.context.getString(R.string.good_price_range, good.getPriceRangeMin(), good.getPriceRangeMax()));
             ((GoodItemViewHolder) holder).goodCategoryTxt.setText(
                     context.getString(R.string.goods_list_category_label, good.getCategory()));
+        } else {
+            ((PlaceholderItemViewHolder)holder).itemView1.setOnClickListener(v -> {
+                Log.d("load item clicked", "Position: " + position);
+            });
         }
+    }
+
+    private boolean hasExtraRow() {
+        return networkState != null && networkState != NetworkState.LOADED;
     }
 
     @Override
     public int getItemViewType(int position) {
-        return getItem(position) == null ? ITEM_PLACEHOLDER : ITEM_GOOD;
+        if(hasExtraRow() && position == getItemCount() - 1) {
+            return ITEM_PLACEHOLDER;
+        } else {
+            return ITEM_GOOD;
+        }
+    }
+
+    @Override
+    public int getItemCount() {
+        return hasExtraRow() ? super.getItemCount() +  1 : super.getItemCount();
+    }
+
+    public void setNetworkState(NetworkState newNetworkState) {
+//        Log.d("load setNetworkState", newNetworkState.getStatus().toString());
+        if(networkState != null)
+            Log.d("load setNetworkState", this.networkState.getStatus().toString() + " to " + newNetworkState.getStatus().toString());
+
+        NetworkState prevNetworkState = this.networkState;
+        boolean hadExtraRow = hasExtraRow();
+        this.networkState = newNetworkState;
+        boolean hasExtraRow = hasExtraRow();
+        if(hadExtraRow != hasExtraRow) {
+            if(hadExtraRow) {
+                notifyItemRemoved(super.getItemCount());
+                Log.d("load setNS", "Load item removed");
+            } else {
+                notifyItemInserted(super.getItemCount());
+                Log.d("load setNS", "Load item inserted");
+            }
+        } else if(hasExtraRow && prevNetworkState != newNetworkState){
+            notifyItemChanged(getItemCount() - 1);
+            Log.d("load setNS", "Load item changed");
+            Log.d("load setNS", "Position: " + (getItemCount() - 1));
+        }
     }
 
     class GoodItemViewHolder extends RecyclerView.ViewHolder {
@@ -80,8 +126,27 @@ public class GoodsListAdapter extends PagedListAdapter<Good, RecyclerView.ViewHo
     }
 
     class PlaceholderItemViewHolder extends RecyclerView.ViewHolder {
-        public PlaceholderItemViewHolder(LayoutInflater inflater, ViewGroup parent) {
-            super(inflater.inflate(R.layout.goods_list_placeholder, parent, false));
+        public View itemView1;
+        public PlaceholderItemViewHolder(LayoutInflater inflater, ViewGroup parent, NetworkState networkState) {
+            super(inflater.inflate(R.layout.goods_list_item_loading, parent, false));
+
+            Log.d("LoadingItemViewHolder", "ble " + networkState.getStatus().toString());
+
+            ProgressBar progressBar = (ProgressBar) itemView.findViewById(R.id.goods_list_item_progressbar);
+            Button retryBtn = (Button) itemView.findViewById(R.id.goods_list_item_retry_btn);
+            retryBtn.setOnClickListener(v -> {
+                networkState.getRetryable().retry();
+            });
+
+            itemView1 = itemView;
+
+            if(networkState.getStatus() == NetworkState.Status.FAILED) {
+                progressBar.setVisibility(View.GONE);
+                retryBtn.setVisibility(View.VISIBLE);
+            } else if(networkState.getStatus() == NetworkState.Status.RUNNING) {
+                progressBar.setVisibility(View.VISIBLE);
+                retryBtn.setVisibility(View.GONE);
+            }
         }
     }
 
