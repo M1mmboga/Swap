@@ -1,5 +1,6 @@
 package com.example.swap.fragments;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.paging.PagedList;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -19,6 +21,8 @@ import com.example.swap.R;
 import com.example.swap.adapters.GoodsListAdapter;
 import com.example.swap.models.Good;
 import com.example.swap.rest.NetworkState;
+import com.example.swap.viewmodels.GoodsByCategoryViewModel;
+import com.example.swap.viewmodels.factories.GoodsByCategoryViewModelFactory;
 
 public class GoodsListFragment extends Fragment {
 
@@ -26,12 +30,26 @@ public class GoodsListFragment extends Fragment {
     private LiveData<NetworkState> loadInitialNetworkState;
     private LiveData<NetworkState> loadAfterNetworkState;
 
-    public GoodsListFragment(LiveData<PagedList<Good>> goodsPagedList,
+    public GoodsListFragment() {}
+
+    /*public GoodsListFragment(LiveData<PagedList<Good>> goodsPagedList,
                              LiveData<NetworkState> loadInitialNetworkState,
                              LiveData<NetworkState> loadAfterNetworkState) {
         this.goodsPagedList = goodsPagedList;
         this.loadInitialNetworkState = loadInitialNetworkState;
         this.loadAfterNetworkState = loadAfterNetworkState;
+    }*/
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        String category = getArguments().getString("Category");
+        GoodsByCategoryViewModel model = ViewModelProviders
+                .of(this, new GoodsByCategoryViewModelFactory(getActivity().getApplication(), category))
+                .get(GoodsByCategoryViewModel.class);
+        this.goodsPagedList = model.getGoodsPagedList();
+        this.loadInitialNetworkState = model.getLoadInitialNetworState();
+        this.loadAfterNetworkState = model.getLoadAfterNetworkState();
     }
 
     @Override

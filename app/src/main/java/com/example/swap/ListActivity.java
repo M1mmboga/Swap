@@ -3,6 +3,9 @@ package com.example.swap;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
 
@@ -35,6 +38,8 @@ public class ListActivity extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
 
+        setDefaultKeyMode(DEFAULT_KEYS_SEARCH_LOCAL);
+
         progressBar = (ProgressBar) findViewById(R.id.activity_list_progressbar);
 
         Intent i = getIntent();
@@ -50,10 +55,13 @@ public class ListActivity extends AppCompatActivity {
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
         GoodsListFragment goodsListFragment = new GoodsListFragment(
-                goodsByCategoryViewModel.getGoodsPagedList(),
+                /*goodsByCategoryViewModel.getGoodsPagedList(),
                 goodsByCategoryViewModel.getLoadInitialNetworState(),
-                goodsByCategoryViewModel.getLoadAfterNetworkState()
+                goodsByCategoryViewModel.getLoadAfterNetworkState()*/
         );
+        Bundle fragmentParams = new Bundle();
+        fragmentParams.putString("Category", category);
+        goodsListFragment.setArguments(fragmentParams);
         fragmentTransaction.add(R.id.list_fragment_container, goodsListFragment);
         fragmentTransaction.commit();
     }
@@ -65,5 +73,22 @@ public class ListActivity extends AppCompatActivity {
             progressBar.setVisibility(View.INVISIBLE);
         }
         Log.d("ListActivity initLoad", networkState.getStatus().toString());
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.search_menu_item:
+                onSearchRequested();
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 }
