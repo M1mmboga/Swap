@@ -22,10 +22,13 @@ import com.example.swap.viewmodels.GoodsByCategoryViewModel;
 import com.example.swap.viewmodels.factories.GoodsByCategoryViewModelFactory;
 
 public class ListActivity extends AppCompatActivity {
+    public static final String CATEGORY_CRITERIA = "Category";
 
     private GoodsByCategoryViewModel goodsByCategoryViewModel;
 
     private ProgressBar progressBar;
+
+    private String category;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,24 +46,22 @@ public class ListActivity extends AppCompatActivity {
         progressBar = (ProgressBar) findViewById(R.id.activity_list_progressbar);
 
         Intent i = getIntent();
-        String category = i.getStringExtra("category");
+        category = i.getStringExtra("category");
+
+        setTitle(category);
 
         goodsByCategoryViewModel = ViewModelProviders
                 .of(this, new GoodsByCategoryViewModelFactory(getApplication(), category))
                 .get(GoodsByCategoryViewModel.class);
-        goodsByCategoryViewModel.getLoadInitialNetworState()
+        goodsByCategoryViewModel.getLoadInitialNetworkState()
                 .observe(this, this::handleInitialLoading);
 
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
-        GoodsListFragment goodsListFragment = new GoodsListFragment(
-                /*goodsByCategoryViewModel.getGoodsPagedList(),
-                goodsByCategoryViewModel.getLoadInitialNetworState(),
-                goodsByCategoryViewModel.getLoadAfterNetworkState()*/
-        );
+        GoodsListFragment goodsListFragment = new GoodsListFragment();
         Bundle fragmentParams = new Bundle();
-        fragmentParams.putString("Category", category);
+        fragmentParams.putString(CATEGORY_CRITERIA, category);
         goodsListFragment.setArguments(fragmentParams);
         fragmentTransaction.add(R.id.list_fragment_container, goodsListFragment);
         fragmentTransaction.commit();
@@ -76,9 +77,24 @@ public class ListActivity extends AppCompatActivity {
     }
 
     @Override
+    public boolean onSearchRequested() {
+        Bundle searchData = new Bundle();
+        Log.d("onSearchRequested", category);
+        searchData.putString(CATEGORY_CRITERIA, category);
+        startSearch(null, false, searchData, false);
+        return true;
+    }
+
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater menuInflater = getMenuInflater();
         menuInflater.inflate(R.menu.menu, menu);
+
+        /*SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+        SearchView searchView = (SearchView) menu.findItem(R.id.search_menu_item).getActionView();
+        searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
+        searchView.setIconifiedByDefault(false);*/
+
         return true;
     }
 

@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.swap.ListActivity;
 import com.example.swap.R;
 import com.example.swap.adapters.GoodsListAdapter;
 import com.example.swap.models.Good;
@@ -30,25 +31,17 @@ public class GoodsListFragment extends Fragment {
     private LiveData<NetworkState> loadInitialNetworkState;
     private LiveData<NetworkState> loadAfterNetworkState;
 
-    public GoodsListFragment() {}
-
-    /*public GoodsListFragment(LiveData<PagedList<Good>> goodsPagedList,
-                             LiveData<NetworkState> loadInitialNetworkState,
-                             LiveData<NetworkState> loadAfterNetworkState) {
-        this.goodsPagedList = goodsPagedList;
-        this.loadInitialNetworkState = loadInitialNetworkState;
-        this.loadAfterNetworkState = loadAfterNetworkState;
-    }*/
-
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
-        String category = getArguments().getString("Category");
+        String category = getArguments().getString(ListActivity.CATEGORY_CRITERIA);
+
         GoodsByCategoryViewModel model = ViewModelProviders
                 .of(this, new GoodsByCategoryViewModelFactory(getActivity().getApplication(), category))
                 .get(GoodsByCategoryViewModel.class);
+
         this.goodsPagedList = model.getGoodsPagedList();
-        this.loadInitialNetworkState = model.getLoadInitialNetworState();
+        this.loadInitialNetworkState = model.getLoadInitialNetworkState();
         this.loadAfterNetworkState = model.getLoadAfterNetworkState();
     }
 

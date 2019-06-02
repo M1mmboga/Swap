@@ -9,22 +9,21 @@ import androidx.paging.LivePagedListBuilder;
 import androidx.paging.PagedList;
 
 import com.example.swap.datasources.goods.GoodsDataSource;
-import com.example.swap.datasources.goods.factories.GoodsByCategoryDataSourceFactory;
+import com.example.swap.datasources.goods.factories.SoughtGoodsDataSourceFactory;
 import com.example.swap.models.Good;
 import com.example.swap.rest.NetworkState;
 
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
-public class GoodsByCategoryViewModel extends ViewModel {
+public class SoughtGoodsViewModel extends ViewModel {
     private LiveData<PagedList<Good>> goodsPagedList;
     private LiveData<NetworkState> loadInitialNetworkState;
     private LiveData<NetworkState> loadAfterNetworkState;
 
-    public GoodsByCategoryViewModel(Application application, String category) {
-
-        GoodsByCategoryDataSourceFactory goodsDataSourceFactory =
-                new GoodsByCategoryDataSourceFactory(category);
+    public SoughtGoodsViewModel(Application application, String searchQuery, String category) {
+        SoughtGoodsDataSourceFactory goodsDataSourceFactory
+                = new SoughtGoodsDataSourceFactory(searchQuery, category);
 
         Executor executor = Executors.newFixedThreadPool(4);
 
@@ -39,7 +38,6 @@ public class GoodsByCategoryViewModel extends ViewModel {
                 .setFetchExecutor(executor)
                 .build();
 
-
         loadInitialNetworkState = Transformations.switchMap(
                 goodsDataSourceFactory.getGoodsDataSourceMutableLiveData(),
                 GoodsDataSource::getLoadInitialNetworkState
@@ -49,8 +47,8 @@ public class GoodsByCategoryViewModel extends ViewModel {
                 goodsDataSourceFactory.getGoodsDataSourceMutableLiveData(),
                 GoodsDataSource::getLoadAfterNetworkState
         );
-
     }
+
 
     public LiveData<PagedList<Good>> getGoodsPagedList() {
         return goodsPagedList;

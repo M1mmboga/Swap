@@ -6,6 +6,8 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+
+        <item name="searchViewStyle">@style/MySearchView</item>
     </style>
 
     <style name="AppThemeMaterial" parent="Theme.MaterialComponents.Light.NoActionBar">
@@ -13,6 +15,13 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+
+        <item name="searchViewStyle">@style/MySearchView</item>
     </style>
 
+    <style name="MySearchView" parent="Widget.AppCompat.SearchView">
+        <item name="android:queryHint">bbbbbbbbbbb</item>
+        <item name="searchHintIcon">@null</item>
+        <item name="closeIcon">@drawable/ic_search_white_32dp</item>
+    </style>
 </resources>

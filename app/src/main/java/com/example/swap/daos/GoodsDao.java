@@ -11,4 +11,9 @@ public interface GoodsDao {
     @GET("goods/paged")
     Call<GoodsPage> fetchGoodsByCategory(@Query("page") int page,
                                          @Query("category") String category);
+
+    @GET("goods/find")
+    Call<GoodsPage> findGoods(@Query("query") String query,
+                              @Query("category") String category);
+
 }
