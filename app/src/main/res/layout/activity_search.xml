@@ -6,4 +6,14 @@
     android:layout_height="match_parent"
     tools:context=".SearchActivity">
 
+    <RelativeLayout
+        android:id="@+id/activity_search_fragment_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <SearchView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

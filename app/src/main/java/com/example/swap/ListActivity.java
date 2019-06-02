@@ -16,10 +16,13 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProviders;
 
+import com.example.swap.datasources.goods.goodfetchers.ByCategoryGoodsFetcher;
 import com.example.swap.fragments.GoodsListFragment;
 import com.example.swap.rest.NetworkState;
 import com.example.swap.viewmodels.GoodsByCategoryViewModel;
-import com.example.swap.viewmodels.factories.GoodsByCategoryViewModelFactory;
+import com.example.swap.viewmodels.GoodsFetcherViewModel;
+import com.example.swap.viewmodels.GoodsListViewModel;
+import com.example.swap.viewmodels.factories.GoodsListViewModelFactory;
 
 public class ListActivity extends AppCompatActivity {
     public static final String CATEGORY_CRITERIA = "Category";
@@ -50,11 +53,22 @@ public class ListActivity extends AppCompatActivity {
 
         setTitle(category);
 
-        goodsByCategoryViewModel = ViewModelProviders
+        GoodsFetcherViewModel goodsFetcherViewModel = ViewModelProviders
+                .of(this)
+                .get(GoodsFetcherViewModel.class);
+        goodsFetcherViewModel.getGoodsFetcherLiveData().setValue(new ByCategoryGoodsFetcher(category));
+
+        GoodsListViewModel goodsListViewModel = ViewModelProviders
+                .of(this, new GoodsListViewModelFactory(goodsFetcherViewModel.getGoodsFetcherLiveData().getValue()))
+                .get(GoodsListViewModel.class);
+        goodsListViewModel.getLoadInitialNetworkState()
+                .observe(this, this::handleInitialLoading);
+
+        /*goodsByCategoryViewModel = ViewModelProviders
                 .of(this, new GoodsByCategoryViewModelFactory(getApplication(), category))
                 .get(GoodsByCategoryViewModel.class);
         goodsByCategoryViewModel.getLoadInitialNetworkState()
-                .observe(this, this::handleInitialLoading);
+                .observe(this, this::handleInitialLoading);*/
 
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();

@@ -17,13 +17,13 @@ import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.swap.ListActivity;
 import com.example.swap.R;
 import com.example.swap.adapters.GoodsListAdapter;
 import com.example.swap.models.Good;
 import com.example.swap.rest.NetworkState;
-import com.example.swap.viewmodels.GoodsByCategoryViewModel;
-import com.example.swap.viewmodels.factories.GoodsByCategoryViewModelFactory;
+import com.example.swap.viewmodels.GoodsFetcherViewModel;
+import com.example.swap.viewmodels.GoodsListViewModel;
+import com.example.swap.viewmodels.factories.GoodsListViewModelFactory;
 
 public class GoodsListFragment extends Fragment {
 
@@ -34,15 +34,21 @@ public class GoodsListFragment extends Fragment {
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
-        String category = getArguments().getString(ListActivity.CATEGORY_CRITERIA);
+//        String category = getArguments().getString(ListActivity.CATEGORY_CRITERIA);
 
-        GoodsByCategoryViewModel model = ViewModelProviders
+        /*GoodsByCategoryViewModel model = ViewModelProviders
                 .of(this, new GoodsByCategoryViewModelFactory(getActivity().getApplication(), category))
-                .get(GoodsByCategoryViewModel.class);
+                .get(GoodsByCategoryViewModel.class);*/
+        GoodsFetcherViewModel goodsFetcherViewModel = ViewModelProviders
+                .of(getActivity())
+                .get(GoodsFetcherViewModel.class);
+        GoodsListViewModel goodsListViewModel = ViewModelProviders
+                .of(this, new GoodsListViewModelFactory(goodsFetcherViewModel.getGoodsFetcherLiveData().getValue()))
+                .get(GoodsListViewModel.class);
 
-        this.goodsPagedList = model.getGoodsPagedList();
-        this.loadInitialNetworkState = model.getLoadInitialNetworkState();
-        this.loadAfterNetworkState = model.getLoadAfterNetworkState();
+        this.goodsPagedList = goodsListViewModel.getGoodsPagedList();
+        this.loadInitialNetworkState = goodsListViewModel.getLoadInitialNetworkState();
+        this.loadAfterNetworkState = goodsListViewModel.getLoadAfterNetworkState();
     }
 
     @Override
