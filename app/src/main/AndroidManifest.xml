@@ -58,7 +58,7 @@
         <activity android:name=".TempHomePage"></activity>
 
         <activity android:name=".LoginActivity" />
-        <activity android:name=".profile"></activity>
+        <activity android:name=".ProfileActivity"></activity>
     </application>
 
 </manifest>

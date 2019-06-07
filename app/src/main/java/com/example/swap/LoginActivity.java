@@ -1,6 +1,6 @@
 package com.example.swap;
 
-import android.support.v7.app.AppCompatActivity;
+//import android.support.v7.app.AppCompatActivity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -10,6 +10,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.InputStreamReader;
@@ -119,7 +122,7 @@ public class LoginActivity extends AppCompatActivity {
 
                     finish();
 
-                    Intent intent = new Intent(LoginActivity.this, profile.class);
+                    Intent intent = new Intent(LoginActivity.this, ProfileActivity.class);
 
                     intent.putExtra(UserEmail,email);
 

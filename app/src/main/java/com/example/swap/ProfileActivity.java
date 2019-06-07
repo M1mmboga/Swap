@@ -1,15 +1,16 @@
 package com.example.swap;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
 
-public class profile extends AppCompatActivity {
+
+public class ProfileActivity extends AppCompatActivity {
 
     TextView textView ;
     Button button ;
@@ -34,11 +35,11 @@ public class profile extends AppCompatActivity {
 
                 finish();
 
-                Intent intent = new Intent(profile.this, LoginActivity.class);
+                Intent intent = new Intent(ProfileActivity.this, LoginActivity.class);
 
                 startActivity(intent);
 
-                Toast.makeText(profile.this, "Log Out Successfully", Toast.LENGTH_LONG).show();
+                Toast.makeText(ProfileActivity.this, "Log Out Successfully", Toast.LENGTH_LONG).show();
 
             }
         });
@@ -48,7 +49,7 @@ public class profile extends AppCompatActivity {
     @Override
     public void onBackPressed() {
 
-        Toast.makeText(profile.this, "Please Click on Log Out button .", Toast.LENGTH_LONG).show();
+        Toast.makeText(ProfileActivity.this, "Please Click on Log Out button .", Toast.LENGTH_LONG).show();
 
         return;
     }
