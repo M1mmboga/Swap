@@ -2,7 +2,9 @@ package com.example.swap.models;
 
 import com.google.gson.annotations.SerializedName;
 
-public class User {
+import java.io.Serializable;
+
+public class User implements Serializable {
 
     private int id;
     @SerializedName("email") private String email;

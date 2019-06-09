@@ -4,9 +4,11 @@ import androidx.annotation.Nullable;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
-public class Good {
+public class Good implements Serializable {
 
     private int id;
     @SerializedName("user_id") private int userId;
@@ -14,6 +16,7 @@ public class Good {
     @SerializedName("name") private String name;
     @SerializedName("description") private String description;
     @SerializedName("image_file_name") private String imageFileName;
+    @SerializedName("supplementary_good_images") private List<String> supplementaryImageFileNames;
     @SerializedName("price_range_min") private int priceRangeMin;
     @SerializedName("price_range_max") private int priceRangeMax;
     @SerializedName("category") private String category;
@@ -110,5 +113,13 @@ public class Good {
 
     public void setPostDate(Date postDate) {
         this.postDate = postDate;
+    }
+
+    public List<String> getSupplementaryImageFileNames() {
+        return supplementaryImageFileNames;
+    }
+
+    public void setSupplementaryImageFileNames(List<String> supplementaryImageFileNames) {
+        this.supplementaryImageFileNames = supplementaryImageFileNames;
     }
 }
