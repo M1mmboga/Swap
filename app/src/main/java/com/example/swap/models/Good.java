@@ -9,11 +9,11 @@ import java.util.Date;
 public class Good {
 
     private int id;
-    @SerializedName("user_id") private int userId;
-    @SerializedName("user") private User user;
-    @SerializedName("name") private String name;
-    @SerializedName("description") private String description;
-    @SerializedName("image_file_name") private String imageFileName;
+    @SerializedName("user_id") private int userId;//
+    @SerializedName("user") private User user;//
+    @SerializedName("name") private String name;//
+    @SerializedName("description") private String description;//
+    @SerializedName("image_file_name") private String imageFileName;//
     @SerializedName("price_range_min") private int priceRangeMin;
     @SerializedName("price_range_max") private int priceRangeMax;
     @SerializedName("category") private String category;
