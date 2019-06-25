@@ -8,8 +8,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.lifecycle.ViewModelProviders;
 
 import com.example.swap.R;
+import com.example.swap.views.postgood.viewmodels.PostGoodViewModel;
 
 public class PostGoodActivity extends AppCompatActivity {
 
@@ -25,6 +27,9 @@ public class PostGoodActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         setTitle("Post Item");
+
+        PostGoodViewModel postGoodViewModel =
+                ViewModelProviders.of(this).get(PostGoodViewModel.class);
 
         if(savedInstanceState == null) {
             FragmentManager fragmentManager = getSupportFragmentManager();
