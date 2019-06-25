@@ -7,6 +7,7 @@ import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -27,10 +28,13 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 import retrofit2.Retrofit;
 
 
 public class MainActivity extends AppCompatActivity {
+    private static final String TAG = "MainActivity";
 
     ImageView mImageView;
     Button mChooseButton;
@@ -96,11 +100,14 @@ public class MainActivity extends AppCompatActivity {
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 String category = spinner.getSelectedItem().toString();
                 String nameOfItem = itemName.getText().toString();
                 String descriptionOfItem = itemDescriptionText.getText().toString();
                 String locationOfItem = itemLocationText.getText().toString();
                 String priceOfItem = itemPriceText.getText().toString();
+
+                Log.d(TAG + "category", category);
 
                 if (category == null || nameOfItem == null ||
                         descriptionOfItem == null || locationOfItem == null ||
@@ -120,6 +127,22 @@ public class MainActivity extends AppCompatActivity {
                     Retrofit retrofit = RetrofitFactory.create();
                     GoodsDao goodsDao = retrofit.create(GoodsDao.class);
                     Call<Good> good = goodsDao.addGood(goodDTO);
+                    good.enqueue(new Callback<Good>() {
+                        @Override
+                        public void onResponse(Call<Good> call, Response<Good> response) {
+                            if (response.isSuccessful()) {
+                                Log.d("IS A MESSAGE", response.body().getName());
+                            } else {
+                                Log.d(TAG, response.message());
+                                Log.d(TAG, response.raw().request().url().toString());
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<Good> call, Throwable t) {
+                            Log.d(TAG, t.getMessage());
+                        }
+                    });
                 }
 
 
@@ -170,8 +193,5 @@ public class MainActivity extends AppCompatActivity {
             mImageView.setImageURI(data.getData());
         }
     }
-
-
-
 
 }
