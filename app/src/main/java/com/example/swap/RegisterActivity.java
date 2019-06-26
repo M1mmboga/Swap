@@ -1,6 +1,6 @@
 package com.example.swap;
 
-
+import android.Manifest;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -9,6 +9,7 @@ import android.view.View;
 
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -35,7 +36,8 @@ public class RegisterActivity extends AppCompatActivity {
 
 
 
-    Button register , login ;
+    Button register ;
+    TextView login;
     EditText name, email , password ;
     String RegisterURL = "http://localhost/swap-mobileapp/insert.php" ;
     Boolean CheckEditText ;
@@ -44,11 +46,11 @@ public class RegisterActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_register);
+
 
         register = (Button)findViewById(R.id.button);
-        login = (Button)findViewById(R.id.button2);
-
+        login = (TextView) findViewById(R.id.loginText);
         name = (EditText)findViewById(R.id.name);
         email = (EditText)findViewById(R.id.email);
         password = (EditText)findViewById(R.id.password);
@@ -60,7 +62,7 @@ public class RegisterActivity extends AppCompatActivity {
                 if(CheckEditText){
                     SendDataToServer(NameHolder, EmailHolder, PasswordHolder);
                 } else {
-                    Toast.makeText(RegisterActivity.this, "Please fill all form fields.", Toast.LENGTH_LONG).show();
+                    Toast.makeText(RegisterActivity.this, "Please fill all fields", Toast.LENGTH_LONG).show();
                 }
             }
         });
@@ -152,13 +154,8 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
 
-
-
-
-
-
-
-
-
-
+    public void loginUser(View view) {
+        Intent intent = new Intent(this, LoginActivity.class);
+        startActivity(intent);
+    }
 }

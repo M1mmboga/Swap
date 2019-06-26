@@ -29,8 +29,8 @@ public class GoodsListAdapter extends PagedListAdapter<Good, RecyclerView.ViewHo
     private static final int ITEM_PLACEHOLDER = 1;
 
     private Context context;
-
     private NetworkState networkState;
+    private View.OnClickListener goodItemOnClickListener;
 
     public GoodsListAdapter(@NonNull DiffUtil.ItemCallback<Good> diffCallback, Context context) {
         super(diffCallback);
@@ -108,6 +108,10 @@ public class GoodsListAdapter extends PagedListAdapter<Good, RecyclerView.ViewHo
         }
     }
 
+    public void setGoodItemOnClickListener(View.OnClickListener onClickListener) {
+        this.goodItemOnClickListener = onClickListener;
+    }
+
     class GoodItemViewHolder extends RecyclerView.ViewHolder {
         public ImageView goodImage;
         public TextView goodNameTxt;
@@ -122,6 +126,13 @@ public class GoodsListAdapter extends PagedListAdapter<Good, RecyclerView.ViewHo
             goodDescriptionTxt = (TextView) itemView.findViewById(R.id.good_description);
             goodPriceRangeTxt = (TextView) itemView.findViewById(R.id.good_price_range);
             goodCategoryTxt = (TextView) itemView.findViewById(R.id.temp_good_category);
+
+            if(goodItemOnClickListener != null) {
+                itemView.setTag(this);
+                itemView.setOnClickListener(goodItemOnClickListener);
+            } else {
+                throw new NullPointerException("Must set goodItemOnClickListener.");
+            }
         }
     }
 

@@ -48,6 +48,7 @@ public class LoginActivity extends AppCompatActivity {
     StringBuilder stringBuilder = new StringBuilder();
     String Result ;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -72,7 +73,7 @@ public class LoginActivity extends AppCompatActivity {
                 }
                 else {
 
-                    Toast.makeText(LoginActivity.this, "Please fill all form fields.", Toast.LENGTH_LONG).show();
+                    Toast.makeText(LoginActivity.this, "Please enter email and password", Toast.LENGTH_LONG).show();
 
                 }
 
@@ -148,6 +149,13 @@ public class LoginActivity extends AppCompatActivity {
 
         LoginFunctionClass loginFunctionClass = new LoginFunctionClass();
         loginFunctionClass.execute(email,password);
+    }
+
+    //action listener to register activity
+    public void registerUser(View view) {
+
+        Intent intent = new Intent(this, RegisterActivity.class);
+        startActivity(intent);
     }
 
     public class LoginParseClass {

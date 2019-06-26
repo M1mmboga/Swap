@@ -82,9 +82,12 @@ public class ListActivity extends AppCompatActivity {
     }
 
     private void handleInitialLoading(NetworkState networkState) {
+        Log.d("ListActivity", networkState.getStatus().toString());
         if(networkState.getStatus() == NetworkState.Status.RUNNING) {
+            Log.d("ListActivity", "Showing progress indicator");
             progressBar.setVisibility(View.VISIBLE);
         } else {
+            Log.d("ListActivity", "Showing progress hiding");
             progressBar.setVisibility(View.INVISIBLE);
         }
         Log.d("ListActivity initLoad", networkState.getStatus().toString());

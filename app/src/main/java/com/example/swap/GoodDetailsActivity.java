@@ -1,0 +1,73 @@
+package com.example.swap;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+
+import com.example.swap.fragments.GoodsListFragment;
+import com.example.swap.models.Good;
+import com.example.swap.rest.addressconstants.Addresses;
+import com.glide.slider.library.Animations.DescriptionAnimation;
+import com.glide.slider.library.SliderLayout;
+import com.glide.slider.library.SliderTypes.DefaultSliderView;
+
+import java.text.DecimalFormat;
+
+public class GoodDetailsActivity extends AppCompatActivity {
+
+    private SliderLayout slider;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_good_details);
+
+        Intent intent = getIntent();
+        Good good = (Good) intent.getSerializableExtra(GoodsListFragment.CHOSEN_GOOD);
+
+        Toolbar toolbar = findViewById(R.id.activity_good_details_toolbar);
+        setSupportActionBar(toolbar);
+        setTitle(good.getName());
+
+        slider = (SliderLayout) findViewById(R.id.good_images_slider);
+
+        slider.addSlider(
+                new DefaultSliderView(this)
+                    .image(Addresses.IMAGES_HOME + good.getImageFileName())
+                    .setProgressBarVisible(true)
+        );
+
+        for(String image : good.getSupplementaryImageFileNames()) {
+            DefaultSliderView sliderView = new DefaultSliderView(this);
+            sliderView
+                    .image(Addresses.IMAGES_HOME + image)
+                    .setProgressBarVisible(true);
+            slider.addSlider(sliderView);
+        }
+
+        slider.setPresetIndicator(SliderLayout.PresetIndicators.Center_Bottom);
+        slider.setCustomAnimation(new DescriptionAnimation());
+        slider.setDuration(7000);
+
+        /*USE DATA-BINDING INSTEAD !!!*/
+        ((TextView) findViewById(R.id.good_details_good_name)).setText(good.getName());
+        ((TextView) findViewById(R.id.good_details_category)).setText(good.getCategory());
+
+        String priceApproximation = new DecimalFormat("#,###")
+                .format(good.getPriceRangeMin());
+        ((TextView) findViewById(R.id.good_details_price_approx))
+                .setText(getString(R.string.good_details_price_approx, priceApproximation));
+
+        ((TextView) findViewById(R.id.good_details_description))
+                .setText(good.getDescription());
+    }
+
+    @Override
+    protected void onStop() {
+        slider.stopAutoCycle();
+        super.onStop();
+    }
+}

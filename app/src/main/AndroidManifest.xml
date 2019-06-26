@@ -2,11 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.swap">
 
-    <!--get permission to access the gallery -->
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" /> <!-- get permission to access the gallery -->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -17,20 +14,51 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
 
-        <!--Splash screen-->
-        <activity android:name=".Splashscreen"
-            android:label="@string/app_name">
+        <activity android:name=".views.postgood.PostGoodActivity"
+            android:theme="@style/AppThemeMaterial">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
-        <!--Inserting-goods-page. Better name required-->
-        <activity android:name=".MainActivity"></activity>
+        <activity
 
-        <!--By category list of goods-->
-        <activity android:name=".ListActivity"
+            android:name=".LoginActivity"
+            android:theme="@style/AppThemeMaterial">
+            <!--<intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>-->
+        </activity>
+
+        <activity android:name=".RegisterActivity">
+
+        </activity>
+
+        <activity
+            android:name=".GoodDetailsActivity"
+            android:label="@string/title_activity_good_details"
+            android:theme="@style/AppThemeMaterial">
+
+            <!--
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            -->
+        </activity> <!-- Splash screen -->
+        <activity
+            android:name=".Splashscreen"
+            android:label="@string/app_name" />
+        <!-- Inserting-goods-page. Better name required -->
+        <activity android:name=".MainActivity" />
+        <!-- By category list of goods -->
+        <activity
+            android:name=".ListActivity"
             android:parentActivityName=".MainActivity"
             android:theme="@style/AppThemeMaterial">
             <meta-data
@@ -38,27 +66,38 @@
                 android:value=".MainActivity" />
             <meta-data
                 android:name="android.app.default_searchable"
-                android:value=".SearchActivity"/>
-        </activity>
-
-
-        <!--Searchable Activity-->
-        <activity android:name=".SearchActivity"
+                android:value=".SearchActivity" />
+        </activity> <!-- Searchable Activity -->
+        <activity
+            android:name=".SearchActivity"
             android:label="@string/search_activity_label"
-            android:launchMode="singleTop">
+            android:launchMode="singleTop"
+            android:theme="@style/AppThemeMaterial">
             <intent-filter>
-                <action android:name="android.intent.action.SEARCH"/>
+                <action android:name="android.intent.action.SEARCH" />
             </intent-filter>
+
             <meta-data
                 android:name="android.app.searchable"
-                android:resource="@xml/searchable"/>
+                android:resource="@xml/searchable" />
+        </activity> <!-- Temporary Home-page -->
+        <activity android:name=".TempHomePage">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
 
-        <!--Temporary Home-page-->
-        <activity android:name=".TempHomePage"></activity>
-
-        <activity android:name=".LoginActivity" />
-        <activity android:name=".ProfileActivity"></activity>
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="com.johngachihi.example.swap.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
     </application>
 
 </manifest>
