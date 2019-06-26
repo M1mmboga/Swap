@@ -1,7 +1,6 @@
 package com.example.swap.views.postgood;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,6 +13,8 @@ import com.example.swap.R;
 import com.example.swap.views.postgood.viewmodels.PostGoodViewModel;
 
 public class PostGoodActivity extends AppCompatActivity {
+
+    private static final String FRAGMENT_TAG_FORM = "form-fragment-tag";
 
     private PostItemFormFragment postItemFormFragment;
 
@@ -36,7 +37,7 @@ public class PostGoodActivity extends AppCompatActivity {
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
             postItemFormFragment = new PostItemFormFragment();
-            fragmentTransaction.add(R.id.fragment_container, postItemFormFragment);
+            fragmentTransaction.add(R.id.fragment_container, postItemFormFragment, FRAGMENT_TAG_FORM);
             fragmentTransaction.commit();
         }
     }
@@ -51,25 +52,31 @@ public class PostGoodActivity extends AppCompatActivity {
         //noinspection SimplifiableIfStatement
         if(id == R.id.post_item_form_next) {
             openNextFragment();
+        } else if(id == android.R.id.home) {
+            onBackPressed();
+            return true;
         }
 
         return super.onOptionsItemSelected(item);
     }
 
     private void openNextFragment() {
-        Log.d("Next fragment needed", "Next fragment needed");
+        PostItemFormFragment postItemFormFragment = (PostItemFormFragment)
+                getSupportFragmentManager().findFragmentByTag(FRAGMENT_TAG_FORM);
+        if(postItemFormFragment.submitForm()) {
+            FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.setCustomAnimations(
+                    R.anim.enter_from_right,
+                    R.anim.exit_to_left
+            );
 
-        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-//        fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE);
-        fragmentTransaction.setCustomAnimations(
-                R.anim.enter_from_right,
-                R.anim.exit_to_left
-        );
+            ImagesInsertionFragment insertImagesFragment = new ImagesInsertionFragment();
+            fragmentTransaction.replace(R.id.fragment_container, insertImagesFragment);
+            fragmentTransaction.addToBackStack(null);
+            fragmentTransaction.commit();
+        }
 
-        ImagesInsertionFragment insertImagesFragment = new ImagesInsertionFragment();
-        fragmentTransaction.replace(R.id.fragment_container, insertImagesFragment);
-        fragmentTransaction.addToBackStack(null);
-        fragmentTransaction.commit();
+
 
     }
 

@@ -45,7 +45,7 @@ public class GoodsByCategoryDataSourceFactory extends DataSource.Factory<Integer
         }
 
         public Call<GoodsPage> fetch(int pageNumber) {
-            return goodsDao.fetchGoodsByCategory(pageNumber, this.category);
+            return goodsService.fetchGoodsByCategory(pageNumber, this.category);
         }
     }
 }

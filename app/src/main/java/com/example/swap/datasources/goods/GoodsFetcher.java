@@ -1,6 +1,6 @@
 package com.example.swap.datasources.goods;
 
-import com.example.swap.daos.GoodsDao;
+import com.example.swap.data.network.retrofit.services.GoodsService;
 import com.example.swap.models.GoodsPage;
 import com.example.swap.rest.RetrofitFactory;
 
@@ -10,11 +10,11 @@ import retrofit2.Retrofit;
 public abstract class GoodsFetcher {
 
     protected Retrofit retrofit;
-    protected GoodsDao goodsDao;
+    protected GoodsService goodsService;
 
     protected GoodsFetcher() {
         retrofit = RetrofitFactory.create();
-        goodsDao = retrofit.create(GoodsDao.class);
+        goodsService = retrofit.create(GoodsService.class);
     }
 
     abstract protected Call<GoodsPage> fetch(int pageNumber);

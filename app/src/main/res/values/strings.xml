@@ -34,4 +34,7 @@
     <string name="add_image">Add Image</string>
     <string name="supplementary_images">Supplementary Images</string>
     <string name="next">Next</string>
+    <string name="item_name_and_description">Item Name and Description</string>
+    <string name="item_name">Item Name</string>
+    <string name="item_name_element_hint">Insert item name</string>
 </resources>

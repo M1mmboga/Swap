@@ -16,6 +16,6 @@ public class SoughtGoodsGoodsFetcher extends GoodsFetcher {
 
     @Override
     protected Call<GoodsPage> fetch(int pageNumber) {
-        return goodsDao.findGoods(this.searchQuery, this.category);
+        return goodsService.findGoods(this.searchQuery, this.category);
     }
 }
