@@ -27,7 +27,7 @@ import com.example.swap.GoodDetailsActivity;
 import com.example.swap.R;
 import com.example.swap.adapters.GoodsListAdapter;
 import com.example.swap.models.Good;
-import com.example.swap.rest.NetworkState;
+import com.example.swap.utils.NetworkState;
 import com.example.swap.viewmodels.GoodsFetcherViewModel;
 import com.example.swap.viewmodels.GoodsListViewModel;
 import com.example.swap.viewmodels.factories.GoodsListViewModelFactory;

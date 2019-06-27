@@ -10,7 +10,7 @@ import com.example.swap.datasources.goods.GoodsDataSource;
 import com.example.swap.datasources.goods.GoodsFetcher;
 import com.example.swap.datasources.goods.factories.GoodsDataSourceFactory;
 import com.example.swap.models.Good;
-import com.example.swap.rest.NetworkState;
+import com.example.swap.utils.NetworkState;
 
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;

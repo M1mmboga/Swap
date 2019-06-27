@@ -1,6 +1,6 @@
-package com.example.swap.rest;
+package com.example.swap.utils;
 
-import com.example.swap.rest.addressconstants.Addresses;
+import com.example.swap.utils.addressconstants.Addresses;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 

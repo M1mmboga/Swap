@@ -1,5 +1,7 @@
 package com.example.swap.rest;
 
+import com.example.swap.utils.NetworkState;
+
 import org.junit.Test;
 import static org.junit.Assert.*;
 

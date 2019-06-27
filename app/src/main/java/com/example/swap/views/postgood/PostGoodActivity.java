@@ -1,7 +1,9 @@
 package com.example.swap.views.postgood;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -15,8 +17,10 @@ import com.example.swap.views.postgood.viewmodels.PostGoodViewModel;
 public class PostGoodActivity extends AppCompatActivity {
 
     private static final String FRAGMENT_TAG_FORM = "form-fragment-tag";
+    private static final String FRAGMENT_TAG_IMAGES_INSERT = "images-insert-fragment-tag";
 
     private PostItemFormFragment postItemFormFragment;
+    private PostGoodViewModel postGoodViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,8 +33,8 @@ public class PostGoodActivity extends AppCompatActivity {
 
         setTitle("Post Item");
 
-        PostGoodViewModel postGoodViewModel =
-                ViewModelProviders.of(this).get(PostGoodViewModel.class);
+        postGoodViewModel = ViewModelProviders
+                .of(this).get(PostGoodViewModel.class);
 
         if(savedInstanceState == null) {
             FragmentManager fragmentManager = getSupportFragmentManager();
@@ -52,6 +56,8 @@ public class PostGoodActivity extends AppCompatActivity {
         //noinspection SimplifiableIfStatement
         if(id == R.id.post_item_form_next) {
             openNextFragment();
+        } else if(id == R.id.post_item_images_next) {
+            submitGood();
         } else if(id == android.R.id.home) {
             onBackPressed();
             return true;
@@ -71,13 +77,31 @@ public class PostGoodActivity extends AppCompatActivity {
             );
 
             ImagesInsertionFragment insertImagesFragment = new ImagesInsertionFragment();
-            fragmentTransaction.replace(R.id.fragment_container, insertImagesFragment);
+            fragmentTransaction.replace(R.id.fragment_container, insertImagesFragment, FRAGMENT_TAG_IMAGES_INSERT);
             fragmentTransaction.addToBackStack(null);
             fragmentTransaction.commit();
         }
+    }
 
-
-
+    private void submitGood() {
+        ImagesInsertionFragment imagesInsertionFragment = (ImagesInsertionFragment)
+                getSupportFragmentManager().findFragmentByTag(FRAGMENT_TAG_IMAGES_INSERT);
+        if(imagesInsertionFragment.isInputValid()) {
+            final String TAG = "GOOD-ITEM";
+            Log.d(TAG, "Good Name: " + postGoodViewModel.getItemName().getValue());
+            Log.d(TAG, "Good Description: " + postGoodViewModel.getItemDescription().getValue());
+            Log.d(TAG, "Good Category: " + postGoodViewModel.getItemCategory().getValue());
+            Log.d(TAG, "Good Estimated Price: " + postGoodViewModel.getItemEstimatedPrice().getValue());
+            Log.d(TAG, "Good Location: " + postGoodViewModel.getItemLocation().getValue());
+            Log.d(TAG, "Good Main Image: " + postGoodViewModel.getItemMainImage().getValue());
+            if(postGoodViewModel.getItemSupplementaryImages().getValue() != null &&
+                    postGoodViewModel.getItemSupplementaryImages().getValue().get(0) != null)
+            {
+                Log.d(TAG, "Good Sup Image (1)" + postGoodViewModel.getItemSupplementaryImages().getValue().get(0));
+            }
+        } else {
+            Toast.makeText(this, "Invalid", Toast.LENGTH_SHORT).show();
+        }
     }
 
 }

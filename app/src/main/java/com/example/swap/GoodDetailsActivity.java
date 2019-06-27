@@ -9,7 +9,7 @@ import androidx.appcompat.widget.Toolbar;
 
 import com.example.swap.fragments.GoodsListFragment;
 import com.example.swap.models.Good;
-import com.example.swap.rest.addressconstants.Addresses;
+import com.example.swap.utils.addressconstants.Addresses;
 import com.glide.slider.library.Animations.DescriptionAnimation;
 import com.glide.slider.library.SliderLayout;
 import com.glide.slider.library.SliderTypes.DefaultSliderView;

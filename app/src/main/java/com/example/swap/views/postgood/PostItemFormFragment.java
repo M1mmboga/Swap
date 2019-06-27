@@ -7,6 +7,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -38,6 +39,7 @@ public class PostItemFormFragment extends Fragment {
 
     private PostGoodViewModel postGoodViewModel;
     private FormBuilder formBuilder;
+    private TextView validationErrorTxt;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -55,6 +57,7 @@ public class PostItemFormFragment extends Fragment {
                              @Nullable Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_post_item_form, container, false);
+        validationErrorTxt = (TextView) view.findViewById(R.id.post_item_form_validation_error);
         RecyclerView recyclerView = view.findViewById(R.id.post_item_form_recyclerview);
         setUpForm(recyclerView);
 
@@ -68,13 +71,13 @@ public class PostItemFormFragment extends Fragment {
                 .setTag(FORM_ELEMENT_NAME)
                 .setRequired(true)
                 .setValue(postGoodViewModel.getItemName().getValue())
-                .setTitle(getString(R.string.item_name))
+                .setTitle(getString(R.string.item_name) + "*")
                 .setHint(getString(R.string.item_name_element_hint));
         FormElementTextMultiLine descriptionElement = FormElementTextMultiLine.createInstance()
                 .setTag(FORM_ELEMENT_DESCRIPTION)
                 .setRequired(true)
                 .setValue(postGoodViewModel.getItemDescription().getValue())
-                .setTitle("Item Description")
+                .setTitle("Item Description*")
                 .setHint("Insert item's description");
 
         FormHeader itemCategoryHeader = FormHeader.createInstance("Item Category");
@@ -88,14 +91,14 @@ public class PostItemFormFragment extends Fragment {
                 .setTag(FORM_ELEMENT_CATEGORY)
                 .setRequired(true)
                 .setValue(postGoodViewModel.getItemCategory().getValue())
-                .setTitle("Select Item Category")
+                .setTitle("Item Category*")
+                .setHint("Choose category")
                 .setOptions(categories)
                 .setPickerTitle("Select item's category");
 
         FormHeader misellaneousSectionHeader = FormHeader.createInstance("Other Details");
         FormElementTextNumber priceEstimateElement = FormElementTextNumber.createInstance()
                 .setTag(FORM_ELEMENT_PRICE_ESTIMATE)
-                .setRequired(true)
                 .setValue(postGoodViewModel.getItemEstimatedPrice().getValue() == null ? "" : "" + postGoodViewModel.getItemEstimatedPrice().getValue())
                 .setTitle("Estimated Price")
                 .setHint("eg 5000");
@@ -120,15 +123,30 @@ public class PostItemFormFragment extends Fragment {
 
     boolean submitForm() {
         if(formBuilder.isValidForm()) {
-            postGoodViewModel.setItemNameLiveData(formBuilder.getFormElement(FORM_ELEMENT_NAME).getValue());
-            postGoodViewModel.setItemDescriptionLiveData(formBuilder.getFormElement(FORM_ELEMENT_DESCRIPTION).getValue());
-            postGoodViewModel.setItemCategoryLiveData(formBuilder.getFormElement(FORM_ELEMENT_CATEGORY).getValue());
-            postGoodViewModel.setItemEstimatedPriceLiveData(Integer.parseInt(formBuilder.getFormElement(FORM_ELEMENT_PRICE_ESTIMATE).getValue()));
-            postGoodViewModel.setItemLocationLiveData(formBuilder.getFormElement(FORM_ELEMENT_LOCATION).getValue());
+            storeFormInputToViewModel();
             return true;
         } else {
+            validationErrorTxt.setVisibility(View.VISIBLE);
             return false;
         }
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        storeFormInputToViewModel();
+    }
+
+    private void storeFormInputToViewModel() {
+        postGoodViewModel.setItemNameLiveData(formBuilder.getFormElement(FORM_ELEMENT_NAME).getValue());
+        postGoodViewModel.setItemDescriptionLiveData(formBuilder.getFormElement(FORM_ELEMENT_DESCRIPTION).getValue());
+        postGoodViewModel.setItemCategoryLiveData(formBuilder.getFormElement(FORM_ELEMENT_CATEGORY).getValue());
+        try {
+            int priceEstimateInput = Integer.parseInt(
+                    formBuilder.getFormElement(FORM_ELEMENT_PRICE_ESTIMATE).getValue());
+            postGoodViewModel.setItemEstimatedPriceLiveData(priceEstimateInput);
+        } catch (Exception e) {}
+        postGoodViewModel.setItemLocationLiveData(formBuilder.getFormElement(FORM_ELEMENT_LOCATION).getValue());
     }
 
     @Override

@@ -18,8 +18,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.swap.R;
 import com.example.swap.models.Good;
-import com.example.swap.rest.NetworkState;
-import com.example.swap.rest.addressconstants.Addresses;
+import com.example.swap.utils.NetworkState;
+import com.example.swap.utils.addressconstants.Addresses;
 import com.squareup.picasso.Picasso;
 
 //import com.johngachihi.swap.R;

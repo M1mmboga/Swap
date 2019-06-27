@@ -3,10 +3,13 @@ package com.example.swap.views.postgood;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -34,13 +37,16 @@ public class ImagesInsertionFragment extends Fragment implements BSImagePicker.O
     private Button addMainImageBtn;
     private MaterialButton addSupplementaryImagesBtn;
     private ImageView mainImageIv;
+    private TextView errorMessageTxt;
     private FlexboxLayout supplementaryImagesHolder;
     private List<ImageView> supplementaryImageViews = new ArrayList<>();
     private PostGoodViewModel postGoodViewModel;
+    private boolean isMainImageUploaded = false;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
         postGoodViewModel = ViewModelProviders
                 .of(getActivity()).get(PostGoodViewModel.class);
     }
@@ -51,6 +57,7 @@ public class ImagesInsertionFragment extends Fragment implements BSImagePicker.O
         View v = inflater.inflate(R.layout.fragment_post_good_image_insert, container, false);
         addMainImageBtn = v.findViewById(R.id.add_main_img);
         addSupplementaryImagesBtn = v.findViewById(R.id.add_supplementary_imgs);
+        errorMessageTxt = v.findViewById(R.id.post_item_image_validation_error_message);
 
         mainImageIv = v.findViewById(R.id.main_image_iv);
         Glide.with(this).load(postGoodViewModel
@@ -67,7 +74,8 @@ public class ImagesInsertionFragment extends Fragment implements BSImagePicker.O
             supplementaryImageViews.add(imageView);
             supplementaryImagesHolder.addView(imageView);
 
-            if(postGoodViewModel.getItemSupplementaryImages().getValue() != null) {
+            if(postGoodViewModel.getItemSupplementaryImages().getValue() != null &&
+                    postGoodViewModel.getItemSupplementaryImages().getValue().size() > i) {
                 Uri imageUri = postGoodViewModel.getItemSupplementaryImages().getValue().get(i);
                 Glide.with(this).load(imageUri).into(imageView);
 
@@ -127,6 +135,8 @@ public class ImagesInsertionFragment extends Fragment implements BSImagePicker.O
         if(tag == null) {
             Glide.with(this).load(uri).into(mainImageIv);
             postGoodViewModel.getItemMainImage().setValue(uri);
+            isMainImageUploaded = true;
+            errorMessageTxt.setVisibility(View.GONE);
         } else {
             int index = Integer.parseInt(tag);
             Glide.with(this).load(uri).into(supplementaryImageViews.get(index));
@@ -135,10 +145,22 @@ public class ImagesInsertionFragment extends Fragment implements BSImagePicker.O
     }
 
     private void updateSupplementaryImagesInViewModel(int index, Uri uri) {
-        if(postGoodViewModel.getItemSupplementaryImages().getValue() != null
-                && postGoodViewModel.getItemSupplementaryImages().getValue().get(index) != null) {
-            postGoodViewModel.getItemSupplementaryImages().getValue().set(index, uri);
+        if(postGoodViewModel.getItemSupplementaryImages().getValue() == null) {
+            postGoodViewModel.setItemSupplementaryImagesLiveData(new ArrayList<>(NUMBER_OF_SUPPLEMENTARY_IMGS));
         }
+        if(postGoodViewModel.getItemSupplementaryImages().getValue().size() <= index){
+            postGoodViewModel.getItemSupplementaryImages().getValue().add(uri);
+        } else {
+            postGoodViewModel.getItemSupplementaryImages().getValue().set(0, uri);
+        }
+
+//        if(postGoodViewModel.getItemSupplementaryImages().getValue().get(index) != null) {
+//            postGoodViewModel.getItemSupplementaryImages().getValue()
+//        }
+//        if(postGoodViewModel.getItemSupplementaryImages().getValue() != null
+//                && postGoodViewModel.getItemSupplementaryImages().getValue().get(index) != null) {
+            postGoodViewModel.getItemSupplementaryImages().getValue().set(0, uri);
+//        }
     }
 
     @Override
@@ -152,5 +174,18 @@ public class ImagesInsertionFragment extends Fragment implements BSImagePicker.O
     @Override
     public void loadImage(File imageFile, ImageView ivImage) {
         Glide.with(getContext()).load(imageFile).into(ivImage);
+    }
+
+    @Override
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+        inflater.inflate(R.menu.menu_post_item_images, menu);
+    }
+
+    boolean isInputValid() {
+        if(postGoodViewModel.getItemMainImage().getValue() == null) {
+            errorMessageTxt.setVisibility(View.VISIBLE);
+            return false;
+        }
+        return true;
     }
 }

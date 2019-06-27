@@ -37,4 +37,6 @@
     <string name="item_name_and_description">Item Name and Description</string>
     <string name="item_name">Item Name</string>
     <string name="item_name_element_hint">Insert item name</string>
+    <string name="post_item_form_validation_error">All fields with * are required</string>
+    <string name="post_item_image_validation_error">Main image required</string>
 </resources>
