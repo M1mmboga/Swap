@@ -17,22 +17,27 @@ public class Good implements Serializable {
     @SerializedName("description") private String description;
     @SerializedName("image_file_name") private String imageFileName;
     @SerializedName("supplementary_good_images") private List<String> supplementaryImageFileNames;
-    @SerializedName("price_range_min") private int priceRangeMin;
-    @SerializedName("price_range_max") private int priceRangeMax;
+    @SerializedName("price_estimate") private int price_estimate;
     @SerializedName("category") private String category;
+    @SerializedName("location") private String location;
     @SerializedName("created_at") private Date postDate;
 
     public Good() {
     }
 
-    public Good(int id, User user, String name, String description, String imageFileName, int priceRangeMin, int priceRangeMax, Date postDate) {
+    /*For Good submission*/
+//    public Good(User user, String name, String description, ) {
+//
+//    }
+
+    public Good(int id, User user, String name, String description, String imageFileName, int price_estimate, String location, Date postDate) {
         this.id = id;
         this.user = user;
         this.name = name;
         this.description = description;
         this.imageFileName = imageFileName;
-        this.priceRangeMin = priceRangeMin;
-        this.priceRangeMax = priceRangeMax;
+        this.price_estimate = price_estimate;
+        this.location = location;
         this.postDate = postDate;
     }
 
@@ -91,20 +96,20 @@ public class Good implements Serializable {
         this.imageFileName = imageFileName;
     }
 
-    public int getPriceRangeMin() {
-        return priceRangeMin;
+    public int getPrice_estimate() {
+        return price_estimate;
     }
 
-    public void setPriceRangeMin(int priceRangeMin) {
-        this.priceRangeMin = priceRangeMin;
+    public void setPrice_estimate(int price_estimate) {
+        this.price_estimate = price_estimate;
     }
 
-    public int getPriceRangeMax() {
-        return priceRangeMax;
+    public String getLocation() {
+        return location;
     }
 
-    public void setPriceRangeMax(int priceRangeMax) {
-        this.priceRangeMax = priceRangeMax;
+    public void setLocation(String location) {
+        this.location = location;
     }
 
     public Date getPostDate() {

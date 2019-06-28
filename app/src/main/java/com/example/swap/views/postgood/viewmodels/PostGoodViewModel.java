@@ -7,7 +7,15 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
 
+import com.example.swap.data.network.repository.GoodsRepository;
+import com.example.swap.models.Good;
+
+import java.io.File;
 import java.util.List;
+
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 
 public class PostGoodViewModel extends AndroidViewModel {
 
@@ -23,12 +31,27 @@ public class PostGoodViewModel extends AndroidViewModel {
         super(application);
     }
 
-//    private MultipartBody.Part prepareFilePart(String partName, Uri fileUri) {
-//        File file = new File(fileUri.getPath());
-//        RequestBody requestBody = RequestBody.create(
-//                MediaType.parse(getApplication().getApplicationContext().getContentResolver(), )
-//        )
-//    }
+    private MultipartBody.Part prepareFilePart(String partName, Uri fileUri) {
+        File file = new File(fileUri.getPath());
+        RequestBody requestFile = RequestBody.create(
+                MediaType.parse(getApplication().getApplicationContext().getContentResolver().getType(fileUri)),
+                file
+        );
+
+        return MultipartBody.Part.createFormData(partName, file.getName(), requestFile);
+    }
+
+    private Good prepareGood(String name, String description,
+                             String category, int estimatedPrice,
+                             String location)
+    {
+        return null;
+    }
+
+    private void submitItem() {
+        GoodsRepository goodsRepository = new GoodsRepository();
+//        goodsRepository.addGood(new Good())
+    }
 
     public MutableLiveData<String> getItemName() {
         return itemName;

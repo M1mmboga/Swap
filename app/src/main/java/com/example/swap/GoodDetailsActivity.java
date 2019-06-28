@@ -57,7 +57,7 @@ public class GoodDetailsActivity extends AppCompatActivity {
         ((TextView) findViewById(R.id.good_details_category)).setText(good.getCategory());
 
         String priceApproximation = new DecimalFormat("#,###")
-                .format(good.getPriceRangeMin());
+                .format(good.getPrice_estimate());
         ((TextView) findViewById(R.id.good_details_price_approx))
                 .setText(getString(R.string.good_details_price_approx, priceApproximation));
 

@@ -19,7 +19,7 @@
 
     <string name="category_label_books">Books</string>
     <string name="category_label_clothes">Clothes</string>
-    <string name="good_price_range">Kshs. %1$d - %2$d</string>
+    <string name="good_price_range">Kshs. %1$d</string>
     <string name="goods_list_category_label">Category: %1$s</string>
     <string name="search_menu_item_title">Search</string>
     <string name="search_activity_label">Search Results</string>
