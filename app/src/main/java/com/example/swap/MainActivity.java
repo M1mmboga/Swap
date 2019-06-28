@@ -8,10 +8,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
-import com.example.swap.R;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -19,16 +19,23 @@ import androidx.appcompat.app.AppCompatActivity;
 
 
 public class MainActivity extends AppCompatActivity {
+    private static final String TAG = "MainActivity";
 
     ImageView mImageView;
     Button mChooseButton;
 
     private static final int IMAGE_PICK_CODE = 1000;
     private static final int PERMISSION_CODE = 1001;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        EditText itemName = (EditText) findViewById(R.id.itemNameEdit);
+        EditText itemDescriptionText = (EditText) findViewById(R.id.itemDescriptionEdit);
+        EditText itemLocationText = (EditText) findViewById(R.id.sellerLocationEdit);
+        EditText itemPriceText = (EditText) findViewById(R.id.valuedPriceEdit);
 
         Spinner spinner = (Spinner) findViewById(R.id.categoriesSpinner);
 // Create an ArrayAdapter using the string array and a default spinner layout
@@ -38,6 +45,11 @@ public class MainActivity extends AppCompatActivity {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 // Apply the adapter to the spinner
         spinner.setAdapter(adapter);
+
+
+
+
+
 
 
         //views
@@ -65,12 +77,69 @@ public class MainActivity extends AppCompatActivity {
                 }
 
             }
-
-
-
         });
-    }
 
+        //submit item details
+        Button submitButton = (Button) findViewById(R.id.submitItem);
+
+        /*submitButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                String category = spinner.getSelectedItem().toString();
+                String nameOfItem = itemName.getText().toString();
+                String descriptionOfItem = itemDescriptionText.getText().toString();
+                String locationOfItem = itemLocationText.getText().toString();
+                String priceOfItem = itemPriceText.getText().toString();
+
+                Log.d(TAG + "category", category);
+
+                if (category == null || nameOfItem == null ||
+                        descriptionOfItem == null || locationOfItem == null ||
+                        priceOfItem == null)
+                {
+                      Toast.makeText(
+                              MainActivity.this,
+                              "Please complete item upload information",
+                              Toast.LENGTH_SHORT).show();
+                }
+                else{
+                    GoodDTO goodDTO = new GoodDTO(
+                            category, nameOfItem,
+                            descriptionOfItem, locationOfItem,
+                            priceOfItem
+                    );
+                    Retrofit retrofit = RetrofitFactory.create();
+                    GoodsService goodsDao = retrofit.create(GoodsService.class);
+                    Call<Good> good = goodsDao.addGood(goodDTO);
+                    good.enqueue(new Callback<Good>() {
+                        @Override
+                        public void onResponse(Call<Good> call, Response<Good> response) {
+                            if (response.isSuccessful()) {
+                                Log.d("IS A MESSAGE", response.body().getName());
+                            } else {
+                                Log.d(TAG, response.message());
+                                Log.d(TAG, response.raw().request().url().toString());
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<Good> call, Throwable t) {
+                            Log.d(TAG, t.getMessage());
+                        }
+                    });
+                }
+
+
+            }
+
+
+        });*/
+
+
+
+
+    }
     private void pickImageFromGallery()
     {
         Intent intent = new Intent(Intent.ACTION_PICK);
@@ -92,10 +161,10 @@ public class MainActivity extends AppCompatActivity {
                     pickImageFromGallery();
                 }
                 else
-                    {
-                        //permission denied
-                        Toast.makeText(this, "Permission denied", Toast.LENGTH_SHORT).show();
-                    }
+                {
+                    //permission denied
+                    Toast.makeText(this, "Permission denied", Toast.LENGTH_SHORT).show();
+                }
             }
         }
     }
@@ -109,4 +178,5 @@ public class MainActivity extends AppCompatActivity {
             mImageView.setImageURI(data.getData());
         }
     }
+
 }

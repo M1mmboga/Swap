@@ -14,8 +14,24 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
 
-        <activity
-            android:name=".views.postgood.PostGoodActivity"
+        <activity android:name=".LoginActivity"
+            android:theme="@style/AppThemeMaterial">
+            <!--<intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>-->
+        </activity>
+
+        <activity android:name=".RegisterActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".views.postgood.PostGoodActivity"
             android:label="@string/title_activity_post_good"
             android:theme="@style/AppThemeMaterial">
             <intent-filter>

@@ -66,6 +66,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/itemName"
                 android:layout_marginTop="@dimen/vertical_margin_top"
+                android:inputType="textCapSentences|textAutoCorrect"
 
                 />
 
@@ -85,7 +86,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/itemDescriptionTextView"
                 android:layout_marginTop="@dimen/vertical_margin_top"
-                android:inputType="textCapSentences|textAutoCorrect"
+                android:inputType="textMultiLine"
 
 
                 />

@@ -39,4 +39,5 @@
     <string name="item_name_element_hint">Insert item name</string>
     <string name="post_item_form_validation_error">All fields with * are required</string>
     <string name="post_item_image_validation_error">Main image required</string>
+    <string name="preferences_file">com.example.swap.PREFERENCE_FILES</string>
 </resources>
