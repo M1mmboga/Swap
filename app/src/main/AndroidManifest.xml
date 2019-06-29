@@ -2,7 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.swap">
 
-    <uses-permission android:name="android.permission.INTERNET" /> <!-- get permission to access the gallery -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <!-- To access the gallery -->
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
@@ -14,22 +15,16 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
 
-        <activity android:name=".LoginActivity"
+        <activity android:name=".views.authentication.LoginActivity"
             android:theme="@style/AppThemeMaterial">
-            <!--<intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>-->
-        </activity>
-
-        <activity android:name=".RegisterActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity android:name=".views.authentication.RegisterActivity"/>
 
         <activity android:name=".views.postgood.PostGoodActivity"
             android:label="@string/title_activity_post_good"
@@ -84,7 +79,8 @@
         </activity>
 
         <!-- Temporary Home-page -->
-        <activity android:name=".TempHomePage">
+        <activity android:name=".TempHomePage"
+            android:theme="@style/AppThemeMaterial">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -39,5 +39,8 @@
     <string name="item_name_element_hint">Insert item name</string>
     <string name="post_item_form_validation_error">All fields with * are required</string>
     <string name="post_item_image_validation_error">Main image required</string>
-    <string name="preferences_file">com.example.swap.PREFERENCE_FILES</string>
+    <string name="user_preferences_file">com.example.swap.USER_PREFERENCE_FILES</string>
+
+    <string name="server_client_id">84913860976-2htunkve88135e98akhtuetr5db4eb7q.apps.googleusercontent.com</string>
+    <string name="required_validation_error">*Required</string>
 </resources>
