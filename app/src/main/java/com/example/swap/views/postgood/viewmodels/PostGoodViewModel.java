@@ -2,22 +2,28 @@ package com.example.swap.views.postgood.viewmodels;
 
 import android.app.Application;
 import android.net.Uri;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.FileProvider;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.swap.data.network.repository.GoodsRepository;
 import com.example.swap.models.Good;
+import com.example.swap.utils.fileutils.FileUtils;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
+import retrofit2.Callback;
 
 public class PostGoodViewModel extends AndroidViewModel {
+    private final static String PROVIDER_AUTHORITY = "com.johngachihi.example.swap.fileprovider";
 
     private MutableLiveData<String> itemName = new MutableLiveData<>();
     private MutableLiveData<String> itemDescription = new MutableLiveData<>();
@@ -32,25 +38,52 @@ public class PostGoodViewModel extends AndroidViewModel {
     }
 
     private MultipartBody.Part prepareFilePart(String partName, Uri fileUri) {
-        File file = new File(fileUri.getPath());
+        File file = FileUtils.getFile(getApplication(), fileUri);
+        String fileType = getApplication().getApplicationContext()
+                .getContentResolver().getType(fileUri);
+        if(fileType == null) {
+            fileType = getApplication().getApplicationContext()
+                    .getContentResolver().getType(
+                            FileProvider.getUriForFile(getApplication(), PROVIDER_AUTHORITY, file));
+        }
+        Log.e("PostGoodViewModel", "fileType: " + Uri.fromFile(file));
         RequestBody requestFile = RequestBody.create(
-                MediaType.parse(getApplication().getApplicationContext().getContentResolver().getType(fileUri)),
+                MediaType.parse(fileType),
                 file
         );
 
         return MultipartBody.Part.createFormData(partName, file.getName(), requestFile);
     }
 
-    private Good prepareGood(String name, String description,
-                             String category, int estimatedPrice,
-                             String location)
-    {
-        return null;
+    private RequestBody prepareGood() {
+        /*Good good = new Good();
+        good.setName(itemName.getValue());
+        good.setDescription(itemDescription.getValue());
+        good.setCategory(itemCategory.getValue());
+        if(itemEstimatedPrice.getValue() != null) {
+            good.setPriceEstimate(itemEstimatedPrice.getValue());
+        }
+        good.setLocation(itemLocation.getValue());*/
+
+        RequestBody requestBody = new MultipartBody.Builder()
+                .addFormDataPart("name", "bleble")
+                .addFormDataPart("description", itemCategory.getValue())
+                .build();
+
+        return requestBody;
     }
 
-    private void submitItem() {
+    public void submitGood(Callback<Good> callback) {
         GoodsRepository goodsRepository = new GoodsRepository();
-//        goodsRepository.addGood(new Good())
+        RequestBody good = prepareGood();
+        MultipartBody.Part mainImage = prepareFilePart("main_image", itemMainImage.getValue());
+        List<MultipartBody.Part> supImages = new ArrayList<>();
+        if(itemSupplementaryImages.getValue() != null) {
+            for(Uri imageUri : itemSupplementaryImages.getValue()) {
+                supImages.add(prepareFilePart("sup_images[]", imageUri));
+            }
+        }
+        goodsRepository.addGood(good, mainImage, supImages, callback);
     }
 
     public MutableLiveData<String> getItemName() {

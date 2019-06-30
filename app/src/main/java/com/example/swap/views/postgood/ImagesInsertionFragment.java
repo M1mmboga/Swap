@@ -118,7 +118,7 @@ public class ImagesInsertionFragment extends Fragment implements BSImagePicker.O
 
     private void setUpMultiImagePickerOn(View... views) {
         View.OnClickListener onClickListener = v -> {
-            BSImagePicker multiImagePicker = new BSImagePicker.Builder("com.johngachihi.ble123.fileprovider")
+            BSImagePicker multiImagePicker = new BSImagePicker.Builder(PROVIDER_AUTHORITY)
                     .isMultiSelect()
                     .setMinimumMultiSelectCount(1)
                     .setMaximumMultiSelectCount(NUMBER_OF_SUPPLEMENTARY_IMGS)
@@ -132,6 +132,7 @@ public class ImagesInsertionFragment extends Fragment implements BSImagePicker.O
 
     @Override
     public void onSingleImageSelected(Uri uri, String tag) {
+//        Log.e("Image Insertion", "Uri: " + uri.toString());
         if(tag == null) {
             Glide.with(this).load(uri).into(mainImageIv);
             postGoodViewModel.getItemMainImage().setValue(uri);

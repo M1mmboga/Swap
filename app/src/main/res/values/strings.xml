@@ -43,4 +43,5 @@
 
     <string name="server_client_id">84913860976-2htunkve88135e98akhtuetr5db4eb7q.apps.googleusercontent.com</string>
     <string name="required_validation_error">*Required</string>
+    <string name="internal_storage">INTERNAL_STORAGE</string>
 </resources>

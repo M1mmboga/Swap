@@ -14,5 +14,6 @@ public class Addresses {
 
     public static final String BASE_URL = "http://" + HOME_IP + "/swapapi/";
     public static final String API_HOME_URL = BASE_URL + "/public/index.php/";
+//    public static final String API_HOME_URL = "http://www.charlesproxy.com";
     public static final String IMAGES_HOME = BASE_URL + "Good-images/";
 }

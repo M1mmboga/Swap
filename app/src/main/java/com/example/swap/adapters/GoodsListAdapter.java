@@ -56,7 +56,7 @@ public class GoodsListAdapter extends PagedListAdapter<Good, RecyclerView.ViewHo
             ((GoodItemViewHolder)holder).goodNameTxt.setText(good.getName());
             ((GoodItemViewHolder) holder).goodDescriptionTxt.setText(good.getDescription());
             ((GoodItemViewHolder) holder).goodPriceRangeTxt.setText(
-                    this.context.getString(R.string.good_price_range, good.getPrice_estimate()));
+                    this.context.getString(R.string.good_price_range, good.getPriceEstimate()));
             ((GoodItemViewHolder) holder).goodCategoryTxt.setText(
                     context.getString(R.string.goods_list_category_label, good.getCategory()));
         } else {

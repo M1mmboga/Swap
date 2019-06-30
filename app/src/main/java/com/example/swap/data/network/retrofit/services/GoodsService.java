@@ -6,6 +6,7 @@ import com.example.swap.models.GoodsPage;
 import java.util.List;
 
 import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Multipart;
@@ -25,7 +26,7 @@ public interface GoodsService {
 
     @Multipart
     @POST("goods")
-    Call<Void> addGood(@Part("good-details") Good good,
+    Call<Good> addGood(@Part RequestBody good,
                        @Part MultipartBody.Part mainGoodImage,
                        @Part List<MultipartBody.Part> supplementaryImages);
 

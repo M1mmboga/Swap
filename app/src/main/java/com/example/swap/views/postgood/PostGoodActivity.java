@@ -12,7 +12,12 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.example.swap.R;
+import com.example.swap.models.Good;
 import com.example.swap.views.postgood.viewmodels.PostGoodViewModel;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class PostGoodActivity extends AppCompatActivity {
 
@@ -99,6 +104,28 @@ public class PostGoodActivity extends AppCompatActivity {
             {
                 Log.d(TAG, "Good Sup Image (1)" + postGoodViewModel.getItemSupplementaryImages().getValue().get(0));
             }
+            postGoodViewModel.submitGood(new Callback<Good>() {
+                @Override
+                public void onResponse(Call<Good> call, Response<Good> response) {
+                    if (response.isSuccessful()) {
+                        Toast.makeText(PostGoodActivity.this,
+                                "Successfully added", Toast.LENGTH_SHORT).show();
+                        Log.e("On Post Good", response.message());
+                    } else {
+                        Toast.makeText(PostGoodActivity.this,
+                                response.message(), Toast.LENGTH_SHORT).show();
+                        Log.e("On Post Good", response.message());
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<Good> call, Throwable t) {
+                    Toast.makeText(PostGoodActivity.this,
+                            t.getMessage(), Toast.LENGTH_SHORT).show();
+                    t.printStackTrace();
+                    Log.e("On Post Good", t.getMessage());
+                }
+            });
         } else {
             Toast.makeText(this, "Invalid", Toast.LENGTH_SHORT).show();
         }
