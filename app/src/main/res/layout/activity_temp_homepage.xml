@@ -61,6 +61,14 @@
                     android:layout_weight="1"
                     android:text="@string/category_label_clothes"
                     style="@style/Widget.MaterialComponents.Button.TextButton" />
+
+                <Button
+                    android:id="@+id/furniture_category_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Furniture"
+                    style="@style/Widget.MaterialComponents.Button.TextButton" />
             </LinearLayout>
         </LinearLayout>
     </androidx.coordinatorlayout.widget.CoordinatorLayout>

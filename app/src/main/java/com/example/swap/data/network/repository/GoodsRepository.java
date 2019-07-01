@@ -18,12 +18,26 @@ public class GoodsRepository {
         goodsService = RetrofitFactory.create().create(GoodsService.class);
     }
 
-    public void addGood(RequestBody good,
+    public void addGood(Good good,
+                        int userId,
                         MultipartBody.Part mainImage,
                         List<MultipartBody.Part> supplementaryImages,
                         Callback<Good> callback) {
-        Call<Good> call = goodsService.addGood(good, mainImage, supplementaryImages);
+        Call<Good> call = goodsService.addGood(
+                preparePartFromString(good.getName()),
+                preparePartFromString(good.getDescription()),
+                preparePartFromString(good.getCategory()),
+                preparePartFromString(Integer.toString(good.getPriceEstimate())),
+                preparePartFromString(good.getLocation()),
+                preparePartFromString(Integer.toString(userId)),
+                mainImage, supplementaryImages
+        );
         call.enqueue(callback);
+    }
+
+    private RequestBody preparePartFromString(String value) {
+        return RequestBody.create(
+                okhttp3.MultipartBody.FORM, value);
     }
 
 }

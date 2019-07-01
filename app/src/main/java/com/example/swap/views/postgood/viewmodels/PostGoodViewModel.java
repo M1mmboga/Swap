@@ -11,6 +11,8 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.example.swap.data.network.repository.GoodsRepository;
 import com.example.swap.models.Good;
+import com.example.swap.models.User;
+import com.example.swap.utils.Auth;
 import com.example.swap.utils.fileutils.FileUtils;
 
 import java.io.File;
@@ -55,27 +57,32 @@ public class PostGoodViewModel extends AndroidViewModel {
         return MultipartBody.Part.createFormData(partName, file.getName(), requestFile);
     }
 
-    private RequestBody prepareGood() {
-        /*Good good = new Good();
+    private Good prepareGood() {
+        Good good = new Good();
         good.setName(itemName.getValue());
         good.setDescription(itemDescription.getValue());
         good.setCategory(itemCategory.getValue());
         if(itemEstimatedPrice.getValue() != null) {
             good.setPriceEstimate(itemEstimatedPrice.getValue());
         }
-        good.setLocation(itemLocation.getValue());*/
+        good.setLocation(itemLocation.getValue());
+
+        /*final MediaType JSON
+                = MediaType.get("application/json; charset=utf-8");
+
+//        RequestBody requestBody = RequestBody.create(JSON, new Gson().toJson(good));
 
         RequestBody requestBody = new MultipartBody.Builder()
                 .addFormDataPart("name", "bleble")
                 .addFormDataPart("description", itemCategory.getValue())
-                .build();
+                .build();*/
 
-        return requestBody;
+        return good;
     }
 
     public void submitGood(Callback<Good> callback) {
         GoodsRepository goodsRepository = new GoodsRepository();
-        RequestBody good = prepareGood();
+        Good good = prepareGood();
         MultipartBody.Part mainImage = prepareFilePart("main_image", itemMainImage.getValue());
         List<MultipartBody.Part> supImages = new ArrayList<>();
         if(itemSupplementaryImages.getValue() != null) {
@@ -83,7 +90,8 @@ public class PostGoodViewModel extends AndroidViewModel {
                 supImages.add(prepareFilePart("sup_images[]", imageUri));
             }
         }
-        goodsRepository.addGood(good, mainImage, supImages, callback);
+        User currentUser = Auth.of(getApplication()).getCurrentUser();
+        goodsRepository.addGood(good, currentUser.getId(), mainImage, supImages, callback);
     }
 
     public MutableLiveData<String> getItemName() {

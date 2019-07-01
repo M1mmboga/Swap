@@ -1,8 +1,10 @@
 package com.example.swap.views.postgood;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,7 +15,16 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.example.swap.R;
 import com.example.swap.models.Good;
+import com.example.swap.utils.Auth;
+import com.example.swap.views.authentication.LoginActivity;
 import com.example.swap.views.postgood.viewmodels.PostGoodViewModel;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.mikepenz.materialdrawer.Drawer;
+import com.mikepenz.materialdrawer.DrawerBuilder;
+import com.mikepenz.materialdrawer.model.SecondaryDrawerItem;
+import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -27,6 +38,8 @@ public class PostGoodActivity extends AppCompatActivity {
     private PostItemFormFragment postItemFormFragment;
     private PostGoodViewModel postGoodViewModel;
 
+    private GoogleSignInClient mGoogleSignInClient;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,6 +50,12 @@ public class PostGoodActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         setTitle("Post Item");
+
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken(getString(R.string.server_client_id))
+                .requestEmail()
+                .build();
+        mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
 
         postGoodViewModel = ViewModelProviders
                 .of(this).get(PostGoodViewModel.class);
@@ -49,6 +68,8 @@ public class PostGoodActivity extends AppCompatActivity {
             fragmentTransaction.add(R.id.fragment_container, postItemFormFragment, FRAGMENT_TAG_FORM);
             fragmentTransaction.commit();
         }
+
+        setUpNavDrawer();
     }
 
     @Override
@@ -129,6 +150,28 @@ public class PostGoodActivity extends AppCompatActivity {
         } else {
             Toast.makeText(this, "Invalid", Toast.LENGTH_SHORT).show();
         }
+    }
+
+
+    private void setUpNavDrawer() {
+        Drawer drawer = new DrawerBuilder()
+                .withActivity(this)
+                .addDrawerItems(
+                        new SecondaryDrawerItem().withIdentifier(1).withName("Logout")
+                )
+                .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
+                    @Override
+                    public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
+                        if(drawerItem.getIdentifier() == 1) {
+                            Auth.of(getApplication()).logout_GoogleSignIn(mGoogleSignInClient, task -> {});
+                            Auth.of(getApplication()).logout_Swap();
+                            startActivity(new Intent(PostGoodActivity.this, LoginActivity.class));
+                            finish();
+                        }
+                        return false;
+                    }
+                })
+                .build();
     }
 
 }

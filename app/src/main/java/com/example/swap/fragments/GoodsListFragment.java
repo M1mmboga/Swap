@@ -10,7 +10,6 @@ import android.view.ViewGroup;
 import android.view.animation.AnimationUtils;
 import android.view.animation.LayoutAnimationController;
 import android.widget.Button;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -129,11 +128,11 @@ public class GoodsListFragment extends Fragment {
             RecyclerView.ViewHolder viewHolder = (RecyclerView.ViewHolder)v.getTag();
             Good chosenGood = adapter.getCurrentList().get(viewHolder.getAdapterPosition());
 
-            Toast.makeText(
-                    getContext(),
-                    chosenGood.getSupplementaryImageFileNames().get(0),
-                    Toast.LENGTH_SHORT
-            ).show();
+//            Toast.makeText(
+//                    getContext(),
+//                    chosenGood.getSupplementaryImageFileNames().get(0),
+//                    Toast.LENGTH_SHORT
+//            ).show();
 
             Intent intent = new Intent(getActivity(), GoodDetailsActivity.class);
             intent.putExtra(CHOSEN_GOOD, chosenGood);

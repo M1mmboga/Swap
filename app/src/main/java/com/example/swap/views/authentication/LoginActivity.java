@@ -23,6 +23,7 @@ import com.example.swap.TempHomePage;
 import com.example.swap.models.User;
 import com.example.swap.utils.Auth;
 import com.example.swap.utils.formErrorDisplayer.FormErrorDisplayer;
+import com.example.swap.views.postgood.PostGoodActivity;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -128,7 +129,7 @@ public class LoginActivity extends AppCompatActivity {
                     progressBar.setVisibility(View.GONE);
                     if(response.isSuccessful()) {
                         Auth.of(getApplication()).logIn(response.body(), Auth.AccountType.GOOGLE_ACCOUNT);
-                        startActivity(new Intent(LoginActivity.this, TempHomePage.class));
+                        startActivity(new Intent(LoginActivity.this, PostGoodActivity.class));
                         finish();
                     } else {
                         Toast.makeText(LoginActivity.this, response.message(), Toast.LENGTH_SHORT).show();
@@ -177,7 +178,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onResponse(Call<User> call, Response<User> response) {
                 if(response.isSuccessful()) {
                     Auth.of(getApplication()).logIn(response.body(), Auth.AccountType.SWAP_ACCOUNT);
-                    startActivity(new Intent(LoginActivity.this, TempHomePage.class));
+                    startActivity(new Intent(LoginActivity.this, PostGoodActivity.class));
                     finish();
                 } else {
 //                    Log.e("Swap Login", response.message());

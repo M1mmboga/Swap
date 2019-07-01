@@ -24,6 +24,7 @@ public class TempHomePage extends AppCompatActivity implements View.OnClickListe
 
     private Button booksCategoryBtn;
     private Button clothesCategoryBtn;
+    private Button furnitureCategoryBtn;
 
     private GoogleSignInClient mGoogleSignInClient;
 
@@ -38,6 +39,8 @@ public class TempHomePage extends AppCompatActivity implements View.OnClickListe
         booksCategoryBtn.setOnClickListener(this);
         clothesCategoryBtn = (Button) findViewById(R.id.clothes_category_btn);
         clothesCategoryBtn.setOnClickListener(this);
+        furnitureCategoryBtn = (Button) findViewById(R.id.furniture_category_btn);
+        furnitureCategoryBtn.setOnClickListener(this);
 
         User user = Auth.of(getApplication()).getCurrentUser();
         if(user != null) {

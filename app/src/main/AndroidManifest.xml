@@ -29,11 +29,11 @@
         <activity android:name=".views.postgood.PostGoodActivity"
             android:label="@string/title_activity_post_good"
             android:theme="@style/AppThemeMaterial">
-            <intent-filter>
+            <!--<intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            </intent-filter>-->
         </activity>
 
         <activity
@@ -51,8 +51,7 @@
         <activity android:name=".MainActivity" />
 
         <!-- By category list of goods -->
-        <activity
-            android:name=".ListActivity"
+        <activity android:name=".ListActivity"
             android:parentActivityName=".MainActivity"
             android:theme="@style/AppThemeMaterial">
             <meta-data
@@ -80,6 +79,7 @@
 
         <!-- Temporary Home-page -->
         <activity android:name=".TempHomePage"
+            android:label="TempHomePage"
             android:theme="@style/AppThemeMaterial">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

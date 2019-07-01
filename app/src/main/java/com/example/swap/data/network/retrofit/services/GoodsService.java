@@ -24,10 +24,20 @@ public interface GoodsService {
     Call<GoodsPage> findGoods(@Query("query") String query,
                               @Query("category") String category);
 
+    /*@Multipart
+    @POST("goods")
+    Call<Good> addGood(@Part("good_details") RequestBody good,
+                       @Part MultipartBody.Part mainGoodImage,
+                       @Part List<MultipartBody.Part> supplementaryImages);*/
+
     @Multipart
     @POST("goods")
-    Call<Good> addGood(@Part RequestBody good,
+    Call<Good> addGood(@Part("name") RequestBody goodName,
+                       @Part("description") RequestBody goodDescription,
+                       @Part("category") RequestBody goodCategory,
+                       @Part("price_estimate") RequestBody goodPriceEstimate,
+                       @Part("location") RequestBody goodLocation,
+                       @Part("user_id") RequestBody user,
                        @Part MultipartBody.Part mainGoodImage,
                        @Part List<MultipartBody.Part> supplementaryImages);
-
 }
