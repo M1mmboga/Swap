@@ -12,11 +12,17 @@ import androidx.appcompat.widget.Toolbar;
 import com.example.swap.models.User;
 import com.example.swap.utils.Auth;
 import com.example.swap.views.authentication.LoginActivity;
+import com.example.swap.views.postgood.PostGoodActivity;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.mikepenz.materialdrawer.AccountHeader;
+import com.mikepenz.materialdrawer.AccountHeaderBuilder;
 import com.mikepenz.materialdrawer.Drawer;
 import com.mikepenz.materialdrawer.DrawerBuilder;
+import com.mikepenz.materialdrawer.model.DividerDrawerItem;
+import com.mikepenz.materialdrawer.model.PrimaryDrawerItem;
+import com.mikepenz.materialdrawer.model.ProfileDrawerItem;
 import com.mikepenz.materialdrawer.model.SecondaryDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 
@@ -55,7 +61,7 @@ public class TempHomePage extends AppCompatActivity implements View.OnClickListe
                 .build();
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
 
-        setUpNavDrawer();
+        setUpNavDrawer(toolbar);
     }
 
     @Override
@@ -67,11 +73,15 @@ public class TempHomePage extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    private void setUpNavDrawer() {
+    private void setUpNavDrawer(Toolbar toolbar) {
         Drawer drawer = new DrawerBuilder()
                 .withActivity(this)
+                .withToolbar(toolbar)
+                .withAccountHeader(accountHeader())
                 .addDrawerItems(
-                        new SecondaryDrawerItem().withIdentifier(1).withName("Logout")
+                        new PrimaryDrawerItem().withIdentifier(2).withName("Post Item").withIcon(R.drawable.ic_add_black_24dp),
+                        new DividerDrawerItem(),
+                        new SecondaryDrawerItem().withIdentifier(1).withName("Logout").withIcon(R.drawable.ic_lock_outline_black_24dp)
                 )
                 .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
                     @Override
@@ -81,10 +91,22 @@ public class TempHomePage extends AppCompatActivity implements View.OnClickListe
                             Auth.of(getApplication()).logout_Swap();
                             startActivity(new Intent(TempHomePage.this, LoginActivity.class));
                             finish();
+                        } else if(drawerItem.getIdentifier() == 2) {
+                            startActivity(new Intent(TempHomePage.this, PostGoodActivity.class));
                         }
                         return false;
                     }
                 })
+                .build();
+    }
+
+    private AccountHeader accountHeader() {
+        User user = Auth.of(getApplication()).getCurrentUser();
+        return new AccountHeaderBuilder()
+                .withActivity(this)
+                .addProfiles(
+                        new ProfileDrawerItem().withName(user.getFirstname() + " " + user.getLastname()).withEmail(user.getEmail())
+                )
                 .build();
     }
 }
