@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <resources>
     <string name="app_name">Swap</string>
     <string name="add_image">" Ongeza Picha"</string>
@@ -20,4 +21,22 @@
     <string name="submit_item">Tuma</string>
     <string name="supplementary_images">" Picha za Ziada"</string>
     <string name="valued_price_textview">Thamani ya thamani</string>
+    <string name="item_name">" Jina la Kipengee"</string>
+    <string name="item_name_and_description">Jina la Bidhaa na Maelezo</string>
+    <string name="item_name_element_hint">" Ingiza jina la kipengee"</string>
+    <string name="post_item_form_validation_error">Vipengo vyote na * vinahitajika</string>
+    <string name="post_item_image_validation_error">" Picha kuu inahitajika"</string>
+    <string name="required_validation_error">* Inahitajika</string>
+    <string name="already_registered_login">Je! Una Akaunti?</string>
+    <string name="confirm_password_here">Thibitisha nenosiri hapa</string>
+    <string name="register">Jisajili</string>
+    <string name="enter_password_here">"  Andika Nenosiri"</string>
+    <string name="enter_last_name_here">Jina La Familia</string>
+    <string name="enter_first_name_here">Jina la Kwanza</string>
+    <string name="enter_email_here">name@example.com</string>
+    <string name="enter_passwordlogin_here">Andika Nenosiri</string>
+    <string name="enter_email_address_here">name@example.com</string>
+    <string name="register_here">" Jisajili hapa"</string>
+    <string name="log_in">Login</string>
+
 </resources>

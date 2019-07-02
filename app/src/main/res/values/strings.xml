@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">Swap</string>
-    <string name="enter_items_top_bar">Post Item</string>
+    <string name="enter_items_top_bar" translatable="false">Post Item</string>
     <string name="item_category_textview">Select Category</string>
     <string name="item_description_textview">Description</string>
     <string name="item_name_textview">Item Name</string>
@@ -19,15 +19,15 @@
 
     <string name="category_label_books">Books</string>
     <string name="category_label_clothes">Clothes</string>
-    <string name="good_price_range">Kshs. %1$d</string>
+    <string name="good_price_range" translatable="false">Kshs. %1$d</string>
     <string name="goods_list_category_label">Category: %1$s</string>
     <string name="search_menu_item_title">Search</string>
     <string name="search_activity_label">Search Results</string>
     <string name="item_list_loading_retry_btn_label">Retry</string>
-    <string name="title_activity_good_details">GoodDetailsActivity</string>
+    <string name="title_activity_good_details" translatable="false">GoodDetailsActivity</string>
 
     <string name="good_details_price_approx">Around: Kshs. %s</string>
-    <string name="title_activity_post_good">PostGoodActivity</string>
+    <string name="title_activity_post_good" translatable="false">PostGoodActivity</string>
 
     <string name="insert_item_images_fragment_title">Insert Item Images</string>
     <string name="main_image">Main Image</string>
@@ -39,9 +39,23 @@
     <string name="item_name_element_hint">Insert item name</string>
     <string name="post_item_form_validation_error">All fields with * are required</string>
     <string name="post_item_image_validation_error">Main image required</string>
-    <string name="user_preferences_file">com.example.swap.USER_PREFERENCE_FILES</string>
+    <string name="user_preferences_file" translatable="false">com.example.swap.USER_PREFERENCE_FILES</string>
 
-    <string name="server_client_id">84913860976-2htunkve88135e98akhtuetr5db4eb7q.apps.googleusercontent.com</string>
+    <string name="server_client_id" translatable="false">84913860976-2htunkve88135e98akhtuetr5db4eb7q.apps.googleusercontent.com</string>
     <string name="required_validation_error">*Required</string>
-    <string name="internal_storage">INTERNAL_STORAGE</string>
+    <string name="internal_storage" translatable="false">INTERNAL_STORAGE</string>
+
+    <string name="login" translatable="false">LOGIN</string>
+    <string name="register_for_an_account" translatable="false">Register for an account</string>
+    <string name="enter_first_name_here">Enter First Name Here</string>
+    <string name="enter_last_name_here">Enter Last Name Here</string>
+    <string name="enter_email_here">Enter Email Here</string>
+    <string name="enter_password_here">Enter Password Here</string>
+    <string name="confirm_password_here">Confirm Password Here</string>
+    <string name="already_registered_login">Already Registered? Login</string>
+    <string name="register">Register</string>
+    <string name="enter_passwordlogin_here">Enter Password Here</string>
+    <string name="enter_email_address_here">Enter Email Here</string>
+    <string name="register_here">Register Here</string>
+    <string name="log_in">Login</string>
 </resources>
