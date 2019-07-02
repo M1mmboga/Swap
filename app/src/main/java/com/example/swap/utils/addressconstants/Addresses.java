@@ -1,4 +1,4 @@
-package com.example.swap.rest.addressconstants;
+package com.example.swap.utils.addressconstants;
 
 public class Addresses {
     private static final String HOME_IP = "192.168.0.15";
@@ -10,8 +10,12 @@ public class Addresses {
     private static final String SAFARICOM_LAB_IP = "10.55.14.229";
     private static final String SUSWA_LAB = "10.51.52.73";
     private static final String JOHN_HOTSPOT = "192.168.137.163";
+    private static final String PHASE_ONE_ROOM_26_IP = "10.51.33.97";
+    private static final String HTC_HOTSPOT_IP = "192.168.43.65";
 
-    public static final String BASE_URL = "http://" + JOHN_HOTSPOT + "/swapapi";
+    public static final String BASE_URL = "http://" + SQ_IP + "/swapapi/";
     public static final String API_HOME_URL = BASE_URL + "/public/index.php/";
-    public static final String IMAGES_HOME = BASE_URL + "Good-images/";
+    //    public static final String API_HOME_URL = "http://www.charlesproxy.com";
+//    public static final String IMAGES_HOME = BASE_URL + "Good-images/";
+    public static final String IMAGES_HOME = BASE_URL + "storage/app/Good-images/";
 }

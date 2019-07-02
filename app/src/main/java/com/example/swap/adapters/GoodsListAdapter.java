@@ -18,8 +18,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.swap.R;
 import com.example.swap.models.Good;
-import com.example.swap.rest.NetworkState;
-import com.example.swap.rest.addressconstants.Addresses;
+import com.example.swap.utils.NetworkState;
+import com.example.swap.utils.addressconstants.Addresses;
 import com.squareup.picasso.Picasso;
 
 //import com.johngachihi.swap.R;
@@ -56,7 +56,7 @@ public class GoodsListAdapter extends PagedListAdapter<Good, RecyclerView.ViewHo
             ((GoodItemViewHolder)holder).goodNameTxt.setText(good.getName());
             ((GoodItemViewHolder) holder).goodDescriptionTxt.setText(good.getDescription());
             ((GoodItemViewHolder) holder).goodPriceRangeTxt.setText(
-                    this.context.getString(R.string.good_price_range, good.getPriceRangeMin(), good.getPriceRangeMax()));
+                    this.context.getString(R.string.good_price_range, good.getPriceEstimate()));
             ((GoodItemViewHolder) holder).goodCategoryTxt.setText(
                     context.getString(R.string.goods_list_category_label, good.getCategory()));
         } else {

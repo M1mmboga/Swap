@@ -10,6 +10,8 @@
         <item name="searchViewStyle">@style/MySearchView</item>
     </style>
 
+    <!--<style name="AppTheme.NoActionBar" parent="AppTheme"></style>-->
+
     <style name="AppThemeMaterial" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
@@ -44,6 +46,13 @@
         <item name="android:layout_height">250dp</item>
         <item name="android:layout_width">match_parent</item>
         <item name="android:paddingTop">20dp</item>
+    </style>
+
+    <style name="ValidationErrorStyle" parent="TextAppearance.MaterialComponents.Caption">
+        <item name="android:textColor">@color/validation_error</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center</item>
     </style>
 
 </resources>

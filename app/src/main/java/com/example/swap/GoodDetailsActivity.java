@@ -9,7 +9,7 @@ import androidx.appcompat.widget.Toolbar;
 
 import com.example.swap.fragments.GoodsListFragment;
 import com.example.swap.models.Good;
-import com.example.swap.rest.addressconstants.Addresses;
+import com.example.swap.utils.addressconstants.Addresses;
 import com.glide.slider.library.Animations.DescriptionAnimation;
 import com.glide.slider.library.SliderLayout;
 import com.glide.slider.library.SliderTypes.DefaultSliderView;
@@ -57,7 +57,7 @@ public class GoodDetailsActivity extends AppCompatActivity {
         ((TextView) findViewById(R.id.good_details_category)).setText(good.getCategory());
 
         String priceApproximation = new DecimalFormat("#,###")
-                .format(good.getPriceRangeMin());
+                .format(good.getPriceEstimate());
         ((TextView) findViewById(R.id.good_details_price_approx))
                 .setText(getString(R.string.good_details_price_approx, priceApproximation));
 

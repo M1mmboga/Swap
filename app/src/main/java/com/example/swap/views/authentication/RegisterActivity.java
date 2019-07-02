@@ -1,66 +1,57 @@
-package com.example.swap;
+package com.example.swap.views.authentication;
 
-import android.Manifest;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
-
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 
+import com.example.swap.R;
+import com.example.swap.TempHomePage;
 import com.example.swap.daos.UserService;
 import com.example.swap.models.User;
 import com.example.swap.models.UserRegistrationResponse;
-import com.example.swap.rest.RetrofitFactory;
+import com.example.swap.utils.Auth;
+import com.example.swap.utils.RetrofitFactory;
+import com.example.swap.utils.formErrorDisplayer.FormErrorDisplayer;
 import com.example.swap.viewmodels.RegisterActivityViewModel;
 import com.google.gson.Gson;
 
-import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.HttpEntity;
-
-import org.apache.http.NameValuePair;
-
-import org.apache.http.client.ClientProtocolException;
-
-import org.apache.http.client.entity.UrlEncodedFormEntity;
-import org.apache.http.message.BasicNameValuePair;
-
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 
 public class RegisterActivity extends AppCompatActivity {
 
     public static final String CURRENT_USER = "current-user";
 
+    public static final String SIGN_IN_METHOD = "sign_in_method";
+    public static final int SIGN_IN_REGULAR = 0;
+    public static final int SIGN_IN_GOOGLE = 1;
+
+    public static final String UNPROCESSABLE_ENTITY = "Unprocessable Entity";
+    public static final int UNPROCESSABLE_ENTITY_CODE = 422;
+
     Button register ;
     TextView login;
     EditText firstName, lastName, email , password, confPassword ;
-    String RegisterURL = "http://localhost/swap-mobileapp/insert.php" ;
     Boolean CheckEditText ;
     String FirstNameHolder,LastNameHolder, EmailHolder, PasswordHolder ;
 
     RegisterActivityViewModel registerActivityViewModel;
+    FormErrorDisplayer formErrorDisplayer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,7 +85,6 @@ public class RegisterActivity extends AppCompatActivity {
                 );
                 GetCheckEditTextIsEmptyOrNot();
                 if(!CheckEditText){
-//                    SendDataToServer(FirstNameHolder, LastNameHolder, EmailHolder, PasswordHolder);
                     Toast.makeText(RegisterActivity.this, "Please fill all fields", Toast.LENGTH_LONG).show();
                 } else if(!checkPasswords(user.getPassword(), confPassword.getText().toString())){
                     Toast.makeText(RegisterActivity.this, "Passwords do not match", Toast.LENGTH_LONG).show();
@@ -115,6 +105,11 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
 
+        formErrorDisplayer = new FormErrorDisplayer.Builder()
+                .addErrorDisplayer("first_name", (TextView)findViewById(R.id.error_message_first_name))
+                .addErrorDisplayer("email", (TextView)findViewById(R.id.error_message_email))
+                .addErrorDisplayer("last_name", (TextView)findViewById(R.id.error_message_last_name))
+                .build();
 
     }
 
@@ -136,66 +131,13 @@ public class RegisterActivity extends AppCompatActivity {
 
         if(TextUtils.isEmpty(FirstNameHolder) || TextUtils.isEmpty(LastNameHolder) || TextUtils.isEmpty(EmailHolder) || TextUtils.isEmpty(PasswordHolder))
         {
-
             CheckEditText = false;
-
         }
         else {
-
             CheckEditText = true ;
         }
 
     }
-
-//    public void SendDataToServer(final String firstName, final String lastName, final String email, final String password){
-//        class SendPostReqAsyncTask extends AsyncTask<String, Void, String> {
-//            @Override
-//            protected String doInBackground(String... params) {
-//
-//                String QuickFirstName = firstName ;
-//                String QuickLastName = lastName;
-//                String QuickEmail = email ;
-//                String QuickPassword = password;
-//
-//                List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
-//
-//                nameValuePairs.add(new BasicNameValuePair("firstname", QuickFirstName));
-//                nameValuePairs.add(new BasicNameValuePair("lastname", QuickLastName));
-//                nameValuePairs.add(new BasicNameValuePair("email", QuickEmail));
-//                nameValuePairs.add(new BasicNameValuePair("password", QuickPassword));
-//
-//                try {
-//                    HttpClient httpClient = new DefaultHttpClient();
-//
-//                    HttpPost httpPost = new HttpPost(RegisterURL);
-//
-//                    httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
-//
-//                    HttpResponse response = httpClient.execute(httpPost);
-//
-//                    HttpEntity entity = response.getEntity();
-//
-//
-//                } catch (ClientProtocolException e) {
-//
-//                } catch (IOException e) {
-//
-//                }
-//                return "Data Submit Successfully";
-//            }
-//
-//            @Override
-//            protected void onPostExecute(String result) {
-//                super.onPostExecute(result);
-//
-//                Toast.makeText(RegisterActivity.this, "Data Submit Successfully", Toast.LENGTH_LONG).show();
-//
-//            }
-//        }
-//        SendPostReqAsyncTask sendPostReqAsyncTask = new SendPostReqAsyncTask();
-//        sendPostReqAsyncTask.execute(firstName, lastName, email, password);
-//    }
-
 
     public void loginUser(View view) {
         Intent intent = new Intent(this, LoginActivity.class);
@@ -206,6 +148,7 @@ public class RegisterActivity extends AppCompatActivity {
     protected void onPause() {
         super.onPause();
         persistInputToViewModel();
+        formErrorDisplayer.clearDisplayers();
     }
 
     private void persistInputToViewModel() {
@@ -222,35 +165,34 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private void submitUser(User user){
+        formErrorDisplayer.clearErrors();
         Retrofit retrofit = RetrofitFactory.create();
-//        Retrofit retrofit = new Retrofit.Builder()
-//                .baseUrl("http://192.168.137.163/swapapi/public/index.php/")
-//                .addConverterFactory(GsonConverterFactory.create())
-//                .build();
         UserService userService = retrofit.create(UserService.class);
         Call<UserRegistrationResponse> call = userService.addUser(user);
         call.enqueue(new Callback<UserRegistrationResponse>() {
             @Override
-            public void onResponse(Call<UserRegistrationResponse> call, Response<UserRegistrationResponse> response) {
+            public void onResponse(Call<UserRegistrationResponse> call,
+                                   Response<UserRegistrationResponse> response) {
                 if(response.isSuccessful()) {
-                    SharedPreferences sharedPref = getSharedPreferences(
-                            getString(R.string.preferences_file), MODE_PRIVATE);
-                    SharedPreferences.Editor editor = sharedPref.edit();
-                    editor.putString(CURRENT_USER, new Gson().toJson(response.body().getUser()));
-                    editor.apply();
-                    Toast.makeText(
-                            RegisterActivity.this,
-                            "Registration successful",
-                            Toast.LENGTH_SHORT
-                    ).show();
+                    Auth.of(getApplication()).logIn(response.body().getUser(), Auth.AccountType.SWAP_ACCOUNT);
                     startActivity(new Intent(RegisterActivity.this, TempHomePage.class));
+                    finish();
                 } else {
                     Toast.makeText(
                             RegisterActivity.this,
-                            response.message(),
-                            Toast.LENGTH_LONG
-                    ).show();
-                    Log.e("bleble", response.raw().request().url().toString());
+                            response.message() + " " + response.code(), Toast.LENGTH_LONG).show();
+
+                    if(response.code() == UNPROCESSABLE_ENTITY_CODE) {
+                        try {
+                            String errorBody = response.errorBody().string();
+                            Log.e("Error Response", errorBody);
+                            Map<String, List<String>> errorsMap = new Gson().fromJson(errorBody, Map.class);
+                            formErrorDisplayer.displayFormErrors(errorsMap);
+
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
                 }
             }
 
@@ -264,6 +206,7 @@ public class RegisterActivity extends AppCompatActivity {
                 t.printStackTrace();
             }
         });
+
     }
 
 }

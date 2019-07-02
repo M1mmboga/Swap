@@ -9,6 +9,8 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.swap.views.authentication.LoginActivity;
+
 
 public class ProfileActivity extends AppCompatActivity {
 
@@ -25,9 +27,9 @@ public class ProfileActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
 
-        String username = intent.getStringExtra(LoginActivity.UserEmail);
+//        String username = intent.getStringExtra(LoginActivity.UserEmail);
 
-        textView.setText(username);
+//        textView.setText(username);
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override

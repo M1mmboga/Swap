@@ -3,34 +3,19 @@ package com.example.swap;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-
 import android.os.Build;
 import android.os.Bundle;
-import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
-import com.example.swap.R;
-import com.example.swap.daos.GoodsDao;
-import com.example.swap.models.Good;
-import com.example.swap.models.dtos.GoodDTO;
-import com.example.swap.rest.RetrofitFactory;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -97,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
         //submit item details
         Button submitButton = (Button) findViewById(R.id.submitItem);
 
-        submitButton.setOnClickListener(new View.OnClickListener() {
+        /*submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -125,7 +110,7 @@ public class MainActivity extends AppCompatActivity {
                             priceOfItem
                     );
                     Retrofit retrofit = RetrofitFactory.create();
-                    GoodsDao goodsDao = retrofit.create(GoodsDao.class);
+                    GoodsService goodsDao = retrofit.create(GoodsService.class);
                     Call<Good> good = goodsDao.addGood(goodDTO);
                     good.enqueue(new Callback<Good>() {
                         @Override
@@ -149,7 +134,7 @@ public class MainActivity extends AppCompatActivity {
             }
 
 
-        });
+        });*/
 
 
 
