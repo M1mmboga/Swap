@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Swap</string>
+    <string name="add_image">"  Bild hinzufügen"</string>
+    <string name="category_label_books">" Bücher"</string>
+    <string name="category_label_clothes">Kleider</string>
+    <string name="good_details_price_approx">Herum: Kshs. % s</string>
+    <string name="goods_list_category_label">Kategorie</string>
+    <string name="image_textview">Bild</string>
+    <string name="insert_item_images_fragment_title">Objektbilder einfügen</string>
+    <string name="item_category_textview">Kategorie wählen</string>
+    <string name="item_description_textview">Beschreibung</string>
+    <string name="item_list_loading_retry_btn_label">Wiederholen</string>
+    <string name="item_name_textview">Artikelname</string>
+    <string name="main_image">Hauptbild</string>
+    <string name="my_location_textview">Mein Standort</string>
+    <string name="next">" Nächster"</string>
+    <string name="search_activity_label">Suchergebnisse</string>
+    <string name="search_menu_item_title">Suche</string>
+    <string name="submit_item">Artikel einreichen</string>
+    <string name="supplementary_images">" Ergänzende Bilder"</string>
+    <string name="valued_price_textview">" Geschätzter Preis"</string>
+</resources>

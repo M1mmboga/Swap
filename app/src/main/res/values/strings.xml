@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">Swap</string>
-    <string name="enter_items_top_bar">Post Item</string>
     <string name="item_category_textview">Select Category</string>
     <string name="item_description_textview">Description</string>
     <string name="item_name_textview">Item Name</string>
@@ -19,20 +18,21 @@
 
     <string name="category_label_books">Books</string>
     <string name="category_label_clothes">Clothes</string>
-    <string name="good_price_range">Kshs. %1$d - %2$d</string>
-    <string name="goods_list_category_label">Category: %1$s</string>
+    <string name="good_price_range" translatable="false">Kshs. %1$d - %2$d</string>
     <string name="search_menu_item_title">Search</string>
     <string name="search_activity_label">Search Results</string>
     <string name="item_list_loading_retry_btn_label">Retry</string>
-    <string name="title_activity_good_details">GoodDetailsActivity</string>
+    <string name="title_activity_good_details" translatable="false">GoodDetailsActivity</string>
 
-    <string name="good_details_price_approx">Around: Kshs. %s</string>
-    <string name="title_activity_post_good">PostGoodActivity</string>
+    <string name="title_activity_post_good" translatable="false">PostGoodActivity</string>
 
     <string name="insert_item_images_fragment_title">Insert Item Images</string>
     <string name="main_image">Main Image</string>
     <string name="add_image">Add Image</string>
     <string name="supplementary_images">Supplementary Images</string>
     <string name="next">Next</string>
-    <string name="preferences_file">com.example.swap.PREFERENCE_FILES</string>
+    <string name="preferences_file" translatable="false">com.example.swap.PREFERENCE_FILES</string>
+    <string name="enter_items_top_bar" translatable="false">Post Item</string>
+    <string name="goods_list_category_label">Category</string>
+    <string name="good_details_price_approx">Around: Kshs. %s</string>
 </resources>
