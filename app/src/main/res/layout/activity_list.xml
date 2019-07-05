@@ -38,6 +38,7 @@
                 app:mpb_useIntrinsicPadding="false"
                 app:mpb_progressStyle="horizontal"
                 style="@style/Widget.MaterialProgressBar.ProgressBar.Horizontal"
+                android:background="#963C1F"
                 android:visibility="invisible"/>
         </com.google.android.material.appbar.AppBarLayout>
 

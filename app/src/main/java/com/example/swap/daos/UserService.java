@@ -1,13 +1,26 @@
 package com.example.swap.daos;
 
+import com.example.swap.models.SimpleRestResponse;
 import com.example.swap.models.User;
 import com.example.swap.models.UserRegistrationResponse;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
+import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 
 public interface UserService {
     @POST("users")
-    public Call<UserRegistrationResponse> addUser(@Body User user);
+    Call<UserRegistrationResponse> addUser(@Body User user);
+
+    @FormUrlEncoded
+    @PUT("users/fcm-instance-id")
+    Call<SimpleRestResponse> putFCMInstanceId(@Field("user_id") int userId,
+                                              @Field("fcm_instance_id") String fcmInstanceId);
+
+    @DELETE("users/fcm-instance-id")
+    Call<SimpleRestResponse> removeFCMInstanceId(@Field("user_id") int userId);
 }

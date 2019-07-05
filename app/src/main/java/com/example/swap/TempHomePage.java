@@ -13,9 +13,7 @@ import com.example.swap.models.User;
 import com.example.swap.utils.Auth;
 import com.example.swap.views.authentication.LoginActivity;
 import com.example.swap.views.postgood.PostGoodActivity;
-import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.mikepenz.materialdrawer.AccountHeader;
 import com.mikepenz.materialdrawer.AccountHeaderBuilder;
 import com.mikepenz.materialdrawer.Drawer;
@@ -55,12 +53,6 @@ public class TempHomePage extends AppCompatActivity implements View.OnClickListe
             startActivity(new Intent(this, LoginActivity.class));
         }
 
-        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken(getString(R.string.server_client_id))
-                .requestEmail()
-                .build();
-        mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
-
         setUpNavDrawer(toolbar);
     }
 
@@ -87,8 +79,9 @@ public class TempHomePage extends AppCompatActivity implements View.OnClickListe
                     @Override
                     public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
                         if(drawerItem.getIdentifier() == 1) {
-                            Auth.of(getApplication()).logout_GoogleSignIn(mGoogleSignInClient, task -> {});
-                            Auth.of(getApplication()).logout_Swap();
+                            Auth.of(getApplication()).logout(task -> {});
+//                            Auth.of(getApplication()).logout_GoogleSignIn(task -> {});
+//                            Auth.of(getApplication()).logout_Swap();
                             startActivity(new Intent(TempHomePage.this, LoginActivity.class));
                             finish();
                         } else if(drawerItem.getIdentifier() == 2) {

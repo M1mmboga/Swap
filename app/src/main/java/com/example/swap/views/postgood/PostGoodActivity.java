@@ -69,7 +69,7 @@ public class PostGoodActivity extends AppCompatActivity {
             fragmentTransaction.commit();
         }
 
-        setUpNavDrawer();
+        setUpNavDrawer(toolbar);
     }
 
     @Override
@@ -158,9 +158,10 @@ public class PostGoodActivity extends AppCompatActivity {
     }
 
 
-    private void setUpNavDrawer() {
+    private void setUpNavDrawer(Toolbar toolbar) {
         Drawer drawer = new DrawerBuilder()
                 .withActivity(this)
+                .withToolbar(toolbar)
                 .addDrawerItems(
                         new SecondaryDrawerItem().withIdentifier(1).withName("Logout")
                 )
@@ -168,8 +169,9 @@ public class PostGoodActivity extends AppCompatActivity {
                     @Override
                     public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
                         if(drawerItem.getIdentifier() == 1) {
-                            Auth.of(getApplication()).logout_GoogleSignIn(mGoogleSignInClient, task -> {});
-                            Auth.of(getApplication()).logout_Swap();
+                            Auth.of(getApplication()).logout( task -> {});
+//                            Auth.of(getApplication()).logout_GoogleSignIn( task -> {});
+//                            Auth.of(getApplication()).logout_Swap();
                             startActivity(new Intent(PostGoodActivity.this, LoginActivity.class));
                             finish();
                         }

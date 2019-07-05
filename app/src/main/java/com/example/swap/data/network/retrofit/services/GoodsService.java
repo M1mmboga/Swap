@@ -12,6 +12,7 @@ import retrofit2.http.GET;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
+import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 public interface GoodsService {
@@ -19,6 +20,9 @@ public interface GoodsService {
     @GET("goods/paged")
     Call<GoodsPage> fetchGoodsByCategory(@Query("page") int page,
                                          @Query("category") String category);
+
+    @GET("users/{userId}/goods")
+    Call<List<Good>> fetchGoodsByUserId(@Path("userId") int userId);
 
     @GET("goods/find")
     Call<GoodsPage> findGoods(@Query("query") String query,

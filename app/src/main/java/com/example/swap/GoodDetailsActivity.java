@@ -2,6 +2,7 @@ package com.example.swap;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -10,6 +11,7 @@ import androidx.appcompat.widget.Toolbar;
 import com.example.swap.fragments.GoodsListFragment;
 import com.example.swap.models.Good;
 import com.example.swap.utils.addressconstants.Addresses;
+import com.example.swap.views.makeoffer.SelectGoodsToExchangeActivity;
 import com.glide.slider.library.Animations.DescriptionAnimation;
 import com.glide.slider.library.SliderLayout;
 import com.glide.slider.library.SliderTypes.DefaultSliderView;
@@ -63,6 +65,11 @@ public class GoodDetailsActivity extends AppCompatActivity {
 
         ((TextView) findViewById(R.id.good_details_description))
                 .setText(good.getDescription());
+
+        ((Button) findViewById(R.id.good_details_make_offer_button))
+                .setOnClickListener(v -> {
+                    startActivity(new Intent(GoodDetailsActivity.this, SelectGoodsToExchangeActivity.class));
+                });
     }
 
     @Override
