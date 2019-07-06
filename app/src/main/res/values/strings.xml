@@ -48,4 +48,7 @@
     <string name="title_activity_select_items_to_exchange">SelectItemsToExchangeActivity</string>
     <string name="swap_with">Swap with...</string>
     <string name="item_image">Item\'s image</string>
+    <string name="no_items_selected">No items selected</string>
+    <string name="no_items_swap_with_msg">You have no items to swap with!</string>
+    <string name="post_item">Post item</string>
 </resources>

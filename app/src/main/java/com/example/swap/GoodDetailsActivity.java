@@ -20,6 +20,8 @@ import java.text.DecimalFormat;
 
 public class GoodDetailsActivity extends AppCompatActivity {
 
+    public static final String GOOD_ID = "good-id";
+
     private SliderLayout slider;
 
     @Override
@@ -68,7 +70,12 @@ public class GoodDetailsActivity extends AppCompatActivity {
 
         ((Button) findViewById(R.id.good_details_make_offer_button))
                 .setOnClickListener(v -> {
-                    startActivity(new Intent(GoodDetailsActivity.this, SelectGoodsToExchangeActivity.class));
+                    Intent toGoodDetailsIntent = new Intent(
+                            GoodDetailsActivity.this,
+                            SelectGoodsToExchangeActivity.class
+                    );
+                    toGoodDetailsIntent.putExtra(GOOD_ID, good.getId());
+                    startActivity(toGoodDetailsIntent);
                 });
     }
 

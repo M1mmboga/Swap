@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.swap.R;
+import com.example.swap.models.Good;
 import com.example.swap.utils.addressconstants.Addresses;
 import com.google.android.material.card.MaterialCardView;
 import com.mikepenz.fastadapter.FastAdapter;
@@ -18,18 +19,20 @@ import com.mikepenz.fastadapter.items.AbstractItem;
 import java.util.List;
 
 public class ToSwapWithItem extends AbstractItem {
-    private String goodName;
-    private String imageFileName;
+//    private String goodName;
+//    private String imageFileName;
+    private Good good;
     private boolean isSelected;
     Context context;
 
 //    public ToSwapWithItem() {
 //    }
 
-    public ToSwapWithItem(Context context, String goodName, String imageFileName) {
-        this.goodName = goodName;
-        this.imageFileName = imageFileName;
+    public ToSwapWithItem(Context context, Good good) {
+//        this.goodName = goodName;
+//        this.imageFileName = imageFileName;
         this.context = context;
+        this.good = good;
     }
 
     @NonNull
@@ -48,12 +51,12 @@ public class ToSwapWithItem extends AbstractItem {
         return R.layout.good_to_swap_with_list_item;
     }
 
-    public String getGoodName() {
-        return goodName;
+    public Good getGood() {
+        return good;
     }
 
-    public void setGoodName(String goodName) {
-        this.goodName = goodName;
+    public void setGood(Good good) {
+        this.good = good;
     }
 
     @Override
@@ -79,9 +82,9 @@ public class ToSwapWithItem extends AbstractItem {
 
         @Override
         public void bindView(ToSwapWithItem item, List<Object> payloads) {
-            String imageFileName = Addresses.IMAGES_HOME + item.imageFileName;
+            String imageFileName = Addresses.IMAGES_HOME + item.getGood().getImageFileName();
             Glide.with(context).load(imageFileName).into(imageView);
-            goodName.setText(item.getGoodName());
+            goodName.setText(item.getGood().getName());
             cardView.setChecked(item.isSelected);
         }
 

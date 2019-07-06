@@ -11,6 +11,7 @@ import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
+import retrofit2.http.Path;
 
 public interface UserService {
     @POST("users")
@@ -21,6 +22,6 @@ public interface UserService {
     Call<SimpleRestResponse> putFCMInstanceId(@Field("user_id") int userId,
                                               @Field("fcm_instance_id") String fcmInstanceId);
 
-    @DELETE("users/fcm-instance-id")
-    Call<SimpleRestResponse> removeFCMInstanceId(@Field("user_id") int userId);
+    @DELETE("users/{user_id}/fcm-instance-id")
+    Call<SimpleRestResponse> removeFCMInstanceId(@Path("user_id") int userId);
 }

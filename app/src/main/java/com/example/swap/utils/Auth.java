@@ -67,15 +67,15 @@ public class Auth {
     }
 
     public void logout(OnCompleteListener<Void> onCompleteListener) {
+        new UsersRepository().removeFCMInstanceIdForUser(getCurrentUser().getId());
+
         logout_Swap();
         logout_GoogleSignIn(onCompleteListener);
-
-        new UsersRepository().removeFCMInstanceIdForUser(getCurrentUser().getId());
     }
 
     private void logout_Swap() {
         clearUserFromSharedPrefs();
-        new UsersRepository().removeFCMInstanceIdForUser(getCurrentUser().getId());
+//        new UsersRepository().removeFCMInstanceIdForUser(getCurrentUser().getId());
     }
 
     private void logout_GoogleSignIn(OnCompleteListener<Void> onCompleteListener) {

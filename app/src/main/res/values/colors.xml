@@ -10,4 +10,5 @@
     <color name="glide_slider_description_background_color">#77000000</color>
     <color name="validation_error">#EB0909</color>
     <color name="light_grey">#FAF9F9</color>
+    <color name="white">#FFFFFF</color>
 </resources>
