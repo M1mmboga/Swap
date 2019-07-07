@@ -13,6 +13,7 @@ import com.example.swap.models.User;
 import com.example.swap.utils.Auth;
 import com.example.swap.views.authentication.LoginActivity;
 import com.example.swap.views.postgood.PostGoodActivity;
+import com.example.swap.views.viewoffers.OffersActivity;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.mikepenz.materialdrawer.AccountHeader;
 import com.mikepenz.materialdrawer.AccountHeaderBuilder;
@@ -72,6 +73,7 @@ public class TempHomePage extends AppCompatActivity implements View.OnClickListe
                 .withAccountHeader(accountHeader())
                 .addDrawerItems(
                         new PrimaryDrawerItem().withIdentifier(2).withName("Post Item").withIcon(R.drawable.ic_add_black_24dp),
+                        new PrimaryDrawerItem().withIdentifier(3).withName("Your Offers").withIcon(R.drawable.ic_add_black_24dp),
                         new DividerDrawerItem(),
                         new SecondaryDrawerItem().withIdentifier(1).withName("Logout").withIcon(R.drawable.ic_lock_outline_black_24dp)
                 )
@@ -86,6 +88,8 @@ public class TempHomePage extends AppCompatActivity implements View.OnClickListe
                             finish();
                         } else if(drawerItem.getIdentifier() == 2) {
                             startActivity(new Intent(TempHomePage.this, PostGoodActivity.class));
+                        } else if(drawerItem.getIdentifier() == 3) {
+                            startActivity(new Intent(TempHomePage.this, OffersActivity.class));
                         }
                         return false;
                     }

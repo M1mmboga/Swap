@@ -14,6 +14,16 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
 
+        <activity
+            android:name=".views.viewoffers.OffersActivity"
+            android:label="@string/your_offers"
+            android:theme="@style/AppThemeMaterial">
+            <intent-filter>
+                <action android:name="com.johngachihi.example.swap.OFFERS_ACTIVITY"/>
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
         <service
             android:name=".MyFirebaseMessagingService"
             android:exported="false">
@@ -101,7 +111,6 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths" />
         </provider>
-
     </application>
 
 </manifest>
