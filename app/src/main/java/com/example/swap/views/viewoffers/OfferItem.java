@@ -66,6 +66,7 @@ public class OfferItem extends AbstractItem {
     class OfferViewHolder extends FastAdapter.ViewHolder<OfferItem> {
 
         private TextView bidderNameTxt;
+        private TextView bidderEmailTxt;
         private ImageView wantedGoodImage;
         private TextView wantedGoodNameTxt;
         private LinearLayout offeredGoodsContainer;
@@ -73,6 +74,7 @@ public class OfferItem extends AbstractItem {
         public OfferViewHolder(View itemView) {
             super(itemView);
             bidderNameTxt = itemView.findViewById(R.id.item_offer_bidder);
+            bidderEmailTxt = itemView.findViewById(R.id.item_offer_bidder_email);
             wantedGoodImage = itemView.findViewById(R.id.item_offer_wanted_good_image);
             wantedGoodNameTxt = itemView.findViewById(R.id.item_offer_wanted_good_name);
             offeredGoodsContainer = itemView.findViewById(R.id.item_offer_offered_goods_container);
@@ -83,6 +85,7 @@ public class OfferItem extends AbstractItem {
             bidderNameTxt.setText(item.context.getString(
                     R.string.label_from,
                     item.bidder.getFirstname() + " " + item.bidder.getLastname()) );
+            bidderEmailTxt.setText(item.bidder.getEmail());
 
             String imageFileName = Addresses.IMAGES_HOME + item.goodWanted.getImageFileName();
             Glide.with(item.context)
