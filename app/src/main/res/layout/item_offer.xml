@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-                                                                                                                                                                                                                                                                                                            <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/item_offer"
     android:layout_height="wrap_content"
@@ -21,22 +21,29 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
+                android:orientation="vertical"
                 android:layout_marginBottom="8dp">
 
                 <TextView
                     android:id="@+id/item_offer_bidder"
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    style="@style/TextAppearance.MaterialComponents.Subtitle1"
-                    tools:text="From: John Gachihi" />
+                    style="@style/TextAppearance.MaterialComponents.Headline6"
+                    tools:text="John Gachihi" />
 
                 <TextView
                     android:id="@+id/item_offer_bidder_email"
+                    style="@style/TextAppearance.MaterialComponents.Subtitle1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
             </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#DBD8D8"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="@dimen/md_keylines"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -47,9 +54,9 @@
                     android:id="@+id/textView4"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    style="@style/TextAppearance.MaterialComponents.Subtitle1"
-                    android:text="@string/for_text"
-                    tools:text="For:" />
+                    android:layout_marginBottom="4dp"
+                    style="@style/TextAppearance.MaterialComponents.Subtitle2"
+                    android:text="@string/for_text" />
 
                 <LinearLayout
                     android:orientation="horizontal"
@@ -72,13 +79,17 @@
                             android:id="@+id/item_offer_wanted_good_name"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            style="@style/TextAppearance.MaterialComponents.Subtitle2"
+                            android:textAppearance="?attr/textAppearanceListItem"
+                            android:textSize="16sp"
                             android:gravity="center_vertical"
                             tools:text="Sweet bananas"/>
 
                         <TextView
+                            android:id="@+id/item_offer_wanted_good_price_estimate"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:textAppearance="?attr/textAppearanceListItem"
+                            android:textColor="@color/medium_grey"
                             style="@style/TextAppearance.MaterialComponents.Body2"
                             tools:text="Price estimate: Kshs. 1000"/>
                     </LinearLayout>
@@ -96,13 +107,15 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_marginTop="@dimen/md_keylines">
+            android:layout_marginTop="@dimen/md_keylines"
+            android:layout_marginBottom="12dp">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="4dp"
                 android:text="@string/item_offer_offering"
-                style="@style/TextAppearance.MaterialComponents.Subtitle1"/>
+                style="@style/TextAppearance.MaterialComponents.Subtitle2"/>
 
             <LinearLayout
                 android:id="@+id/item_offer_offered_goods_container"
@@ -211,14 +224,15 @@
             <com.google.android.material.button.MaterialButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/reject"
-                style="@style/Widget.MaterialComponents.Button.TextButton"/>
+                android:text="@string/accept"
+                tools:text="Accept"
+                style="@style/Widget.MaterialComponents.Button.TextButton" />
 
             <com.google.android.material.button.MaterialButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/accept"
-                tools:text="Accept"/>
+                android:text="@string/reject"
+                style="@style/Widget.MaterialComponents.Button.TextButton"/>
         </LinearLayout>
     </LinearLayout>
 </com.google.android.material.card.MaterialCardView>

@@ -21,14 +21,17 @@
 
         <TextView
             android:id="@+id/item_offered_good_name"
-            style="@style/TextAppearance.MaterialComponents.Subtitle2"
+            android:textAppearance="?attr/textAppearanceListItem"
+            android:textSize="16sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             tools:text="Tangy Tangering" />
 
         <TextView
             android:id="@+id/item_offered_good_price_estimate"
-            style="@style/TextAppearance.MaterialComponents.Body2"
+            android:textAppearance="?attr/textAppearanceListItem"
+            android:textColor="@color/medium_grey"
+            android:textSize="@dimen/good_list_item_description"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             tools:text="Price Estimate: Kshs.1200" />

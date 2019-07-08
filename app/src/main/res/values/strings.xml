@@ -68,7 +68,7 @@
     <string name="post_item">Post item</string>
     <string name="title_activity_offers">OffersActivity</string>
     <string name="your_offers">Your offers</string>
-    <string name="for_text">For</string>
+    <string name="for_text">For:</string>
     <string name="item_offer_offering">Offering:</string>
     <string name="accept">accept</string>
     <string name="reject">reject</string>

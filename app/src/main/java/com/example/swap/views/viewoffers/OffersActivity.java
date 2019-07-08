@@ -1,7 +1,9 @@
 package com.example.swap.views.viewoffers;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ProgressBar;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.swap.R;
 import com.example.swap.utils.NetworkState;
+import com.google.android.material.button.MaterialButton;
 import com.mikepenz.fastadapter.commons.adapters.FastItemAdapter;
 
 import java.util.List;
@@ -19,6 +22,7 @@ import java.util.List;
 public class OffersActivity extends AppCompatActivity {
 
     private ProgressBar progressBar;
+    private MaterialButton retryButton;
 
     private FastItemAdapter<OfferItem> fastItemAdapter;
 
@@ -30,6 +34,8 @@ public class OffersActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         progressBar = findViewById(R.id.activity_offers_progressbar);
+
+        retryButton = findViewById(R.id.addon_loading_failed_retry_btn);
 
         OffersViewModel offersViewModel = ViewModelProviders
                 .of(this).get(OffersViewModel.class);
@@ -58,6 +64,9 @@ public class OffersActivity extends AppCompatActivity {
 
             if(networkState.getStatus() == NetworkState.Status.FAILED) {
                 loadingFailedView.setVisibility(View.VISIBLE);
+                Button button = loadingFailedView.findViewById(R.id.addon_loading_failed_retry_btn);
+                button.setOnClickListener(v -> networkState.getRetryable().retry());
+                Log.e("OffersActivity", networkState.getMessage());
             }
         }
     }
@@ -65,5 +74,6 @@ public class OffersActivity extends AppCompatActivity {
     private void handleOffers(List<OfferItem> offers) {
         fastItemAdapter.add(offers);
     }
+
 
 }

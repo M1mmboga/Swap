@@ -69,6 +69,7 @@ public class OfferItem extends AbstractItem {
         private TextView bidderEmailTxt;
         private ImageView wantedGoodImage;
         private TextView wantedGoodNameTxt;
+        private TextView wantedGoodPriceEstimateTxt;
         private LinearLayout offeredGoodsContainer;
 
         public OfferViewHolder(View itemView) {
@@ -77,14 +78,17 @@ public class OfferItem extends AbstractItem {
             bidderEmailTxt = itemView.findViewById(R.id.item_offer_bidder_email);
             wantedGoodImage = itemView.findViewById(R.id.item_offer_wanted_good_image);
             wantedGoodNameTxt = itemView.findViewById(R.id.item_offer_wanted_good_name);
+            wantedGoodPriceEstimateTxt = itemView.findViewById(R.id.item_offer_wanted_good_price_estimate);
             offeredGoodsContainer = itemView.findViewById(R.id.item_offer_offered_goods_container);
         }
 
         @Override
         public void bindView(OfferItem item, List<Object> payloads) {
-            bidderNameTxt.setText(item.context.getString(
-                    R.string.label_from,
-                    item.bidder.getFirstname() + " " + item.bidder.getLastname()) );
+//            bidderNameTxt.setText(item.context.getString(
+//                    R.string.label_from,
+//                    item.bidder.getFirstname() + " " + item.bidder.getLastname()) );
+            bidderNameTxt.setText(item.bidder.getFirstname() + " " + item.bidder.getLastname());
+
             bidderEmailTxt.setText(item.bidder.getEmail());
 
             String imageFileName = Addresses.IMAGES_HOME + item.goodWanted.getImageFileName();
@@ -94,6 +98,7 @@ public class OfferItem extends AbstractItem {
                     .into(wantedGoodImage);
 
             wantedGoodNameTxt.setText(item.goodWanted.getName());
+            wantedGoodPriceEstimateTxt.setText(context.getString(R.string.label_price_estimate, item.goodWanted.getPriceEstimate()));
 
             addOfferedGoodsToLinearLayout(item.offeredGoods, offeredGoodsContainer);
         }

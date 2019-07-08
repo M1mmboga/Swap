@@ -39,7 +39,7 @@ public class OffersViewModel extends AndroidViewModel {
         return networkState;
     }
 
-    private void loadOffers() {
+    public void loadOffers() {
         networkState.setValue(NetworkState.LOADING);
         OffersRepository offersRepository = new OffersRepository();
         int userId = Auth.of(getApplication()).getCurrentUser().getId();
@@ -50,13 +50,13 @@ public class OffersViewModel extends AndroidViewModel {
                     networkState.setValue(NetworkState.LOADED);
                     offers.setValue(convertToOfferItems(response.body()));
                 } else {
-                    networkState.setValue(NetworkState.error(response.message()));
+                    networkState.setValue(NetworkState.error(response.message(), () -> loadOffers()));
                 }
             }
 
             @Override
             public void onFailure(Call<List<Offer>> call, Throwable t) {
-                networkState.setValue(NetworkState.error(t.getMessage()));
+                networkState.setValue(NetworkState.error(t.getMessage(), () -> loadOffers()));
             }
         });
     }
