@@ -15,7 +15,7 @@ import com.example.swap.utils.Auth;
 
 public class ProfileActivity extends AppCompatActivity {
 
-    TextView myUsername, myEmail;
+    TextView myUsername, myEmail, myPhone;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,10 +24,12 @@ public class ProfileActivity extends AppCompatActivity {
 
         myUsername = (TextView) findViewById(R.id.username);
         myEmail = (TextView) findViewById(R.id.email);
+        myPhone = (TextView) findViewById(R.id.phone);
 
         User user = Auth.of(getApplication()).getCurrentUser();
         myUsername.setText(user.getFirstname()+' '+user.getLastname());
         myEmail.setText(user.getEmail());
+        myPhone.setText(user.getPhonenumber());
     }
 
 
