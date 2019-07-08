@@ -11,7 +11,7 @@ import androidx.paging.PagedList;
 import com.example.swap.datasources.goods.GoodsDataSource;
 import com.example.swap.datasources.goods.factories.GoodsByCategoryDataSourceFactory;
 import com.example.swap.models.Good;
-import com.example.swap.rest.NetworkState;
+import com.example.swap.utils.NetworkState;
 
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;

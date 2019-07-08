@@ -26,7 +26,7 @@
         android:layout_alignParentLeft="true"
         android:layout_marginLeft="12dp"
         android:layout_marginTop="23dp"
-        android:drawableLeft="@drawable/ic_image_black_24dp"
+        android:drawableLeft="@drawable/person24dp"
         android:paddingTop="5dp"
         android:paddingRight="70dp"
         android:text="name" />
@@ -39,7 +39,7 @@
         android:layout_marginLeft="-127dp"
         android:layout_marginTop="29dp"
         android:layout_toRightOf="@id/username"
-        android:drawableLeft="@drawable/ic_image_black_24dp"
+        android:drawableLeft="@drawable/ic_mail_black_24dp"
         android:paddingTop="5dp"
         android:text="email" />
 
@@ -51,7 +51,7 @@
         android:layout_marginLeft="80dp"
         android:layout_marginTop="-84dp"
         android:layout_toRightOf="@id/username"
-        android:drawableLeft="@drawable/ic_image_black_24dp"
+        android:drawableLeft="@drawable/phone24dp"
         android:paddingTop="5dp"
         android:text="phone" />
 

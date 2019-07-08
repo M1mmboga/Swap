@@ -97,6 +97,11 @@
                     android:layout_marginTop="32dp"
                     android:layout_gravity="end">
 
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/good_details_make_offer_button"
+                        android:text="@string/make_offer"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
                 </LinearLayout>
             </LinearLayout>
 

@@ -8,7 +8,7 @@ import androidx.paging.PageKeyedDataSource;
 
 import com.example.swap.models.Good;
 import com.example.swap.models.GoodsPage;
-import com.example.swap.rest.NetworkState;
+import com.example.swap.utils.NetworkState;
 
 import retrofit2.Call;
 import retrofit2.Callback;

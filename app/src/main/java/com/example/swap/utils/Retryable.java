@@ -1,4 +1,4 @@
-package com.example.swap.rest;
+package com.example.swap.utils;
 
 public interface Retryable {
     void retry();

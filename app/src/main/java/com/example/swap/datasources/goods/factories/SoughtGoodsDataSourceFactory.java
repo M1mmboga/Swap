@@ -48,7 +48,7 @@ public class SoughtGoodsDataSourceFactory extends DataSource.Factory<Integer, Go
 
         @Override
         protected Call<GoodsPage> fetch(int pageNumber) {
-            return goodsDao.findGoods(this.searchQuery, this.category);
+            return goodsService.findGoods(this.searchQuery, this.category);
         }
     }
 }

@@ -18,7 +18,7 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.example.swap.datasources.goods.goodfetchers.ByCategoryGoodsFetcher;
 import com.example.swap.fragments.GoodsListFragment;
-import com.example.swap.rest.NetworkState;
+import com.example.swap.utils.NetworkState;
 import com.example.swap.viewmodels.GoodsByCategoryViewModel;
 import com.example.swap.viewmodels.GoodsFetcherViewModel;
 import com.example.swap.viewmodels.GoodsListViewModel;

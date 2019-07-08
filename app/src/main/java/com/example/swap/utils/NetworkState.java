@@ -1,4 +1,4 @@
-package com.example.swap.rest;
+package com.example.swap.utils;
 
 /*
 Inspired by https://github.com/SaurabhSandav/PagingDemo
