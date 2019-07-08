@@ -40,4 +40,9 @@ public class GoodsRepository {
                 okhttp3.MultipartBody.FORM, value);
     }
 
+    public void getUserGoods(int userId, Callback<List<Good>> callback) {
+        Call<List<Good>> call = goodsService.fetchGoodsByUserId(userId);
+        call.enqueue(callback);
+    }
+
 }

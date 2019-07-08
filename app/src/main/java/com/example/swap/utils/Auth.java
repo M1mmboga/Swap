@@ -4,11 +4,16 @@ import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.example.swap.R;
+import com.example.swap.data.network.repository.UsersRepository;
 import com.example.swap.models.User;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.gson.Gson;
 
 public class Auth {
@@ -34,8 +39,24 @@ public class Auth {
     public void logIn(User user, AccountType accountType) {
         putToSharedPreferences(CURRENT_USER, new Gson().toJson(user));
         putToSharedPreferences(ACCOUNT_TYPE, accountType.toString());
+        putFCMInstanceIdForUser();
 
         Log.e("Auth", getSharedPrefs().getString(CURRENT_USER, null));
+    }
+
+    private void putFCMInstanceIdForUser() {
+        final String TAG = "Auth FCMInstance";
+        FirebaseInstanceId.getInstance().getInstanceId().addOnCompleteListener(task -> {
+            if(!task.isSuccessful()) {
+                Toast.makeText(getContext(),
+                        "Get Instance id failed",
+                        Toast.LENGTH_SHORT).show();
+            }
+
+            UsersRepository usersRepository = new UsersRepository();
+            usersRepository.putFCMInstanceIdForUser(
+                    getCurrentUser().getId(), task.getResult().getToken());
+        });
     }
 
     private void putToSharedPreferences(String key, String value) {
@@ -45,13 +66,27 @@ public class Auth {
         editor.apply();
     }
 
-    public void logout_Swap() {
-        clearUserFromSharedPrefs();
+    public void logout(OnCompleteListener<Void> onCompleteListener) {
+        new UsersRepository().removeFCMInstanceIdForUser(getCurrentUser().getId());
+
+        logout_Swap();
+        logout_GoogleSignIn(onCompleteListener);
     }
 
-    public void logout_GoogleSignIn(GoogleSignInClient client,
-                                    OnCompleteListener<Void> onCompleteListener) {
-        client.signOut().addOnCompleteListener(onCompleteListener);
+    private void logout_Swap() {
+        clearUserFromSharedPrefs();
+//        new UsersRepository().removeFCMInstanceIdForUser(getCurrentUser().getId());
+    }
+
+    private void logout_GoogleSignIn(OnCompleteListener<Void> onCompleteListener) {
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken(getContext().getString(R.string.server_client_id))
+                .requestEmail()
+                .build();
+
+        GoogleSignInClient mGoogleSignInClient = GoogleSignIn.getClient(getContext(), gso);
+        mGoogleSignInClient.signOut().addOnCompleteListener(onCompleteListener);
+        clearUserFromSharedPrefs();
     }
 
     private void clearUserFromSharedPrefs() {

@@ -58,4 +58,22 @@
     <string name="enter_email_address_here">Enter Email Here</string>
     <string name="register_here">Register Here</string>
     <string name="log_in">Login</string>
+
+    <string name="make_offer">Make offer</string>
+    <string name="title_activity_select_items_to_exchange">SelectItemsToExchangeActivity</string>
+    <string name="swap_with">Swap with...</string>
+    <string name="item_image">Item\'s image</string>
+    <string name="no_items_selected">No items selected</string>
+    <string name="no_items_swap_with_msg">You have no items to swap with!</string>
+    <string name="post_item">Post item</string>
+    <string name="title_activity_offers">OffersActivity</string>
+    <string name="your_offers">Your offers</string>
+    <string name="for_text">For</string>
+    <string name="item_offer_offering">Offering:</string>
+    <string name="accept">accept</string>
+    <string name="reject">reject</string>
+    <string name="network_error_message">There is a problem with the internet connection</string>
+    <string name="retry">Retry</string>
+    <string name="label_from">From: %s</string>
+    <string name="label_price_estimate">Price Estimate: Kshs. %s</string>
 </resources>

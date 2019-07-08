@@ -65,6 +65,7 @@ public class LoginActivity extends AppCompatActivity {
                 getString(R.string.user_preferences_file), MODE_PRIVATE);
         if(sharedPreferences.getString(RegisterActivity.CURRENT_USER, null) != null) {
             startActivity(new Intent(this, TempHomePage.class));
+            finish();
         }
 
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
