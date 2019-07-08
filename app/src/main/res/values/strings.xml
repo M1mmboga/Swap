@@ -45,7 +45,7 @@
     <string name="required_validation_error">*Required</string>
     <string name="internal_storage" translatable="false">INTERNAL_STORAGE</string>
 
-    <string name="login" translatable="false">LOGIN</string>
+    <string name="login">LOGIN</string>
     <string name="register_for_an_account" translatable="false">Register for an account</string>
     <string name="enter_first_name_here">Enter First Name Here</string>
     <string name="enter_last_name_here">Enter Last Name Here</string>

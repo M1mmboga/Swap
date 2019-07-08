@@ -38,5 +38,6 @@
     <string name="enter_email_address_here">name@example.com</string>
     <string name="register_here">" Jisajili hapa"</string>
     <string name="log_in">Login</string>
+    <string name="login">KARIBU</string>
 
 </resources>
