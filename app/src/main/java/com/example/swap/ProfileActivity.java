@@ -9,16 +9,28 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.swap.models.User;
+import com.example.swap.utils.Auth;
+
 
 public class ProfileActivity extends AppCompatActivity {
 
+    TextView myUsername, myEmail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
+        myUsername = (TextView) findViewById(R.id.username);
+        myEmail = (TextView) findViewById(R.id.email);
+
+        User user = Auth.of(getApplication()).getCurrentUser();
+        myUsername.setText(user.getFirstname()+' '+user.getLastname());
+        myEmail.setText(user.getEmail());
     }
+
+
 
 
 }
