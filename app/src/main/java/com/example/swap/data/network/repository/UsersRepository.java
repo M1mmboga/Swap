@@ -3,12 +3,16 @@ package com.example.swap.data.network.repository;
 import android.util.Log;
 
 import com.example.swap.daos.UserService;
+import com.example.swap.models.Good;
 import com.example.swap.models.SimpleRestResponse;
 import com.example.swap.utils.RetrofitFactory;
+
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import retrofit2.http.Path;
 
 public class UsersRepository {
     private static final String TAG = "UserRepository";
@@ -17,6 +21,12 @@ public class UsersRepository {
 
     public UsersRepository() {
         userService = RetrofitFactory.create().create(UserService.class);
+    }
+
+    public void fetchGoodsByUserId(int userId,  Callback<List<Good>> callback){
+        Call<List<Good>> good = userService.fetchGoodsByUserId(userId);
+        good.enqueue(callback);
+
     }
 
     public void putFCMInstanceIdForUser(int userId, String fcmInstanceId) {
