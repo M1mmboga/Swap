@@ -82,6 +82,7 @@ public class TempHomePage extends AppCompatActivity
                 .addDrawerItems(
                         new PrimaryDrawerItem().withIdentifier(2).withName("Post Item").withIcon(R.drawable.ic_add_black_24dp),
                         new PrimaryDrawerItem().withIdentifier(3).withName("Your Offers").withIcon(R.drawable.ic_library_books_black_24dp),
+                        new PrimaryDrawerItem().withIdentifier(4).withName("Your posted items").withIcon(R.drawable.ic_library_books_black_24dp),
                         new DividerDrawerItem(),
                         new SecondaryDrawerItem().withIdentifier(1).withName("Logout").withIcon(R.drawable.ic_lock_outline_black_24dp)
                 )
@@ -98,6 +99,8 @@ public class TempHomePage extends AppCompatActivity
                             startActivity(new Intent(TempHomePage.this, PostGoodActivity.class));
                         } else if(drawerItem.getIdentifier() == 3) {
                             startActivity(new Intent(TempHomePage.this, OffersActivity.class));
+                        } else if(drawerItem.getIdentifier() == 4) {
+                            startActivity(new Intent(TempHomePage.this, UserGoodsActivity.class));
                         }
                         return false;
                     }

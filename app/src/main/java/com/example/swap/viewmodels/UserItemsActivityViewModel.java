@@ -19,12 +19,12 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class ProfileActivityViewModel extends AndroidViewModel {
+public class UserItemsActivityViewModel extends AndroidViewModel {
     MutableLiveData<List<Good>> goods;
     MutableLiveData<NetworkState> networkState =
             new MutableLiveData<>();
 
-    public ProfileActivityViewModel(@NonNull Application application) {
+    public UserItemsActivityViewModel(@NonNull Application application) {
         super(application);
     }
 

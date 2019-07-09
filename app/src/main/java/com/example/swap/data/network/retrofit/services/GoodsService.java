@@ -24,6 +24,11 @@ public interface GoodsService {
     @GET("users/{userId}/goods")
     Call<List<Good>> fetchGoodsByUserId(@Path("userId") int userId);
 
+    @GET("users/{userId}/goods/paged")
+    Call<GoodsPage> fetchGoodsByUserIdPaged( @Path("userId") int userId, @Query("page") int page);
+
+
+
     @GET("goods/find")
     Call<GoodsPage> findGoods(@Query("query") String query,
                               @Query("category") String category);

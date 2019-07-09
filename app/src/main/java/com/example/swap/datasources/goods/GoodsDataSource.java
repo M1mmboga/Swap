@@ -57,6 +57,7 @@ public class GoodsDataSource extends PageKeyedDataSource<Integer, Good> {
                         loadInitial(params, callback);
                     }));
                     Log.e("GoodsDS loadInitial", response.message());
+                    Log.d("GoodsDS loadInitial", response.raw().request().url().toString());
                 }
             }
 
