@@ -8,17 +8,18 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/swap_icon"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/swap_icon_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
         <activity
             android:name=".UserGoodsActivity"
-            android:label="@string/title_activity_user_goods"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
-        <activity android:name=".ProfileActivity">
+            android:label="Your Posted Items"
+            android:theme="@style/AppThemeMaterial"></activity>
+        <activity android:name=".ProfileActivity"
+            android:theme="@style/AppThemeMaterial">
 
             <!-- <intent-filter> -->
             <!-- <action android:name="android.intent.action.MAIN" /> -->
@@ -98,13 +99,13 @@
         </activity> <!-- Temporary Home-page -->
         <activity
             android:name=".TempHomePage"
-            android:label="TempHomePage"
+            android:label="Swap"
             android:theme="@style/AppThemeMaterial">
-            <intent-filter>
+            <!--<intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            </intent-filter>-->
         </activity>
 
         <provider

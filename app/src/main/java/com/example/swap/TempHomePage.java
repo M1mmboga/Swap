@@ -80,8 +80,10 @@ public class TempHomePage extends AppCompatActivity
                 .withToolbar(toolbar)
                 .withAccountHeader(accountHeader())
                 .addDrawerItems(
+                        new PrimaryDrawerItem().withIdentifier(5).withName("Home").withIcon(R.drawable.ic_home_black_24dp),
                         new PrimaryDrawerItem().withIdentifier(2).withName("Post Item").withIcon(R.drawable.ic_add_black_24dp),
                         new PrimaryDrawerItem().withIdentifier(3).withName("Your Offers").withIcon(R.drawable.ic_library_books_black_24dp),
+                        new PrimaryDrawerItem().withIdentifier(6).withName("My Account").withIcon(R.drawable.ic_account_box_black_24dp),
                         new PrimaryDrawerItem().withIdentifier(4).withName("Your posted items").withIcon(R.drawable.ic_library_books_black_24dp),
                         new DividerDrawerItem(),
                         new SecondaryDrawerItem().withIdentifier(1).withName("Logout").withIcon(R.drawable.ic_lock_outline_black_24dp)
@@ -101,6 +103,10 @@ public class TempHomePage extends AppCompatActivity
                             startActivity(new Intent(TempHomePage.this, OffersActivity.class));
                         } else if(drawerItem.getIdentifier() == 4) {
                             startActivity(new Intent(TempHomePage.this, UserGoodsActivity.class));
+                        } else if(drawerItem.getIdentifier() == 5) {
+                            startActivity(new Intent(TempHomePage.this, TempHomePage.class));
+                        } else if(drawerItem.getIdentifier() == 6) {
+                            startActivity(new Intent(TempHomePage.this, ProfileActivity.class));
                         }
                         return false;
                     }

@@ -83,10 +83,11 @@ public class PostItemFormFragment extends Fragment {
         FormHeader itemCategoryHeader = FormHeader.createInstance("Item Category");
         List<String> categories = new ArrayList<>();
         categories.add("Books");
-        categories.add("Electronics");
+//        categories.add("Electronics");
         categories.add("Furniture");
-        categories.add("Men Clothing");
-        categories.add("Women Clothing");
+        categories.add("Clothes");
+//        categories.add("Men Clothing");
+//        categories.add("Women Clothing");
         FormElementPickerSingle categoryPicker = FormElementPickerSingle.createInstance()
                 .setTag(FORM_ELEMENT_CATEGORY)
                 .setRequired(true)
