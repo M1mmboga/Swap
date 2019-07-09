@@ -3,6 +3,7 @@ package com.example.swap.views.viewoffers;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -25,6 +26,8 @@ public class OfferItem extends AbstractItem {
     private Good goodWanted;
     private List<Good> offeredGoods;
     private User bidder;
+
+    private OfferItemOnClickListener offerItemOnClickListener;
 
     private Context context;
 
@@ -63,7 +66,12 @@ public class OfferItem extends AbstractItem {
         return bidder;
     }
 
+    public void setOfferItemOnClickListener(OfferItemOnClickListener offerItemOnClickListener) {
+        this.offerItemOnClickListener = offerItemOnClickListener;
+    }
+
     class OfferViewHolder extends FastAdapter.ViewHolder<OfferItem> {
+
 
         private TextView bidderNameTxt;
         private TextView bidderEmailTxt;
@@ -71,15 +79,19 @@ public class OfferItem extends AbstractItem {
         private TextView wantedGoodNameTxt;
         private TextView wantedGoodPriceEstimateTxt;
         private LinearLayout offeredGoodsContainer;
+        private Button acceptButton;
 
         public OfferViewHolder(View itemView) {
             super(itemView);
+            itemView.setClickable(false);
+            itemView.setEnabled(false);
             bidderNameTxt = itemView.findViewById(R.id.item_offer_bidder);
             bidderEmailTxt = itemView.findViewById(R.id.item_offer_bidder_email);
             wantedGoodImage = itemView.findViewById(R.id.item_offer_wanted_good_image);
             wantedGoodNameTxt = itemView.findViewById(R.id.item_offer_wanted_good_name);
             wantedGoodPriceEstimateTxt = itemView.findViewById(R.id.item_offer_wanted_good_price_estimate);
             offeredGoodsContainer = itemView.findViewById(R.id.item_offer_offered_goods_container);
+            acceptButton = itemView.findViewById(R.id.item_offer_accept_btn);
         }
 
         @Override
@@ -98,16 +110,23 @@ public class OfferItem extends AbstractItem {
                     .into(wantedGoodImage);
 
             wantedGoodNameTxt.setText(item.goodWanted.getName());
-            wantedGoodPriceEstimateTxt.setText(context.getString(R.string.label_price_estimate, item.goodWanted.getPriceEstimate()));
 
-            addOfferedGoodsToLinearLayout(item.offeredGoods, offeredGoodsContainer);
+            String priceEstimate = new DecimalFormat("#,###")
+                    .format(item.goodWanted.getPriceEstimate());
+            wantedGoodPriceEstimateTxt.setText(context.getString(R.string.label_price_estimate, priceEstimate));
+
+            acceptButton.setOnClickListener(v -> offerItemOnClickListener.onClickAccept(item));
+
+            addOfferedGoodsToLinearLayout(item, offeredGoodsContainer);
         }
 
-        private void addOfferedGoodsToLinearLayout(List<Good> offeredGoods, LinearLayout linearLayout) {
-            for(Good good : offeredGoods) {
+        private void addOfferedGoodsToLinearLayout(OfferItem item, LinearLayout linearLayout) {
+            for(Good good : item.getOfferedGoods()) {
                 LayoutInflater inflater = LayoutInflater.from(context);
                 View v = inflater.inflate(R.layout.item_offered_good,
                         linearLayout, false);
+                v.setEnabled(true);
+                v.setClickable(true);
                 ImageView wantedGoodImageView = ((ImageView) v.findViewById(R.id.item_offered_good_image));
                 Glide.with(context)
                         .load(Addresses.IMAGES_HOME + good.getImageFileName())
@@ -119,13 +138,23 @@ public class OfferItem extends AbstractItem {
                 ((TextView) v.findViewById(R.id.item_offered_good_price_estimate))
                         .setText(context.getString(R.string.label_price_estimate, priceEstimate));
 
+                v.setOnClickListener(view -> {
+                    good.setOfferer(item.bidder);
+                    offerItemOnClickListener.onClickOfferedGoodItem(good);
+                });
                 linearLayout.addView(v);
             }
         }
 
         @Override
         public void unbindView(OfferItem item) {
-
+            offeredGoodsContainer.removeAllViews();
         }
+
+    }
+
+    interface OfferItemOnClickListener {
+        void onClickAccept(OfferItem offerItem);
+        void onClickOfferedGoodItem(Good good);
     }
 }

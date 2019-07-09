@@ -9,51 +9,29 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.swap.views.authentication.LoginActivity;
+import com.example.swap.models.User;
+import com.example.swap.utils.Auth;
 
 
 public class ProfileActivity extends AppCompatActivity {
 
-    TextView textView ;
-    Button button ;
+    TextView myUsername, myEmail;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
-        textView = (TextView)findViewById(R.id.textviewprofile);
+        myUsername = (TextView) findViewById(R.id.username);
+        myEmail = (TextView) findViewById(R.id.email);
 
-        button = (Button)findViewById(R.id.button) ;
-
-        Intent intent = getIntent();
-
-//        String username = intent.getStringExtra(LoginActivity.UserEmail);
-
-//        textView.setText(username);
-
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                finish();
-
-                Intent intent = new Intent(ProfileActivity.this, LoginActivity.class);
-
-                startActivity(intent);
-
-                Toast.makeText(ProfileActivity.this, "Log Out Successfully", Toast.LENGTH_LONG).show();
-
-            }
-        });
-
+        User user = Auth.of(getApplication()).getCurrentUser();
+        myUsername.setText(user.getFirstname()+' '+user.getLastname());
+        myEmail.setText(user.getEmail());
     }
 
-    @Override
-    public void onBackPressed() {
 
-        Toast.makeText(ProfileActivity.this, "Please Click on Log Out button .", Toast.LENGTH_LONG).show();
 
-        return;
-    }
+
 }
 

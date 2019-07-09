@@ -42,7 +42,7 @@ public class SelectGoodsViewModel extends AndroidViewModel {
         return currentUserGoods;
     }
 
-    private void loadUserGoods(int userId) {
+    void loadUserGoods(int userId) {
         GoodsRepository goodsRepository = new GoodsRepository();
         networkState.setValue(NetworkState.LOADING);
         goodsRepository.getUserGoods(userId, new Callback<List<Good>>() {

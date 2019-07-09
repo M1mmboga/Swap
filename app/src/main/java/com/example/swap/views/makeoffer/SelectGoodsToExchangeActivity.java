@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.ViewModelProviders;
@@ -17,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.swap.GoodDetailsActivity;
 import com.example.swap.R;
+import com.example.swap.utils.Auth;
 import com.example.swap.utils.NetworkState;
 import com.example.swap.views.postgood.PostGoodActivity;
 import com.google.android.material.card.MaterialCardView;
@@ -25,6 +27,7 @@ import com.mikepenz.fastadapter.commons.adapters.FastItemAdapter;
 import java.util.List;
 
 public class SelectGoodsToExchangeActivity extends AppCompatActivity {
+    private static final int POST_GOOD_CODE = 1;
 
     private ProgressBar progressBar;
     private FastItemAdapter<ToSwapWithItem> fastAdapter;
@@ -65,10 +68,12 @@ public class SelectGoodsToExchangeActivity extends AppCompatActivity {
 
         recyclerView.setAdapter(fastAdapter);
 
-        selectGoodsViewModel.getCurrentUserGoods().observe(this, this::handleCurrentUserGoods);
+        selectGoodsViewModel.getCurrentUserGoods()
+                .observe(this, this::handleCurrentUserGoods);
 
         (findViewById(R.id.select_items_to_exchange_post_good_btn)).setOnClickListener(v -> {
-            startActivity(new Intent(this, PostGoodActivity.class));
+            startActivityForResult(
+                    new Intent(this, PostGoodActivity.class), POST_GOOD_CODE);
         });
     }
 
@@ -118,6 +123,16 @@ public class SelectGoodsToExchangeActivity extends AppCompatActivity {
             selectGoodsViewModel.makeOffer(goodWanted);
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == POST_GOOD_CODE) {
+            selectGoodsViewModel.loadUserGoods(
+                    Auth.of(getApplication()).getCurrentUser().getId()
+            );
+        }
     }
 
     private void showToast(String message) {

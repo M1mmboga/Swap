@@ -11,4 +11,6 @@
     <color name="validation_error">#EB0909</color>
     <color name="light_grey">#FAF9F9</color>
     <color name="white">#FFFFFF</color>
+    <color name="very_light_primary">#FFF3EE</color>
+    <color name="light_medium_grey">#F5F3F3</color>
 </resources>

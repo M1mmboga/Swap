@@ -4,6 +4,8 @@
     android:id="@+id/item_offer"
     android:layout_height="wrap_content"
     android:layout_width="match_parent"
+    android:clickable="false"
+    android:focusable="false"
     android:layout_margin="8dp">
 
     <LinearLayout
@@ -222,6 +224,7 @@
             android:layout_height="wrap_content">
 
             <com.google.android.material.button.MaterialButton
+                android:id="@+id/item_offer_accept_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/accept"

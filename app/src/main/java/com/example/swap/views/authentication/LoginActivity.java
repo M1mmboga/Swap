@@ -113,6 +113,8 @@ public class LoginActivity extends AppCompatActivity {
             if(resultCode == RESULT_OK) {
                 Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
                 handleGoogleSignIn(task);
+            } else {
+                Log.e("LoginActivity", "Result not OK");
             }
         }
     }

@@ -1,6 +1,7 @@
 package com.example.swap;
 
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -19,19 +20,25 @@ import androidx.lifecycle.ViewModelProviders;
 import com.example.swap.datasources.goods.goodfetchers.ByCategoryGoodsFetcher;
 import com.example.swap.fragments.GoodsListFragment;
 import com.example.swap.utils.NetworkState;
+import com.example.swap.utils.NotificationHandler;
+import com.example.swap.utils.broadcastReceivers.NotificationBroadcastReceiver;
 import com.example.swap.viewmodels.GoodsByCategoryViewModel;
 import com.example.swap.viewmodels.GoodsFetcherViewModel;
 import com.example.swap.viewmodels.GoodsListViewModel;
 import com.example.swap.viewmodels.factories.GoodsListViewModelFactory;
+import com.example.swap.views.viewoffers.OffersActivity;
+import com.google.android.material.snackbar.Snackbar;
 
-public class ListActivity extends AppCompatActivity {
+public class ListActivity extends AppCompatActivity implements NotificationHandler {
     public static final String CATEGORY_CRITERIA = "Category";
 
     private GoodsByCategoryViewModel goodsByCategoryViewModel;
 
     private ProgressBar progressBar;
+    private View rootView;
 
     private String category;
+    private NotificationBroadcastReceiver notificationBroadcastReceiver;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +54,7 @@ public class ListActivity extends AppCompatActivity {
         setDefaultKeyMode(DEFAULT_KEYS_SEARCH_LOCAL);
 
         progressBar = (ProgressBar) findViewById(R.id.activity_list_progressbar);
+        rootView = findViewById(R.id.activity_list);
 
         Intent i = getIntent();
         category = i.getStringExtra("category");
@@ -123,5 +131,32 @@ public class ListActivity extends AppCompatActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if(notificationBroadcastReceiver == null) {
+            notificationBroadcastReceiver = new NotificationBroadcastReceiver(this);
+        }
+        IntentFilter intentFilter = new IntentFilter(MyFirebaseMessagingService.NOTIFICATION_BC);
+        registerReceiver(notificationBroadcastReceiver, intentFilter);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if(notificationBroadcastReceiver != null) {
+            unregisterReceiver(notificationBroadcastReceiver);
+        }
+    }
+
+    @Override
+    public void handleNotification() {
+        Snackbar.make(rootView, "You have just received an offer!", Snackbar.LENGTH_INDEFINITE)
+                .setAction("View", v -> {
+                    startActivity(new Intent(ListActivity.this, OffersActivity.class));
+                })
+                .show();
     }
 }

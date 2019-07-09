@@ -132,6 +132,10 @@ public class PostGoodActivity extends AppCompatActivity {
                         Toast.makeText(PostGoodActivity.this,
                                 "Successfully added", Toast.LENGTH_SHORT).show();
                         Log.e("On Post Good", response.message());
+                        if(getCallingActivity() != null){
+                            setResult(RESULT_OK, new Intent());
+                            finish();
+                        }
                     } else {
                         Toast.makeText(PostGoodActivity.this,
                                 response.message(), Toast.LENGTH_SHORT).show();

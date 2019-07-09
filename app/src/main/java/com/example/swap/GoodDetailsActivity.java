@@ -44,12 +44,14 @@ public class GoodDetailsActivity extends AppCompatActivity {
                     .setProgressBarVisible(true)
         );
 
-        for(String image : good.getSupplementaryImageFileNames()) {
-            DefaultSliderView sliderView = new DefaultSliderView(this);
-            sliderView
-                    .image(Addresses.IMAGES_HOME + image)
-                    .setProgressBarVisible(true);
-            slider.addSlider(sliderView);
+        if(good.getSupplementaryImageFileNames() != null) {
+            for (String image : good.getSupplementaryImageFileNames()) {
+                DefaultSliderView sliderView = new DefaultSliderView(this);
+                sliderView
+                        .image(Addresses.IMAGES_HOME + image)
+                        .setProgressBarVisible(true);
+                slider.addSlider(sliderView);
+            }
         }
 
         slider.setPresetIndicator(SliderLayout.PresetIndicators.Center_Bottom);
@@ -59,6 +61,8 @@ public class GoodDetailsActivity extends AppCompatActivity {
         /*USE DATA-BINDING INSTEAD !!!*/
         ((TextView) findViewById(R.id.good_details_good_name)).setText(good.getName());
         ((TextView) findViewById(R.id.good_details_category)).setText(good.getCategory());
+        ((TextView) findViewById(R.id.good_details_good_offerer))
+                .setText(good.getOfferer().getFirstname() + " " + good.getOfferer().getLastname());
 
         String priceApproximation = new DecimalFormat("#,###")
                 .format(good.getPriceEstimate());

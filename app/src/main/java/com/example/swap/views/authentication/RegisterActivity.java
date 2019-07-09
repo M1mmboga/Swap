@@ -46,9 +46,9 @@ public class RegisterActivity extends AppCompatActivity {
 
     Button register ;
     TextView login;
-    EditText firstName, lastName, email , password, confPassword ;
+    EditText firstName, lastName, email , password, confPassword, phoneNumber ;
     Boolean CheckEditText ;
-    String FirstNameHolder,LastNameHolder, EmailHolder, PasswordHolder ;
+    String FirstNameHolder,LastNameHolder, EmailHolder, PasswordHolder, phoneNumberHolder ;
 
     RegisterActivityViewModel registerActivityViewModel;
     FormErrorDisplayer formErrorDisplayer;
@@ -73,6 +73,8 @@ public class RegisterActivity extends AppCompatActivity {
         password.setText(registerActivityViewModel.getPasswordLiveData().getValue());
         confPassword = (EditText)findViewById(R.id.conf_password);
         confPassword.setText(registerActivityViewModel.getConfirmPasswordLiveData().getValue());
+        phoneNumber = (EditText) findViewById(R.id.phone);
+        phoneNumber.setText(registerActivityViewModel.getPhoneNumberLiveData().getValue());
 
         register.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -81,7 +83,8 @@ public class RegisterActivity extends AppCompatActivity {
                         email.getText().toString(),
                         password.getText().toString(),
                         firstName.getText().toString(),
-                        lastName.getText().toString()
+                        lastName.getText().toString(),
+                        phoneNumber.getText().toString()
                 );
                 GetCheckEditTextIsEmptyOrNot();
                 if(!CheckEditText){
@@ -109,6 +112,7 @@ public class RegisterActivity extends AppCompatActivity {
                 .addErrorDisplayer("first_name", (TextView)findViewById(R.id.error_message_first_name))
                 .addErrorDisplayer("email", (TextView)findViewById(R.id.error_message_email))
                 .addErrorDisplayer("last_name", (TextView)findViewById(R.id.error_message_last_name))
+                .addErrorDisplayer("phone_number", (TextView) findViewById(R.id.error_phone_number))
                 .build();
 
     }
@@ -128,8 +132,9 @@ public class RegisterActivity extends AppCompatActivity {
         LastNameHolder = lastName.getText().toString();
         EmailHolder = email.getText().toString();
         PasswordHolder = password.getText().toString();
+        phoneNumberHolder = phoneNumber.getText().toString();
 
-        if(TextUtils.isEmpty(FirstNameHolder) || TextUtils.isEmpty(LastNameHolder) || TextUtils.isEmpty(EmailHolder) || TextUtils.isEmpty(PasswordHolder))
+        if(TextUtils.isEmpty(FirstNameHolder) || TextUtils.isEmpty(LastNameHolder) || TextUtils.isEmpty(EmailHolder) || TextUtils.isEmpty(PasswordHolder) || TextUtils.isEmpty(phoneNumberHolder))
         {
             CheckEditText = false;
         }
@@ -162,6 +167,8 @@ public class RegisterActivity extends AppCompatActivity {
                 .setValue(password.getText().toString());
         registerActivityViewModel.getConfirmPasswordLiveData()
                 .setValue(confPassword.getText().toString());
+        registerActivityViewModel.getPhoneNumberLiveData()
+                .setValue(phoneNumber.getText().toString());
     }
 
     private void submitUser(User user){

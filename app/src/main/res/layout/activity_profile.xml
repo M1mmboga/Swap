@@ -9,42 +9,69 @@
     android:paddingRight="30dp"
     android:paddingTop="30dp"
     tools:context="com.example.swap.ProfileActivity"
-    android:background="#03A9F4"
-
-
     >
 
     <TextView
-        android:text="SuccessFully Logged In, Your Email =  "
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/textView"
-        android:textColor="#ffffff"
-        android:textSize="30dp"
+        android:id="@+id/user_profile"
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
         android:gravity="center"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="150dp"
-        />
+        android:text="User Profile" />
 
     <TextView
-        android:text=""
+        android:id="@+id/username"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="#ffffff"
-        android:textSize="30dp"
-        android:gravity="center"
-        android:layout_below="@+id/textView"
-        android:layout_centerHorizontal="true"
-        android:id="@+id/textviewprofile"/>
+        android:layout_below="@id/user_profile"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="-4dp"
+        android:layout_marginTop="25dp"
+        android:drawableLeft="@drawable/person24dp"
+        android:paddingTop="5dp"
+        android:paddingRight="70dp"
+        android:text="name" />
 
-    <Button
-        android:layout_marginTop="30dp"
-        android:layout_width="fill_parent"
+    <TextView
+        android:id="@+id/email"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/button"
-        android:text="Logout"
-        android:layout_below="@+id/textviewprofile"/>
+        android:layout_below="@id/username"
+        android:layout_marginLeft="-130dp"
+        android:layout_marginTop="20dp"
+        android:layout_toRightOf="@id/username"
+        android:drawableLeft="@drawable/ic_mail_black_24dp"
+        android:paddingTop="5dp"
+        android:text="email" />
+
+    <TextView
+        android:id="@+id/phone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/email"
+        android:layout_marginLeft="23dp"
+        android:layout_marginTop="-87dp"
+        android:layout_toRightOf="@id/username"
+        android:drawableLeft="@drawable/phone24dp"
+        android:paddingTop="5dp"
+        android:text="phone" />
 
 
+    <TextView
+        android:id="@+id/inquiryMail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/email"
+        android:text="Got any questions? Email us swapteam19@gmail.com"
+        android:paddingTop="30dp"
+        android:autoLink="email"
+        />
+
+    <View
+        android:id="@+id/passLine"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@id/inquiryMail"
+        android:background="#f79862"
+        android:layout_marginTop="15dp"
+        />
 </RelativeLayout>

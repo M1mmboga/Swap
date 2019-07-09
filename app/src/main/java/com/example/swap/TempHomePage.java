@@ -1,20 +1,23 @@
 package com.example.swap;
 
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import com.example.swap.models.User;
 import com.example.swap.utils.Auth;
+import com.example.swap.utils.NotificationHandler;
+import com.example.swap.utils.broadcastReceivers.NotificationBroadcastReceiver;
 import com.example.swap.views.authentication.LoginActivity;
 import com.example.swap.views.postgood.PostGoodActivity;
 import com.example.swap.views.viewoffers.OffersActivity;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.material.snackbar.Snackbar;
 import com.mikepenz.materialdrawer.AccountHeader;
 import com.mikepenz.materialdrawer.AccountHeaderBuilder;
 import com.mikepenz.materialdrawer.Drawer;
@@ -25,13 +28,17 @@ import com.mikepenz.materialdrawer.model.ProfileDrawerItem;
 import com.mikepenz.materialdrawer.model.SecondaryDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 
-public class TempHomePage extends AppCompatActivity implements View.OnClickListener {
+public class TempHomePage extends AppCompatActivity
+        implements View.OnClickListener, NotificationHandler {
 
     private Button booksCategoryBtn;
     private Button clothesCategoryBtn;
     private Button furnitureCategoryBtn;
+    private View rootView;
 
     private GoogleSignInClient mGoogleSignInClient;
+
+    private NotificationBroadcastReceiver notificationBroadcastReceiver;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,10 +53,11 @@ public class TempHomePage extends AppCompatActivity implements View.OnClickListe
         clothesCategoryBtn.setOnClickListener(this);
         furnitureCategoryBtn = (Button) findViewById(R.id.furniture_category_btn);
         furnitureCategoryBtn.setOnClickListener(this);
+        rootView = findViewById(R.id.activity_temp_homepage_root);
 
         User user = Auth.of(getApplication()).getCurrentUser();
         if(user != null) {
-            Toast.makeText(this, "first name: " + user.getFirstname(), Toast.LENGTH_SHORT).show();
+//            Toast.makeText(this, "first name: " + user.getFirstname(), Toast.LENGTH_SHORT).show();
         } else {
             startActivity(new Intent(this, LoginActivity.class));
         }
@@ -73,7 +81,7 @@ public class TempHomePage extends AppCompatActivity implements View.OnClickListe
                 .withAccountHeader(accountHeader())
                 .addDrawerItems(
                         new PrimaryDrawerItem().withIdentifier(2).withName("Post Item").withIcon(R.drawable.ic_add_black_24dp),
-                        new PrimaryDrawerItem().withIdentifier(3).withName("Your Offers").withIcon(R.drawable.ic_add_black_24dp),
+                        new PrimaryDrawerItem().withIdentifier(3).withName("Your Offers").withIcon(R.drawable.ic_library_books_black_24dp),
                         new DividerDrawerItem(),
                         new SecondaryDrawerItem().withIdentifier(1).withName("Logout").withIcon(R.drawable.ic_lock_outline_black_24dp)
                 )
@@ -105,6 +113,33 @@ public class TempHomePage extends AppCompatActivity implements View.OnClickListe
                         new ProfileDrawerItem().withName(user.getFirstname() + " " + user.getLastname()).withEmail(user.getEmail())
                 )
                 .build();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if(notificationBroadcastReceiver == null) {
+            notificationBroadcastReceiver = new NotificationBroadcastReceiver(this);
+        }
+        IntentFilter intentFilter = new IntentFilter(MyFirebaseMessagingService.NOTIFICATION_BC);
+        registerReceiver(notificationBroadcastReceiver, intentFilter);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if(notificationBroadcastReceiver != null) {
+            unregisterReceiver(notificationBroadcastReceiver);
+        }
+    }
+
+    @Override
+    public void handleNotification() {
+        Snackbar.make(rootView, "You have just received an offer!", Snackbar.LENGTH_INDEFINITE)
+                .setAction("View", v -> {
+                    startActivity(new Intent(TempHomePage.this, OffersActivity.class));
+                })
+                .show();
     }
 }
 

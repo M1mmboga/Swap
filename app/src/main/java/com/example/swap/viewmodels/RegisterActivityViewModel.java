@@ -17,6 +17,10 @@ public class RegisterActivityViewModel extends ViewModel {
             new MutableLiveData<>();
     MutableLiveData<String> confirmPasswordLiveData =
             new MutableLiveData<>();
+    MutableLiveData<String> phoneNumberLiveData =
+            new MutableLiveData<>();
+
+    public MutableLiveData<String> getPhoneNumberLiveData(){return phoneNumberLiveData; }
 
     public MutableLiveData<String> getConfirmPasswordLiveData() {
         return confirmPasswordLiveData;
