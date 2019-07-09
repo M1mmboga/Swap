@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+    <string name="app_name">Swap</string>
+    <string name="add_image">Ongeza Picha</string>
+    <string name="category_label_books">Vitabu</string>
+    <string name="category_label_clothes">Nguo</string>
+    <string name="good_details_price_approx">Takribani: Kshs. %s</string>
+    <string name="goods_list_category_label">Jamii</string>
+    <string name="image_textview">Picha</string>
+    <string name="insert_item_images_fragment_title">Weka Picha za Kipengee</string>
+    <string name="item_category_textview">Chagua Jamii</string>
+    <string name="item_description_textview">Maelezo</string>
+    <string name="item_list_loading_retry_btn_label">Jaribu Tena</string>
+    <string name="item_name_textview">Jina la Kipengee</string>
+    <string name="main_image">Picha Kuu</string>
+    <string name="my_location_textview">Mahali yangu</string>
+    <string name="next">Ijayo</string>
+    <string name="search_activity_label">Tafuta Matokeo</string>
+    <string name="search_menu_item_title">Tafuta</string>
+    <string name="submit_item">Tuma</string>
+    <string name="supplementary_images">" Picha za Ziada"</string>
+    <string name="valued_price_textview">Thamani ya thamani</string>
+    <string name="item_name">Jina la Kipengee</string>
+    <string name="item_name_and_description">Jina la Bidhaa na Maelezo</string>
+    <string name="item_name_element_hint">Ingiza jina la kipengee</string>
+    <string name="post_item_form_validation_error">Vipengo vyote na * vinahitajika</string>
+    <string name="post_item_image_validation_error">Picha kuu inahitajika</string>
+    <string name="required_validation_error">* Inahitajika</string>
+    <string name="already_registered_login">Je! Una Akaunti?</string>
+    <string name="confirm_password_here">Thibitisha nenosiri hapa</string>
+    <string name="register">Jisajili</string>
+    <string name="enter_password_here">Andika Nenosiri</string>
+    <string name="enter_last_name_here">Jina La Familia</string>
+    <string name="enter_first_name_here">Jina la Kwanza</string>
+    <string name="enter_email_here">name@example.com</string>
+    <string name="enter_passwordlogin_here">Andika Nenosiri</string>
+    <string name="enter_email_address_here">name@example.com</string>
+    <string name="register_here">Jisajili hapa</string>
+    <string name="log_in">Login</string>
+    <string name="login">KARIBU</string>
+    <string name="item_image">Picha</string>
+    <string name="for_text">Kwa</string>
+    <string name="your_offers">Matoleo yako</string>
+    <string name="item_offer_offering">Matoleo:</string>
+    <string name="label_from">Kutoka:</string>
+    <string name="label_price_estimate">Makadirio ya Bei: Kshs. %s</string>
+    <string name="make_offer">Utoe Toleo</string>
+    <string name="network_error_message">" Kuna tatizo na uhusiano wa mtandao"</string>
+    <string name="no_items_selected">" Hakuna vitu vilivyochaguliwa"</string>
+    <string name="no_items_swap_with_msg">Huna vitu za kubadilishana</string>
+    <string name="reject">kataa</string>
+    <string name="retry">Jaribu tena</string>
+    <string name="swap_with">Badilisha na...</string>
+    <string name="register_for_an_account">Jiandikisha kwa akaunti mpya</string>
+    <string name="accept">kubali</string>
+
+</resources>
