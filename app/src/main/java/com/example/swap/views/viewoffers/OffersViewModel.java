@@ -11,6 +11,7 @@ import androidx.lifecycle.MutableLiveData;
 import com.example.swap.data.network.repository.OffersRepository;
 import com.example.swap.models.Good;
 import com.example.swap.models.Offer;
+import com.example.swap.models.User;
 import com.example.swap.utils.Auth;
 import com.example.swap.utils.NetworkState;
 
@@ -24,7 +25,7 @@ import retrofit2.Response;
 public class OffersViewModel extends AndroidViewModel {
     MutableLiveData<List<OfferItem>> offers;
     private MutableLiveData<NetworkState> networkState = new MutableLiveData<>();
-    private MutableLiveData<Good> acceptedGood = new MutableLiveData<>();
+    private MutableLiveData<User> acceptedBidder = new MutableLiveData<>();
 
     public OffersViewModel(@NonNull Application application) {
         super(application);
@@ -84,5 +85,13 @@ public class OffersViewModel extends AndroidViewModel {
             }
         }
         return offerItems;
+    }
+
+    public LiveData<User> getAcceptedBidder() {
+        return acceptedBidder;
+    }
+
+    public void setAcceptedBidder(User acceptedBidder) {
+        this.acceptedBidder.setValue(acceptedBidder);
     }
 }
