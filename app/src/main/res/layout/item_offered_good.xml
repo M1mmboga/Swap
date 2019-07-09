@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="?android:attr/selectableItemBackground"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginBottom="8dp"
+    android:orientation="horizontal">
+
+    <ImageView
+        android:id="@+id/item_offered_good_image"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        tools:srcCompat="@tools:sample/avatars[13]" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/md_keylines"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/item_offered_good_name"
+            android:textAppearance="?attr/textAppearanceListItem"
+            android:textSize="16sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="Tangy Tangering" />
+
+        <TextView
+            android:id="@+id/item_offered_good_price_estimate"
+            android:textAppearance="?attr/textAppearanceListItem"
+            android:textColor="@color/medium_grey"
+            android:textSize="@dimen/good_list_item_description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="Price Estimate: Kshs.1200" />
+    </LinearLayout>
+</LinearLayout>

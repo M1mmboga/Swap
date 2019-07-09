@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_register"
+    android:background="#ffffff"
+    android:padding="20dp"
+    tools:context=".views.authentication.RegisterActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:text="@string/register_here"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView"
+                android:textColor="#f79862"
+                android:textSize="30dp"
+                android:gravity="center"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="30dp"
+                />
+
+            <EditText
+                android:layout_width="fill_parent"
+                android:layout_height="50dp"
+                android:inputType="textPersonName"
+                android:ems="10"
+                android:layout_below="@+id/textView"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="30dp"
+                android:id="@+id/first_name"
+                android:gravity="center"
+                android:background="#fbfefd"
+                android:text="John"
+                android:hint="@string/enter_first_name_here" />
+
+            <TextView
+                android:id="@+id/error_message_first_name"
+                style="@style/ValidationErrorStyle"
+                android:layout_below="@id/first_name"
+                tools:text="*Required" />
+
+            <EditText
+                android:id="@+id/last_name"
+                android:layout_width="fill_parent"
+                android:layout_height="50dp"
+                android:inputType="textPersonName"
+                android:ems="10"
+                android:layout_below="@+id/first_name"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="30dp"
+                android:gravity="center"
+                android:background="#fbfefd"
+                android:text="Gachihi"
+                android:hint="@string/enter_last_name_here"
+                />
+
+            <TextView
+                android:id="@+id/error_message_last_name"
+                style="@style/ValidationErrorStyle"
+                android:layout_below="@id/last_name"
+                tools:text="*Required" />
+
+            <EditText
+                android:id="@+id/email"
+                android:layout_width="fill_parent"
+                android:layout_height="50dp"
+                android:inputType="textEmailAddress"
+                android:ems="10"
+                android:layout_marginTop="30dp"
+                android:gravity="center"
+                android:background="#fbfefd"
+                android:hint="@string/enter_email_here"
+                android:layout_below="@+id/last_name"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:text="j@g.com"/>
+
+            <TextView
+                android:id="@+id/error_message_email"
+                style="@style/ValidationErrorStyle"
+                android:layout_below="@id/email"
+                tools:text="*Required" />
+
+
+            <EditText
+                android:id="@+id/phone"
+                android:layout_width="fill_parent"
+                android:layout_height="50dp"
+                android:layout_below="@id/error_message_email"
+                android:inputType="phone"
+                android:gravity="center"
+                android:background="#fbfefd"
+                android:hint="Phone Number"/>
+
+            <TextView
+                android:id="@+id/error_phone_number"
+                style="@style/ValidationErrorStyle"
+                android:layout_below="@id/phone"
+                tools:text="*Required" />
+
+            <EditText
+                android:layout_width="fill_parent"
+                android:inputType="textPassword"
+                android:layout_marginTop="30dp"
+                android:ems="10"
+                android:id="@+id/password"
+                android:gravity="center"
+                android:background="#fbfefd"
+                android:hint="@string/enter_password_here"
+                android:layout_height="50dp"
+                android:layout_below="@+id/phone"
+                android:layout_centerVertical="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:text="1"/>
+
+            <EditText
+                android:layout_width="fill_parent"
+                android:inputType="textPassword"
+                android:layout_marginTop="30dp"
+                android:ems="10"
+                android:id="@+id/conf_password"
+                android:gravity="center"
+                android:background="#fbfefd"
+                android:hint="@string/confirm_password_here"
+                android:layout_height="50dp"
+                android:layout_below="@+id/password"
+                android:layout_centerVertical="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:text="1"/>
+
+            <Button
+                android:text="@string/register"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/conf_password"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="30dp"
+                android:id="@+id/button"
+                android:textColor="#ffffff"
+                android:backgroundTint="#f79862"
+                />
+
+            <TextView
+                android:text="@string/already_registered_login"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/button"
+                android:layout_centerHorizontal="true"
+                android:id="@+id/loginText"
+                android:textColor="#f79862"
+                android:gravity="center"
+                android:layout_marginTop="10dp"
+                android:onClick="loginUser"
+                />
+        </RelativeLayout>
+    </LinearLayout>
+
+
+</ScrollView>

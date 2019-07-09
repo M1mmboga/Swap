@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#f79862</color>
+    <color name="colorPrimaryDark">#f79862</color>
+    <color name="colorAccent">#f79862</color>
+
+    <color name="medium_grey">#9E9E9E</color>
+
+    <color name="glide_slider_indicator_color">#000000</color>
+    <color name="glide_slider_description_background_color">#77000000</color>
+    <color name="validation_error">#EB0909</color>
+    <color name="light_grey">#FAF9F9</color>
+    <color name="white">#FFFFFF</color>
+    <color name="very_light_primary">#FFF3EE</color>
+    <color name="light_medium_grey">#F5F3F3</color>
+</resources>
